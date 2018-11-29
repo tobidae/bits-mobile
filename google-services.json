@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "case-manager-boeing",
+  "private_key_id": "676191d5881878d1eadade111488d9eecfb22268",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCvRP+V43eiQVS3\n2G1uKt+QIvpo/idPZ7q9d4/zZKNJI7gvVCH7DOPCmjYIj5PrZpdqoUDlj8cRtNRd\n4h0rvrAn2cqfprp2jkUKcAL3S1XFacXsDcGQORiWrton78VYd6gh0ydnqhAGBXKG\nJmb+MgSXZVd5lhJ9eqiak4Az7aaluIg/m/2/Yrp+nJvVTsNQ5vtLMjvXwP1oEYY5\nwGRxRlS5h4j8vzThl13lB3+5dc7ieGbLGF8h2rHctNF4xrzq/RbWLKPK1j2EfV7e\nlLrCJhsn4e2aRwKd8lx98GNfWZ5HzHmDbm31dGoarfhFefRxBR4dXgaiLfhuThy/\nqv6qcC+dAgMBAAECggEAGAEfbxgjAagocfB0llbNXSiJOrl6SUwH3ZyjLL7PBTyc\n5HCFoeRTSksEFPqTE/WuTbaNlJMzPLfTMRN/ksbwSdjwgRqc5ZFZH9OU+GkLM3kn\n2AtPRBEpzrNeYgNa+CGVN6K7fh1iyexTkc9vIifYDKMezqJw4Foc/uSuNY56GS6Z\nhdE2Udv/0/JgL4+GPmulutonNZp5/1bj4uFO+UzP4FhchIsWN9s09fYXabG3Ngkd\njEzgQqq5V+xN2cqDiewyc9c91fb9oT+/iqs2OIne3VmsTdQEDzKmhKGFX+6CN0YR\nipX3FZNvhHRKFs8t9i3/vs1RNZ+r+RRzJ/aFGOU0sQKBgQDWRvQA32N9uLKqBe/t\nwrnu4jcbNATdjfDffMvGFJyI8KifS0OecnsZ21VVPt3Xx5cESKKIu9+miexqFuLW\n2LpfFcmOcF/hR6iTzcF9a7ntBYVetKtsY8RvRQLKOVIHxtW2bPDQRO8AFF2FH6uO\nz4RcrCRpe5V+XFyDtuoPmQ328QKBgQDRZaLxV9zoG/McQjg+S1UREsWFHN+uMzBA\nzz8T3dl1DAKeSSRKbvv01FaYQ3GrxenNpvoTIhuHmchKALNeEcE4bJt6rwL0DLR8\nDMLB55CY9/wm3Y49+BqVQwYGzM3ZdrWjkxX1Jh76LnpNte5RoJAYWF/ElUhzUVAp\nGQUgZdy7bQKBgEbeIpcjSrlq25RF8GtXSr1KDeWuV6ma5z5S/OYfLQJRbcN5VfzS\nagpMMzXFXAOgnD6rcy37zOU8mncf6JgcB8+o2geE/QD5/TQdCdBcT5qnh8uhv0xS\n1sXiMiEFwi6WQVpbP23yToVdNuzvY4MQ+PrZaBWG7RNkoqhhV5ofCbJRAoGAVYrU\nzw1a1IOehFvVCDXUMZ5ejKuoAU0uGDvSA/asgHGAnFM6/SFr0q/wFFHxHQBELFxb\naveTEYlUVk8E95f/PGK5/ZuDdFnAXbEE2xwTaTpdiy8VjeFOUs3Hp32BVqZ1O7a5\n0KVbIE9ebWK2Uihq1Vc9AF0P9PQx8CglfP+/9d0CgYEAxiONOrSG9A+vC2vCDPbe\n7q+xwKhjVhFUtSw/Lhm6gWvnm/F5vbPy5oFd8rgLNeU4BqFLvkZJgf42Rv4y97zk\n16rfhe8+PttTnrZONVypXwvTptXjDXEulj1JhB0Y9t/Xr0NjjPnpvJ1rPP33uRlP\nd4wUqjXd8UH68gFoMrUfTfM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-2aigq@case-manager-boeing.iam.gserviceaccount.com",
+  "client_id": "106232694528048527600",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2aigq%40case-manager-boeing.iam.gserviceaccount.com"
+}

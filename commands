@@ -1,0 +1,3 @@
+
+appcenter codepush release-cordova -a otakerele/Case-Manager -d Production
+appcenter codepush release-cordova -a otakerele/Case-Manager-iOS -d Production

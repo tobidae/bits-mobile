@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AuthLoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AuthProvider } from "../../providers/auth/auth";
+import { TabsPage } from "../tabs/tabs";
+import { AuthRegisterPage } from "../auth-register/auth-register";
 
 @IonicPage()
 @Component({
@@ -15,11 +12,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AuthLoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  loginForm: FormGroup;
+  loginError: string;
+
+  constructor(private navCtrl: NavController, private navParams: NavParams, private authProvider: AuthProvider,
+    fb: FormBuilder
+  ) {
+    this.loginForm = fb.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
+    });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AuthLoginPage');
+  login() {
+    let data = this.loginForm.value;
+
+    if (!data.email) return;
+
+    let credentials = {
+      email: data.email,
+      password: data.password
+    };
+    this.authProvider.signInWithEmail(credentials)
+      .then(
+        () => this.navCtrl.setRoot(TabsPage),
+        error => this.loginError = error.message
+      );
+  }
+
+  register(){
+    this.navCtrl.push(AuthRegisterPage);
   }
 
 }

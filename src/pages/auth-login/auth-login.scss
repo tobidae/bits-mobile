@@ -1,3 +1,11 @@
 page-auth-login {
+  .auth-error {
+    color: #dc3545;
+    padding-left: 3px;
+  }
 
+  .form-error {
+    font-weight: bold;
+    padding: 10px 0;
+  }
 }
