@@ -1,0 +1,15 @@
+lazy-img {
+  .placeholder {
+    background: url('./../../assets/imgs/placeholder.png');
+    &::before {
+      align-items: center;
+      content: '';
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      left: 0;
+      position: absolute;
+      right: 0;
+    }
+  }
+}

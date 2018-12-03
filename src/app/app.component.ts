@@ -18,10 +18,12 @@ export class MyApp {
               private authService: AuthProvider, private codePush: CodePush) {
     platform.ready()
       .then(() => {
-        const downloadProgress = (progress) => {
-          console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
-        };
-        this.codePush.sync({}, downloadProgress).subscribe((syncStatus) => console.log(syncStatus));
+        if (platform.is('cordova')){
+          const downloadProgress = (progress) => {
+            console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
+          };
+          this.codePush.sync({}, downloadProgress).subscribe((syncStatus) => console.log(syncStatus));
+        }
 
         this.authService.isAuthenticated().subscribe(user => {
           statusBar.styleDefault();

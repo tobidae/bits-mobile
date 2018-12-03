@@ -21,6 +21,12 @@ import { AuthLoginPage } from "../pages/auth-login/auth-login";
 import { AuthRegisterPage } from "../pages/auth-register/auth-register";
 import { AuthProvider } from "../providers/auth/auth";
 import { QRScanner } from "@ionic-native/qr-scanner";
+import { CodePush } from "@ionic-native/code-push";
+import { CacheImageProvider } from '../providers/cache-image/cache-image';
+import { LazyLoadDirective } from "../directives/lazy-load/lazy-load";
+import { ComponentsModule } from "../components/components.module";
+import { CommonModule } from "@angular/common";
+import { UtilProvider } from '../providers/util/util';
 
 @NgModule({
   declarations: [
@@ -31,12 +37,15 @@ import { QRScanner } from "@ionic-native/qr-scanner";
     SettingsPage,
     TabsPage,
     AuthLoginPage,
-    AuthRegisterPage
+    AuthRegisterPage,
+    LazyLoadDirective
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    ComponentsModule,
+    CommonModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +66,10 @@ import { QRScanner } from "@ionic-native/qr-scanner";
     AuthGuardProvider,
     AngularFireAuth,
     Camera,
-    QRScanner
+    QRScanner,
+    CodePush,
+    CacheImageProvider,
+    UtilProvider
   ]
 })
 export class AppModule {}
