@@ -6,14 +6,14 @@ import { UtilProvider } from "../../providers/util/util";
   templateUrl: 'item-card.html'
 })
 export class ItemCardComponent {
-  @Input('item') item: any;
+  @Input('case') case: any;
 
   constructor(
     public utilProvider: UtilProvider) {
 
   }
 
-  addItemToCart() {
+  addCaseToCart() {
 
   }
 

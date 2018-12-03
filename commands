@@ -1,3 +1,9 @@
 
+# To push for iOS if you have problems using code push
+# For more info on code below https://cocoapods.org/
+sudo gem install cocoapods
+pod setup
+
+
 appcenter codepush release-cordova -a otakerele/Case-Manager -d Production
 appcenter codepush release-cordova -a otakerele/Case-Manager-iOS -d Production

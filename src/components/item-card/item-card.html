@@ -1,18 +1,18 @@
-<ion-item class="inventory-item">
+<ion-card class="inventory-item">
   <ion-grid>
     <ion-row>
       <ion-col col-3 no-padding>
-        <lazy-img class="item-image" inputSrc="{{item.imageUrl}}"></lazy-img>
+        <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
       </ion-col>
       <ion-col col-9>
-        <h5 class="item-title">{{item.title}}</h5>
-        <p class="small item-desc"><strong><ion-icon name="md-locate"></ion-icon>{{item.lastLocation}}</strong> <ion-icon name="md-timer"></ion-icon>{{item.maxHoldTime}}</p>
+        <h5 class="item-title">{{case.name}}</h5>
+        <p class="small item-desc"><strong><ion-icon name="md-locate"></ion-icon>{{case.lastLocation}}</strong> <ion-icon name="md-timer"></ion-icon>{{case.maxHoldTime}} hrs</p>
         <hr class="custom-divide">
         <ion-row float-right>
-          <button ion-button small text-capitalize (click)="addItemToCart()">Add</button>
+          <button ion-button small text-capitalize (click)="addCaseToCart()">Add</button>
           <button ion-button color="danger" small clear text-capitalize (click)="addToFav()">Fav</button>
         </ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-item>
+</ion-card>

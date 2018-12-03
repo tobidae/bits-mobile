@@ -27,6 +27,9 @@ import { LazyLoadDirective } from "../directives/lazy-load/lazy-load";
 import { ComponentsModule } from "../components/components.module";
 import { CommonModule } from "@angular/common";
 import { UtilProvider } from '../providers/util/util';
+import { CaseDataProvider } from "../providers/case-data/case-data";
+import { HttpClientModule } from "@angular/common/http";
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { UtilProvider } from '../providers/util/util';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     ComponentsModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,7 +74,8 @@ import { UtilProvider } from '../providers/util/util';
     QRScanner,
     CodePush,
     CacheImageProvider,
-    UtilProvider
+    UtilProvider,
+    CaseDataProvider
   ]
 })
 export class AppModule {}

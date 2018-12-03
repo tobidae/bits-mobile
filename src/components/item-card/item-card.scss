@@ -1,13 +1,20 @@
 item-card {
   .inventory-item {
     padding-left: 5px;
+    margin: 10px 2px;
+    width: calc(100% - 4px);
+
     ion-label {
       margin-top: 0;
       margin-bottom: 5px;
     }
   }
   .item-image {
-    height: 45px;
+    img {
+      height: 65px !important;
+      width: auto;
+      display: inline;
+    }
   }
   .item-title {
     font-size: 2rem;

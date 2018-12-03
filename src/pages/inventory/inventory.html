@@ -1,9 +1,9 @@
 <ion-content padding>
   <h2 class="page-title">Inventory</h2>
 
-  <custom-loader *ngIf="!itemData"></custom-loader>
-  <ion-list *ngIf="itemData">
-    <item-card [item]="item"></item-card>
+  <custom-loader *ngIf="!casesData"></custom-loader>
+  <ion-list *ngIf="casesData">
+    <item-card *ngFor="let case of casesData" [case]="case"></item-card>
   </ion-list>
 
   <ion-fab bottom right margin>
