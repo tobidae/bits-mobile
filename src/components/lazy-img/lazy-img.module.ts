@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicPageModule } from 'ionic-angular';
+import { IonicModule } from 'ionic-angular';
 import { LazyImgComponent } from './lazy-img';
 
 @NgModule({
@@ -7,7 +7,7 @@ import { LazyImgComponent } from './lazy-img';
     LazyImgComponent,
   ],
   imports: [
-    IonicPageModule.forChild(LazyImgComponent),
+    IonicModule.forRoot(LazyImgComponent),
   ],
   exports: [
     LazyImgComponent

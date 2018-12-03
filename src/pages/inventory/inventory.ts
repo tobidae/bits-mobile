@@ -8,7 +8,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class InventoryPage {
   item: {};
-  itemData = true;
+  itemData = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.item = {
