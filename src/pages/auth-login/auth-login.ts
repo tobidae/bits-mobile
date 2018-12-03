@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../providers/auth/auth";
 import { TabsPage } from "../tabs/tabs";
 import { AuthRegisterPage } from "../auth-register/auth-register";
+import { AuthForgotPage } from "../auth-forgot/auth-forgot";
 
 @IonicPage()
 @Component({
@@ -42,6 +43,10 @@ export class AuthLoginPage {
 
   register(){
     this.navCtrl.push(AuthRegisterPage);
+  }
+
+  forgotPassword() {
+    this.navCtrl.push(AuthForgotPage);
   }
 
 }

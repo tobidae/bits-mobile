@@ -1,0 +1,14 @@
+<h3>Forgot Password</h3>
+
+
+<ion-content padding>
+
+  <form (ngSubmit)="forgotPassword()" [formGroup]="forgotForm">
+    <ion-item [ngClass]="{ invalid: forgotForm.controls['email'].errors && forgotForm.controls['email'].dirty }">
+      <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+    </ion-item>
+    <p class="auth-error" *ngIf="loginForm.controls['email'].errors && loginForm.controls['email'].dirty">Email address is not valid.</p>
+
+    <button ion-button block type="submit" [disabled]="!forgotForm.valid">Send Reset Email</button>
+  </form>
+</ion-content>

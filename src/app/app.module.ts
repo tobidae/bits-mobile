@@ -30,18 +30,17 @@ import { UtilProvider } from '../providers/util/util';
 import { CaseDataProvider } from "../providers/case-data/case-data";
 import { HttpClientModule } from "@angular/common/http";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
+import { AuthLoginPageModule } from "../pages/auth-login/auth-login.module";
+import { AuthRegisterPageModule } from "../pages/auth-register/auth-register.module";
+import { HistoryPageModule } from "../pages/history/history.module";
+import { InventoryPageModule } from "../pages/inventory/inventory.module";
+import { ScanPageModule } from "../pages/scan/scan.module";
+import { SettingsPageModule } from "../pages/settings/settings.module";
 
 @NgModule({
   declarations: [
     MyApp,
-    InventoryPage,
-    ScanPage,
-    HistoryPage,
-    SettingsPage,
-    TabsPage,
-    AuthLoginPage,
-    AuthRegisterPage,
-    LazyLoadDirective
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +49,13 @@ import { AngularFireDatabaseModule } from "@angular/fire/database";
     ComponentsModule,
     CommonModule,
     HttpClientModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AuthLoginPageModule,
+    AuthRegisterPageModule,
+    HistoryPageModule,
+    InventoryPageModule,
+    ScanPageModule,
+    SettingsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
