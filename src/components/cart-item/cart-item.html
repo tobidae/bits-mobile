@@ -1,0 +1,25 @@
+<ion-card class="cart-item">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3 no-padding>
+        <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
+      </ion-col>
+      <ion-col col-9>
+        <h5 class="item-title">{{case.name}}</h5>
+        <p class="small item-desc"><strong>
+          <ion-icon name="md-locate"></ion-icon>
+          {{case.lastLocation}}</strong>
+          <ion-icon name="md-timer"></ion-icon>
+          {{case.maxHoldTime}} hrs
+        </p>
+        <hr class="custom-divide">
+        <ion-row float-right>
+          <button ion-button small text-capitalize (click)="removeCaseFromCart()" *ngIf="cart.hasOwnProperty(case.$key)"
+                  color="danger">
+            <ion-icon name="remove-circle"></ion-icon>&emsp;Remove
+          </button>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card>

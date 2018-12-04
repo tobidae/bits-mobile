@@ -3,14 +3,17 @@ import { LazyImgComponent } from './lazy-img/lazy-img';
 import { ItemCardComponent } from './item-card/item-card';
 import { CustomLoaderComponent } from './custom-loader/custom-loader';
 import { IonicModule } from "ionic-angular";
+import { CartItemComponent } from './cart-item/cart-item';
 
 @NgModule({
 	declarations: [LazyImgComponent,
     ItemCardComponent,
-    CustomLoaderComponent],
+    CustomLoaderComponent,
+    CartItemComponent],
 	imports: [IonicModule],
 	exports: [LazyImgComponent,
     ItemCardComponent,
-    CustomLoaderComponent]
+    CustomLoaderComponent,
+    CartItemComponent]
 })
 export class ComponentsModule {}

@@ -15,6 +15,11 @@ export class UserDataProvider {
     return this.db.object(`/userCarts/${userId}`).valueChanges();
   }
 
+  getUserFav() {
+    const userId = this.authProvider.userID();
+    return this.db.object(`/userFavCarts/${userId}`).valueChanges();
+  }
+
 
 
 }

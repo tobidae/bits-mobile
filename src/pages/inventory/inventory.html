@@ -3,18 +3,22 @@
 
   <custom-loader *ngIf="!casesData"></custom-loader>
   <ion-list *ngIf="casesData">
-    <item-card *ngFor="let case of casesData | isAvailable:true" [case]="case"></item-card>
+    <item-card *ngFor="let case of casesData | isAvailable:true" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
   </ion-list>
   <h3 *ngIf="casesData" bold>Unavailable</h3>
   <ion-list *ngIf="casesData">
-    <item-card *ngFor="let case of casesData | isAvailable:false" [case]="case"></item-card>
+    <item-card *ngFor="let case of casesData | isAvailable:false" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
   </ion-list>
 
   <ion-fab bottom right class="create-case-fab" #fab>
     <button ion-fab><ion-icon name="add" color="dark"></ion-icon></button>
     <ion-fab-list side="top">
-      <button ion-fab (click)="createNewCase()" class="create-sub-fab" color="dark"><ion-icon name="briefcase"></ion-icon><ion-label>New Case</ion-label></button>
-      <button ion-fab (click)="createNewReminder()" class="create-sub-fab" color="dark"><ion-icon name="calendar"></ion-icon><ion-label>New Reminder</ion-label></button>
+      <button ion-fab (click)="createNewCase()" class="create-sub-fab" color="dark">
+        <ion-icon name="briefcase"></ion-icon><ion-label>New Case</ion-label>
+      </button>
+      <button ion-fab (click)="createNewReminder()" class="create-sub-fab" color="dark">
+        <ion-icon name="calendar"></ion-icon><ion-label>New Reminder</ion-label>
+      </button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

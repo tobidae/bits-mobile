@@ -1,18 +1,5 @@
-<!--
-  Generated template for the CartPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>cart</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
 <ion-content padding>
-
+  <h1>My Cart</h1>
+  <cart-item *ngFor="let case of userCart" [case]="case" [cart]="userCart"></cart-item>
 </ion-content>
+

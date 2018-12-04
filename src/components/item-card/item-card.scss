@@ -16,6 +16,16 @@ item-card {
       display: inline;
     }
   }
+  .item-image:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all .3s linear;
+  }
   .item-title {
     font-size: 2rem;
     font-weight: bold;
@@ -39,8 +49,23 @@ item-card {
     }
   }
   .is-not-available {
+    background-color: rgba(0, 0, 0, 0.15);
     .item-title, .item-desc {
       color: #797979;
+    }
+
+    .item-image {
+      div:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: calc(100% - 65px);
+        left: 0;
+        right: 0;
+        transition: all .3s linear;
+        background: rgba(0, 0, 0, 0.15) !important;
+      }
     }
   }
 }

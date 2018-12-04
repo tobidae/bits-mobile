@@ -6,7 +6,8 @@ import { AuthProvider } from "../auth/auth";
 @Injectable()
 export class CaseDataProvider {
 
-  constructor(public http: HttpClient, private db: AngularFireDatabase, private authProvider: AuthProvider) {}
+  constructor(public http: HttpClient, private db: AngularFireDatabase, private authProvider: AuthProvider) {
+  }
 
 
   getCases() {
@@ -15,12 +16,37 @@ export class CaseDataProvider {
 
   addCaseToCart(caseId) {
     const userId = this.authProvider.userID();
-    return this.db.database.ref(`/caseCarts/${userId}/${caseId}`).set(true);
+    return this.db.database.ref(`/userCarts/${userId}/${caseId}`).set(true);
   }
 
   removeCaseFromCart(caseId) {
     const userId = this.authProvider.userID();
-    return this.db.database.ref(`/caseCarts/${userId}/${caseId}`).remove();
+    return this.db.database.ref(`/userCarts/${userId}/${caseId}`).remove();
+  }
+
+  addCaseToFav(caseId) {
+    const userId = this.authProvider.userID();
+    return this.db.database.ref(`/userFavCarts/${userId}/${caseId}`).set(true);
+  }
+
+  removeCaseFromFav(caseId) {
+    const userId = this.authProvider.userID();
+    return this.db.database.ref(`/userFavCarts/${userId}/${caseId}`).remove();
+  }
+
+  isCaseInCart(caseId) {
+    const userId = this.authProvider.userID();
+    this.db.database.ref(`/userCarts/${userId}/${caseId}`)
+      .once('value', snapshot => {
+        // If success and snapshot exists
+        if (snapshot.exists()) {
+          return true;
+        }
+        return false;
+      }, () => {
+        // If failure
+        return false;
+      })
   }
 
 }

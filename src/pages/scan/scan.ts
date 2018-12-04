@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
-import { P } from "@angular/core/src/render3";
 
 @IonicPage()
 @Component({
@@ -9,8 +8,6 @@ import { P } from "@angular/core/src/render3";
   templateUrl: 'scan.html',
 })
 export class ScanPage {
-  private isBackMode: boolean = true;
-  private isFlashLightOn: boolean = false;
   private scanSub: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private qrScanner: QRScanner) {

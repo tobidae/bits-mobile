@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage } from 'ionic-angular';
 import { AuthProvider } from "../../providers/auth/auth";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilProvider } from "../../providers/util/util";
@@ -13,8 +13,7 @@ import { UtilProvider } from "../../providers/util/util";
 export class AuthForgotPage {
   forgotForm: FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authProvider: AuthProvider,
-              private fb: FormBuilder, private utilProvider: UtilProvider) {
+  constructor(private authProvider: AuthProvider, private fb: FormBuilder, private utilProvider: UtilProvider) {
     this.forgotForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])]
     })

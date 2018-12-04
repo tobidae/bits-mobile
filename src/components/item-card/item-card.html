@@ -1,16 +1,35 @@
 <ion-card class="inventory-item" [class.is-not-available]="!case.isAvailable">
   <ion-grid>
-    <ion-row>
+    <ion-row class="item-row">
       <ion-col col-3 no-padding>
         <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
       </ion-col>
       <ion-col col-9>
         <h5 class="item-title">{{case.name}}</h5>
-        <p class="small item-desc"><strong><ion-icon name="md-locate"></ion-icon>{{case.lastLocation}}</strong> <ion-icon name="md-timer"></ion-icon>{{case.maxHoldTime}} hrs</p>
+        <p class="small item-desc"><strong>
+          <ion-icon name="md-locate"></ion-icon>
+          {{case.lastLocation}}</strong>
+          <ion-icon name="md-timer"></ion-icon>
+          {{case.maxHoldTime}} hrs
+        </p>
         <hr class="custom-divide">
         <ion-row float-right>
-          <button ion-button small text-capitalize (click)="addCaseToCart()" [disabled]="!case.isAvailable"><ion-icon name="cart"></ion-icon>&emsp;Add</button>
-          <button ion-button color="danger" small clear text-capitalize (click)="addToFav()"><ion-icon name="star-outline"></ion-icon>&emsp;Watch</button>
+          <button ion-button small text-capitalize (click)="addCaseToCart()" [disabled]="!case.isAvailable"
+                  *ngIf="!cart.hasOwnProperty(case.$key)">
+            <ion-icon name="cart"></ion-icon>&emsp;Add
+          </button>
+          <button ion-button small text-capitalize (click)="removeCaseFromCart()" *ngIf="cart.hasOwnProperty(case.$key)"
+                  color="danger">
+            <ion-icon name="remove-circle"></ion-icon>&emsp;Remove
+          </button>
+          <button ion-button color="danger" small clear text-capitalize (click)="addToFav()"
+                  *ngIf="!favCart.hasOwnProperty(case.$key)">
+            <ion-icon name="star-outline"></ion-icon>&emsp;Watch
+          </button>
+          <button ion-button color="danger" small outline text-capitalize (click)="removeCaseFromFav()"
+                  *ngIf="favCart.hasOwnProperty(case.$key)">
+            <ion-icon name="star"></ion-icon>&emsp;Ignore
+          </button>
         </ion-row>
       </ion-col>
     </ion-row>
