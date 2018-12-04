@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../providers/auth/auth";
 import { TabsPage } from "../tabs/tabs";
-import { AuthRegisterPage } from "../auth-register/auth-register";
 import { AuthForgotPage } from "../auth-forgot/auth-forgot";
 
 @IonicPage()
@@ -42,7 +41,18 @@ export class AuthLoginPage {
   }
 
   register(){
-    this.navCtrl.push(AuthRegisterPage);
+    let data = this.loginForm.value;
+
+    if (!data.email) return;
+
+    let credentials = {
+      email: data.email,
+      password: data.password
+    };
+    this.authProvider.registerWithEmail(credentials).then(
+      () => this.navCtrl.setRoot(TabsPage),
+      error => this.loginError = error.message
+    );
   }
 
   forgotPassword() {

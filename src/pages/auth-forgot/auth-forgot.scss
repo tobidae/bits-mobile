@@ -3,4 +3,21 @@ page-auth-forgot {
     color: #dc3545;
     padding-left: 3px;
   }
+  .header {
+    font-size: 3.7rem;
+    padding-top: 60px;
+  }
+  .button-container {
+    padding: 10px 20px;
+    .button-inner {
+      font-size: 1.8rem;
+      padding: 8px 15px;
+    }
+  }
+  .forgot-form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 400px;
+  }
 }

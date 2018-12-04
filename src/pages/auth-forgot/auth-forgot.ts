@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AuthProvider } from "../../providers/auth/auth";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UtilProvider } from "../../providers/util/util";
 
 
 @IonicPage()
@@ -13,15 +14,21 @@ export class AuthForgotPage {
   forgotForm: FormGroup;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authProvider: AuthProvider,
-              private fb: FormBuilder) {
-    this.forgotForm = this.fb.group({
+              private fb: FormBuilder, private utilProvider: UtilProvider) {
+    this.forgotForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])]
     })
   }
 
   forgotPassword() {
-    if (this)
-    this.authProvider.registerWithEmail()
+    const data = this.forgotForm.value;
+
+    if (!data.email) return;
+
+    this.authProvider.resetPassword(data.email)
+      .then(() => this.utilProvider.presentToast(`Sent reset email to ${data.email}.`),
+        error => this.utilProvider.presentToast(`Error sending email to ${data.email}.`));
+
   }
 
 }

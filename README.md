@@ -10,6 +10,11 @@ Ionic provides a web application that allows you to see the different
 versions of the phone app for Android, iOS and Windows. To run this web
 environment, run `ionic serve --lab` and navigate to `https://localhost:8100/ionic-lab`
 
+### Livereload on device
+You can also live test your changes to a mobile device. Simply link it to your computer
+using adb for Android or xcode for iOS. Checkout the `adb_connect_device.sh` script in
+[helper scripts](https://github.com/tobidae/devscripts) for how to connect a device wirelessly.
+
 ## Build for platforms
 Building for Android or iOS platforms is super easy. First add the android
 and ios platform to the project like so: `ionic cordova platfrom add android`

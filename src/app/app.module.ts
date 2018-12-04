@@ -18,7 +18,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firebaseConfig } from '../config';
 import { AuthLoginPage } from "../pages/auth-login/auth-login";
-import { AuthRegisterPage } from "../pages/auth-register/auth-register";
 import { AuthProvider } from "../providers/auth/auth";
 import { QRScanner } from "@ionic-native/qr-scanner";
 import { CodePush } from "@ionic-native/code-push";
@@ -31,11 +30,15 @@ import { CaseDataProvider } from "../providers/case-data/case-data";
 import { HttpClientModule } from "@angular/common/http";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { AuthLoginPageModule } from "../pages/auth-login/auth-login.module";
-import { AuthRegisterPageModule } from "../pages/auth-register/auth-register.module";
 import { HistoryPageModule } from "../pages/history/history.module";
 import { InventoryPageModule } from "../pages/inventory/inventory.module";
 import { ScanPageModule } from "../pages/scan/scan.module";
 import { SettingsPageModule } from "../pages/settings/settings.module";
+import { AuthForgotPage } from "../pages/auth-forgot/auth-forgot";
+import { AuthForgotPageModule } from "../pages/auth-forgot/auth-forgot.module";
+import { UserDataProvider } from '../providers/user-data/user-data';
+import { CartPage } from "../pages/cart/cart";
+import { CartPageModule } from "../pages/cart/cart.module";
 
 @NgModule({
   declarations: [
@@ -51,11 +54,12 @@ import { SettingsPageModule } from "../pages/settings/settings.module";
     HttpClientModule,
     AngularFireDatabaseModule,
     AuthLoginPageModule,
-    AuthRegisterPageModule,
+    AuthForgotPageModule,
     HistoryPageModule,
     InventoryPageModule,
     ScanPageModule,
-    SettingsPageModule
+    SettingsPageModule,
+    CartPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -66,7 +70,8 @@ import { SettingsPageModule } from "../pages/settings/settings.module";
     SettingsPage,
     TabsPage,
     AuthLoginPage,
-    AuthRegisterPage
+    AuthForgotPage,
+    CartPage
   ],
   providers: [
     StatusBar,
@@ -80,7 +85,8 @@ import { SettingsPageModule } from "../pages/settings/settings.module";
     CodePush,
     CacheImageProvider,
     UtilProvider,
-    CaseDataProvider
+    CaseDataProvider,
+    UserDataProvider
   ]
 })
 export class AppModule {}

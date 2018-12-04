@@ -1,4 +1,4 @@
-<ion-card class="inventory-item">
+<ion-card class="inventory-item" [class.is-not-available]="!case.isAvailable">
   <ion-grid>
     <ion-row>
       <ion-col col-3 no-padding>
@@ -9,8 +9,8 @@
         <p class="small item-desc"><strong><ion-icon name="md-locate"></ion-icon>{{case.lastLocation}}</strong> <ion-icon name="md-timer"></ion-icon>{{case.maxHoldTime}} hrs</p>
         <hr class="custom-divide">
         <ion-row float-right>
-          <button ion-button small text-capitalize (click)="addCaseToCart()">Add</button>
-          <button ion-button color="danger" small clear text-capitalize (click)="addToFav()">Fav</button>
+          <button ion-button small text-capitalize (click)="addCaseToCart()" [disabled]="!case.isAvailable"><ion-icon name="cart"></ion-icon>&emsp;Add</button>
+          <button ion-button color="danger" small clear text-capitalize (click)="addToFav()"><ion-icon name="star-outline"></ion-icon>&emsp;Watch</button>
         </ion-row>
       </ion-col>
     </ion-row>

@@ -5,5 +5,5 @@ sudo gem install cocoapods
 pod setup
 
 
-appcenter codepush release-cordova -a otakerele/Case-Manager -d Production
-appcenter codepush release-cordova -a otakerele/Case-Manager-iOS -d Production
+appcenter codepush release-cordova -a otakerele/Case-Manager -d Production -m
+appcenter codepush release-cordova -a otakerele/Case-Manager-iOS -d Production -m

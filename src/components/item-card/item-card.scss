@@ -38,4 +38,9 @@ item-card {
       height: 2.8rem;
     }
   }
+  .is-not-available {
+    .item-title, .item-desc {
+      color: #797979;
+    }
+  }
 }

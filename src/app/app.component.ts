@@ -7,6 +7,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { AuthProvider } from "../providers/auth/auth";
 import { AuthLoginPage } from "../pages/auth-login/auth-login";
 import { CodePush } from '@ionic-native/code-push';
+import { UtilProvider } from "../providers/util/util";
 
 @Component({
   templateUrl: 'app.html'
@@ -15,14 +16,19 @@ export class MyApp {
   rootPage: any;
 
   constructor(platform: Platform, statusBar: StatusBar, public zone: NgZone, splashScreen: SplashScreen,
-              private authService: AuthProvider, private codePush: CodePush) {
+              private authService: AuthProvider, private codePush: CodePush, private utilProvider: UtilProvider) {
     platform.ready()
       .then(() => {
-        if (platform.is('cordova')){
+        if (platform.is('cordova')) {
+          this.utilProvider.presentToast('Checking for updates...');
           const downloadProgress = (progress) => {
             console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
           };
-          this.codePush.sync({}, downloadProgress).subscribe((syncStatus) => console.log(syncStatus));
+          this.codePush.sync({}, downloadProgress).subscribe((syncStatus) => {
+            if (syncStatus == 2) {
+              this.utilProvider.presentToast('Update downloaded, please restart app');
+            }
+          });
         }
 
         this.authService.isAuthenticated().subscribe(user => {

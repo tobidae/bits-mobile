@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { P } from "@angular/core/src/render3";
 
 @IonicPage()
 @Component({
@@ -27,7 +28,9 @@ export class ScanPage {
 
   ionViewWillLeave() {
     this.qrScanner.hide().catch(e => console.log('QRScanner hide', e)); // hide camera preview
-    this.scanSub.unsubscribe(); // stop scanning
+    if (this.scanSub) {
+      this.scanSub.unsubscribe(); // stop scanning
+    }
     this.hideCamera();
   }
 

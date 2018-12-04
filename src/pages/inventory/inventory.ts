@@ -17,8 +17,15 @@ export class InventoryPage implements OnInit{
   ngOnInit() {
     this.caseDataProvider.getCases().subscribe(itemData => {
       this.casesData = this.objToArr(itemData);
-      console.log(this.casesData);
     });
+  }
+
+  createNewCase() {
+
+  }
+
+  createNewReminder() {
+
   }
 
   objToArr(obj) {

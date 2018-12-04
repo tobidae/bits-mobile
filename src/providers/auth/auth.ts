@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Observable } from "rxjs";
 
 export interface User {
   email: string;
@@ -10,9 +11,20 @@ export interface User {
 
 @Injectable()
 export class AuthProvider {
+  user: Observable<firebase.User>;
+  userDetails: firebase.User = null;
 
   constructor(
     private afAuth: AngularFireAuth) {
+    this.user = afAuth.authState;
+
+    this.user.subscribe((user) => {
+      if (user) {
+        this.userDetails = user;
+      } else {
+        this.userDetails = null;
+      }
+    });
   }
 
   signInWithEmail(user: User) {
