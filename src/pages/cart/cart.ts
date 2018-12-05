@@ -11,12 +11,17 @@ import { UtilProvider } from "../../providers/util/util";
 })
 export class CartPage {
   userCart: any = null;
+  userFav: any = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider,
               private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider) {
     this.userDataProvider.getUserCart()
       .subscribe(userCart => {
         this.userCart = this.objToArr(userCart);
+      })
+    this.userDataProvider.getUserFav()
+      .subscribe(userFav => {
+        this.userFav = this.objToArr(userFav);
       })
 
   }
@@ -33,7 +38,7 @@ export class CartPage {
   }
 
   checkoutCart() {
-    this.utilProvider.presentToast('Checkout Cart');
+    this.utilProvider.presentToast('Will be able to Checkout Cart in the future!');
   }
 
 }

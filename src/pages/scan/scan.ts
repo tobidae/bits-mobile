@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController } from 'ionic-angular';
 import { UtilProvider } from "../../providers/util/util";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { Case } from "../../shared/interfaces";
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 class QRScan {
   app: string;
@@ -18,22 +17,23 @@ class QRScan {
 })
 export class ScanPage {
   private scannedData: QRScan;
-  caseData: Case = {
-    category: "Electronics",
-    color: "gray",
-    datasheetUrl: "https://www.valuetronics.com/pub/media/vti/datasheets/Agilent%208590%20E-Series.pdf",
-    description: "A spectrum analyzer measures the power of spectrums of known and unknown signals. Spectrum analyzers collect information such as the magnitude of an input signal compared to its frequency. As a frequency analyzer spectrum analyzers main use is to document and analyze electrical input signals as well as spectral compositions of other signals.",
-    imageUrl: "https://storage.googleapis.com/case-manager-boeing.appspot.com/inventory-images/spectrum-analyzer.jpg",
-    isAvailable: true,
-    lastLocation: "B3",
-    mass: 14,
-    maxHoldTime: 6,
-    name: "Spectrum Analyzer",
-    rfid: "934e88e1-21b1-4fce-bafc-03b220f9d43f",
-    tags: "Needs Maintenance"
-  };
+  caseData: Case;
+  // caseData: Case = {
+  //   category: "Electronics",
+  //   color: "gray",
+  //   datasheetUrl: "https://www.valuetronics.com/pub/media/vti/datasheets/Agilent%208590%20E-Series.pdf",
+  //   description: "A spectrum analyzer measures the power of spectrums of known and unknown signals. Spectrum analyzers collect information such as the magnitude of an input signal compared to its frequency. As a frequency analyzer spectrum analyzers main use is to document and analyze electrical input signals as well as spectral compositions of other signals.",
+  //   imageUrl: "https://storage.googleapis.com/case-manager-boeing.appspot.com/inventory-images/spectrum-analyzer.jpg",
+  //   isAvailable: true,
+  //   lastLocation: "B3",
+  //   mass: 14,
+  //   maxHoldTime: 6,
+  //   name: "Spectrum Analyzer",
+  //   rfid: "934e88e1-21b1-4fce-bafc-03b220f9d43f",
+  //   tags: "Needs Maintenance"
+  // };
 
-  constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,
+  constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner,
               private utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider) {
   }
 
@@ -62,7 +62,9 @@ export class ScanPage {
     if (this.scannedData.app == 'BITS') {
       this.caseDataProvider.getCaseById(this.scannedData.caseId)
         .subscribe((caseData: Case) => {
-          console.log(caseData);
+          if (caseData.tags) {
+            caseData.tagsArr = caseData.tags.split(',');
+          }
           this.caseData = caseData;
         })
     }
@@ -78,17 +80,14 @@ export class ScanPage {
   }
 
   checkoutCase() {
+    this.utilProvider.presentToast('Will be able to checkout specific case soon!');
   }
 
   returnCase() {
-    this.utilProvider.presentToast('Will update case location in future');
-  }
-
-  openDatasheet() {
-    this.iab.create(this.caseData.datasheetUrl);
+    this.utilProvider.presentToast('Will be able to scan case to return to location or transport');
   }
 
   updateCaseLocation() {
-    this.utilProvider.presentToast('Will update case location in future');
+    this.utilProvider.presentToast('Will be able to update current case location soon');
   }
 }

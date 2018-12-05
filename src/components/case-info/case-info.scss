@@ -1,0 +1,30 @@
+case-info {
+  .metadata-container {
+    margin-bottom: 10px;
+
+    ion-col:not(:last-child) {
+      border-right: 1px solid black;
+    }
+    h4 {
+      font-weight: bold;
+    }
+  }
+  .case-container {
+    margin-bottom: 80px;
+  }
+  .case-title {
+    font-size: 2.6rem;
+    font-weight: bold;
+    padding-top: 24px;
+  }
+  .case-description,
+  .case-location,
+  .case-hold-time {
+    font-size: 1.6rem;
+  }
+
+  .case-location {
+    margin-top: 8px;
+    display: inline-block;
+  }
+}

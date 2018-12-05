@@ -2,69 +2,7 @@
   <div class="page-header" *ngIf="caseData">
     <span class="page-title">Scanned Case</span>
   </div>
-
-  <ion-grid *ngIf="caseData">
-    <ion-row no-padding>
-      <ion-col no-padding col-4>
-        <lazy-img class="scan-image" inputSrc="{{caseData.imageUrl}}"></lazy-img>
-      </ion-col>
-      <ion-col no-padding padding-left col-8>
-        <h3 class="scan-title">{{caseData.name}}</h3>
-        <p><strong>RFID:</strong>&ensp;{{caseData.rfid | shorten:26}}</p>
-        <div>
-          <ion-badge item-end color="{{caseData.isAvailable ? 'secondary' : 'warning'}}">{{caseData.isAvailable ?
-            'Available' : 'Unavailable/On Hold'}}
-          </ion-badge>
-        </div>
-      </ion-col>
-    </ion-row>
-    <hr class="custom-divide">
-    <ion-row no-padding>
-      <ion-col no-padding col-12>
-        <p class="scan-description">{{caseData.description}}</p>
-      </ion-col>
-    </ion-row>
-    <hr class="custom-divide">
-    <ion-row no-padding>
-      <ion-col no-padding col-12>
-        <p class="scan-location" *ngIf="caseData.lastLocation">
-          <ion-icon name="md-locate"></ion-icon>&emsp;Last known location was <strong>Sector
-          {{caseData.lastLocation}}</strong></p>
-        <button ion-button outline color="danger" (click)="updateCaseLocation()" float-right>Update</button>
-      </ion-col>
-    </ion-row>
-    <hr class="custom-divide">
-    <ion-row no-padding>
-      <ion-col no-padding col-12>
-        <p class="scan-hold-time" *ngIf="caseData.maxHoldTime">
-          <ion-icon name="md-timer"></ion-icon>&emsp;You can only checkout for <strong>{{caseData.maxHoldTime}}
-          hrs max!</strong></p>
-      </ion-col>
-    </ion-row>
-    <hr class="custom-divide">
-    <ion-row no-padding *ngIf="caseData.datasheetUrl">
-      <ion-col no-padding col-12 padding-top>
-        <h3>Resources</h3>
-        <a ion-button color="" href="{{caseData.datasheetUrl}}" target="_blank" text-center>Open Datasheet</a>
-      </ion-col>
-    </ion-row>
-    <hr class="custom-divide" margin-top>
-    <h3>Metadata</h3>
-    <ion-row no-padding text-center>
-      <ion-col no-padding col-4>
-        <h4>Category</h4>
-        <h5>{{caseData.category}}</h5>
-      </ion-col>
-      <ion-col no-padding col-4>
-        <h4>Mass</h4>
-        <h5>{{caseData.mass}}</h5>
-      </ion-col>
-      <ion-col no-padding col-4>
-        <h4>Color</h4>
-        <h5>{{caseData.color}}</h5>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <case-info [case]="caseData"></case-info>
   <div class="no-data-text" *ngIf="!caseData">
     <ion-icon name="md-sad" text-center></ion-icon>
     <h3>No QR Code was scanned yet.</h3>

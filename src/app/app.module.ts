@@ -37,7 +37,6 @@ import { UserDataProvider } from '../providers/user-data/user-data';
 import { CartPage } from "../pages/cart/cart";
 import { CartPageModule } from "../pages/cart/cart.module";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
-import { InAppBrowser } from "@ionic-native/in-app-browser";
 
 @NgModule({
   declarations: [
@@ -84,8 +83,7 @@ import { InAppBrowser } from "@ionic-native/in-app-browser";
     CacheImageProvider,
     UtilProvider,
     CaseDataProvider,
-    UserDataProvider,
-    InAppBrowser
+    UserDataProvider
   ]
 })
 export class AppModule {

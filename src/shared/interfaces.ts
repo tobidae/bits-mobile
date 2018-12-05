@@ -12,4 +12,5 @@ export class Case {
   mass: number | string;
   rfid: string;
   tags: string;
+  tagsArr?: string[];
 }

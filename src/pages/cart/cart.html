@@ -6,6 +6,12 @@
   <div margin-top *ngIf="userCart">
     <cart-item *ngFor="let case of userCart" [case]="case"></cart-item>
   </div>
+  <div class="watch-later-title" margin-top *ngIf="userFav">
+    <span>Watch for Later (Favorites)</span>
+  </div>
+  <div class="watch-container" margin-top *ngIf="userFav">
+    <cart-item *ngFor="let case of userFav" [case]="case"></cart-item>
+  </div>
   <ion-fab bottom right class="checkout-fab" #fab>
     <button ion-button round color="dark" large (click)="checkoutCart()">Checkout</button>
   </ion-fab>

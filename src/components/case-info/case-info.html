@@ -1,0 +1,71 @@
+
+<ion-grid class="case-container" *ngIf="caseData">
+  <ion-row no-padding>
+    <ion-col no-padding col-4>
+      <lazy-img class="case-image" inputSrc="{{caseData.imageUrl}}"></lazy-img>
+    </ion-col>
+    <ion-col no-padding padding-left col-8>
+      <h3 class="case-title">{{caseData.name}}</h3>
+      <p><strong>RFID:</strong>&ensp;{{caseData.rfid | shorten:26}}</p>
+      <div>
+        <ion-badge large item-end color="{{caseData.isAvailable ? 'secondary' : 'warning'}}">{{caseData.isAvailable ?
+          'Available' : 'Unavailable/On Hold'}}
+        </ion-badge>
+      </div>
+    </ion-col>
+  </ion-row>
+  <hr class="custom-divide">
+  <ion-row no-padding>
+    <ion-col no-padding col-12>
+      <p class="case-description">{{caseData.description}}</p>
+    </ion-col>
+  </ion-row>
+  <hr class="custom-divide">
+  <ion-row no-padding>
+    <ion-col no-padding col-12>
+      <p class="case-location" *ngIf="caseData.lastLocation">
+        <ion-icon name="md-locate"></ion-icon>&emsp;Last known location was <strong>Sector
+        {{caseData.lastLocation}}</strong></p>
+      <button ion-button outline color="danger" (click)="updateCaseLocation()" float-right>Update</button>
+    </ion-col>
+  </ion-row>
+  <hr class="custom-divide">
+  <ion-row no-padding>
+    <ion-col no-padding col-12>
+      <p class="case-hold-time" *ngIf="caseData.maxHoldTime">
+        <ion-icon name="md-timer"></ion-icon>&emsp;You can only checkout for <strong>{{caseData.maxHoldTime}}
+        hrs max!</strong></p>
+    </ion-col>
+  </ion-row>
+  <hr class="custom-divide">
+  <ion-row no-padding *ngIf="caseData.datasheetUrl">
+    <ion-col no-padding col-12 padding-top>
+      <h3>Resources</h3>
+      <a ion-button color="" href="{{caseData.datasheetUrl}}" target="_blank" text-center>Open Datasheet</a>
+    </ion-col>
+  </ion-row>
+  <hr class="custom-divide" margin-top>
+  <h3 padding-bottom>Metadata</h3>
+  <ion-row no-padding text-center class="metadata-container">
+    <ion-col no-padding col-4>
+      <h4>Category</h4>
+      <h5>{{caseData.category}}</h5>
+    </ion-col>
+    <ion-col no-padding col-4>
+      <h4>Mass</h4>
+      <h5>{{caseData.mass}} lbs</h5>
+    </ion-col>
+    <ion-col no-padding col-4>
+      <h4>Color</h4>
+      <h5>{{caseData.color}}</h5>
+    </ion-col>
+  </ion-row>
+  <hr class="custom-divide">
+  <h3>Tags</h3>
+  <div *ngIf="caseData.tagsArr">
+    <ion-badge *ngFor="let tag of caseData.tagsArr" color="primary" margin-right>{{tag}}</ion-badge>
+  </div>
+  <div *ngIf="caseData.tags && !caseData.tagsArr">
+    <ion-badge color="primary">{{caseData.tags}}</ion-badge>
+  </div>
+</ion-grid>
