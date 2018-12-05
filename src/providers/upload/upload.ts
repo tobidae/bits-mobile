@@ -1,8 +1,8 @@
 import { UtilProvider } from './../util/util';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/storage';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 
@@ -12,8 +12,7 @@ declare var cordova: any;
 @Injectable()
 export class UploadProvider {
   constructor(
-    public http: Http, public camera: Camera, public file: File, public utilProvider: UtilProvider) {
-
+    public http: HttpClient, public camera: Camera, public file: File, public utilProvider: UtilProvider) {
   }
 
   uploadImageBlob(imageBlob, imageName, basePath) {

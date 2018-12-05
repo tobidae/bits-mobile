@@ -3,13 +3,59 @@
     <span class="page-title">Add A Case</span>
   </div>
 
-  <ion-card class="image-holder" text-center (click)="openCameraOptions()">
-    <img *ngIf="!isEdit" src="{{uploadProvider.pathForImage(basicDetailsForm.value.partyImage)}}" style="width: 100%" [hidden]="basicDetailsForm.value.partyImage === null">
-    <img *ngIf="isEdit" src="{{basicDetailsForm.value.partyImage}}" style="width: 100%" [hidden]="basicDetailsForm.value.partyImage === null">
-    <div [hidden]="basicDetailsForm.value.partyImage !== null">
-      <ion-icon name="ios-camera"></ion-icon>
-      <h5 style="color: #9a0000" *ngIf="!basicDetailsForm.controls.partyImage.valid  && (basicDetailsForm.controls.partyImage.dirty || slide1ContinueAttempt)">Required, you can always change this later!</h5>
-      <h5>Tap here to add a 4:3 image from your gallery or use one of our nice stock images!</h5>
-    </div>
-  </ion-card>
+  <div [formGroup]="caseForm">
+    <ion-card class="image-holder" text-center (click)="openCameraOptions()">
+      <img *ngIf="!isEdit" src="{{uploadProvider.pathForImage(caseForm.value.caseImage)}}" style="width: 100%"
+           [hidden]="caseForm.value.caseImage === null">
+      <img *ngIf="isEdit" src="{{caseForm.value.caseImage}}" style="width: 100%"
+           [hidden]="caseForm.value.caseImage === null">
+      <div [hidden]="caseForm.value.caseImage !== null">
+        <ion-icon name="ios-camera"></ion-icon>
+        <h5 style="color: #9a0000" *ngIf="!caseForm.controls.caseImage.valid  && (caseForm.controls.caseImage.dirty)">
+          Required, you can always change this later!</h5>
+        <h5>Tap here to add a 1:1 image from your gallery!</h5>
+      </div>
+    </ion-card>
+    <ion-list class="case-info">
+      <ion-item class="case-title">
+        <ion-label color="primary" floating>Name of Equipment</ion-label>
+        <ion-input type="text" maxlength="60" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item no-lines class="error-item" *ngIf="!caseForm.controls.name.valid  && (caseForm.controls.name.dirty)">
+        <p>Don't forget to name your equipment.</p>
+      </ion-item>
+      <ion-item class="party-desc">
+        <ion-label color="primary" floating>Description</ion-label>
+        <ion-textarea autoresize maxlength="300" type="text" formControlName="description"></ion-textarea>
+      </ion-item>
+      <ion-item no-lines class="error-item"
+                *ngIf="!caseForm.controls.description.valid  && (caseForm.controls.description.dirty)">
+        <p>Don't forget to give a nice description.</p>
+      </ion-item>
+      <ion-item>
+        <ion-label>Is Item Available?</ion-label>
+        <ion-toggle checked="true" formControlName="isAvailable"></ion-toggle>
+      </ion-item>
+      <ion-item>
+        <ion-label>Current Location</ion-label>
+        <ion-input type="text" formControlName="lastLocation"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Datasheet Url</ion-label>
+        <ion-input type="text" formControlName="datasheetUrl"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Mass</ion-label>
+        <ion-input type="text" formControlName="mass"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Color</ion-label>
+        <ion-input type="text" formControlName="color"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tags</ion-label>
+        <ion-input type="text" formControlName="tags" placeholder="Separate with commas"></ion-input>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

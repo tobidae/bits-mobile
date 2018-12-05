@@ -41,6 +41,9 @@ import { CreateCasePage } from "../pages/create-case/create-case";
 import { CreateCasePageModule } from "../pages/create-case/create-case.module";
 import { UploadProvider } from '../providers/upload/upload';
 import { Diagnostic } from "@ionic-native/diagnostic";
+import { File } from "@ionic-native/file";
+import { FilePath } from "@ionic-native/file-path";
+import { Camera } from "@ionic-native/camera";
 
 @NgModule({
   declarations: [
@@ -91,7 +94,10 @@ import { Diagnostic } from "@ionic-native/diagnostic";
     CaseDataProvider,
     UserDataProvider,
     UploadProvider,
-    Diagnostic
+    Diagnostic,
+    File,
+    FilePath,
+    Camera
   ]
 })
 export class AppModule {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { AuthProvider } from "../../providers/auth/auth";
@@ -17,7 +17,8 @@ export class InventoryPage implements OnInit{
   userId: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private caseDataProvider: CaseDataProvider,
-              private userDataProvider: UserDataProvider, private authProvider: AuthProvider) {
+              private userDataProvider: UserDataProvider, private authProvider: AuthProvider,
+              private modalCtrl: ModalController) {
     this.userId = this.authProvider.userID();
   }
 
@@ -38,7 +39,9 @@ export class InventoryPage implements OnInit{
   }
 
   createNewCase() {
-    return this.navCtrl.push(CreateCasePage);
+    // return this.navCtrl.push(CreateCasePage);
+    const modal = this.modalCtrl.create(CreateCasePage);
+    return modal.present();
   }
 
   objToArr(obj) {

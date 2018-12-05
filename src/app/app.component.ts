@@ -23,13 +23,13 @@ export class MyApp {
           const downloadProgress = (progress) => {
             console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
           };
-          this.codePush.sync({}, downloadProgress).subscribe((syncStatus: SyncStatus) => {
-            if (syncStatus == 2) {
-              this.utilProvider.presentToast('Update downloaded, please restart app');
-            } else if (syncStatus == 7) {
-              this.utilProvider.presentToast('Update found, installing');
-            }
-          });
+          // this.codePush.sync({}, downloadProgress).subscribe((syncStatus: SyncStatus) => {
+          //   if (syncStatus == 2) {
+          //     this.utilProvider.presentToast('Update downloaded, please restart app');
+          //   } else if (syncStatus == 7) {
+          //     this.utilProvider.presentToast('Update found, installing...');
+          //   }
+          // });
         }
 
         this.authService.isAuthenticated().subscribe(user => {

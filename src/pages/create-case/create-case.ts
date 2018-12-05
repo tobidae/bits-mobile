@@ -6,7 +6,10 @@ import { File } from '@ionic-native/file';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilProvider } from "../../providers/util/util";
 import { UploadProvider } from "../../providers/upload/upload";
+import { DomSanitizer } from "@angular/platform-browser";
+
 declare var cordova: any;
+declare var window: any;
 
 @IonicPage()
 @Component({
@@ -15,15 +18,25 @@ declare var cordova: any;
 })
 export class CreateCasePage {
   caseForm: FormGroup;
+  isEdit: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,
               private file: File, private filePath: FilePath, private fb: FormBuilder,
               private actionSheetCtrl: ActionSheetController, private utilProvider: UtilProvider,
-              private uploadProvider: UploadProvider) {
+              public uploadProvider: UploadProvider, private sanitizer: DomSanitizer) {
     this.caseForm = this.fb.group({
       caseImage: [null, Validators.required],
-      title: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
-      description: ['', Validators.compose([Validators.required, Validators.minLength(50), Validators.maxLength(300)])]
+      name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
+      description: ['', Validators.compose([Validators.required, Validators.minLength(50), Validators.maxLength(300)])],
+      maxHoldTime: ['', Validators.compose([Validators.required])],
+      lastLocation: ['', Validators.compose([Validators.required])],
+      datasheetUrl: ['', Validators.compose([Validators.required])],
+      color: ['', Validators.compose([Validators.required])],
+      category: ['', Validators.compose([Validators.required])],
+      isAvailable: ['', Validators.compose([Validators.required])],
+      mass: ['', Validators.compose([Validators.required])],
+      rfid: ['', Validators.compose([Validators.required])],
+      tags: ['', Validators.compose([Validators.required])],
     });
   }
 
@@ -57,15 +70,23 @@ export class CreateCasePage {
             allowEdit: true,
             saveToPhotoAlbum: false,
             targetWidth: 540,
-            targetHeight: 360
+            targetHeight: 540
           };
 
           this.camera.getPicture(options).then((imagePath) => {
             if (this.utilProvider.isAndroid() && sourceType === this.camera.PictureSourceType.PHOTOLIBRARY) {
               this.filePath.resolveNativePath(imagePath).then(filePath => {
+                // this.file.readAsDataURL(cordova.file.dataDirectory, filePath)
+                //   .then((base64) => {
+                //     const imageUri = this.sanitizer.bypassSecurityTrustUrl(base64);
+                //     this.caseForm.controls['caseImage'].setValue(imageUri);
+                //   }, (err) => {
+                //     console.log(err);
+                //   });
                 let correctPath = filePath.substr(0, filePath.lastIndexOf('/') + 1);
                 let currentName = imagePath.substring(imagePath.lastIndexOf('/') + 1, imagePath.lastIndexOf('?'));
                 let newFileName = this.uploadProvider.createFileName();
+
                 this.copyFileToLocalDir(correctPath, currentName, newFileName);
               });
             } else {

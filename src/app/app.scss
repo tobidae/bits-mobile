@@ -1,5 +1,32 @@
 // http://ionicframework.com/docs/theming/
+$app-fonts-path: '../assets/fonts/' !default;
+@font-face {
+  font-family: Product_Sans;
+  src: url('#{$app-fonts-path}Product_Sans_Regular.ttf') format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
 
+@font-face {
+  font-family: Product_Sans;
+  src: url('#{$app-fonts-path}Product_Sans_Bold.ttf') format("ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Product_Sans;
+  src: url('#{$app-fonts-path}Product_Sans_Italic.ttf') format("ttf");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Product_Sans;
+  src: url('#{$app-fonts-path}Product_Sans_Bold_Italic.ttf') format("ttf");
+  font-weight: bold;
+  font-style: italic;
+}
 
 // App Global Sass
 // --------------------------------------------------
@@ -18,6 +45,10 @@
 body {
   font-family: "Product_Sans", sans-serif !important;
   font-weight: normal !important;
+}
+
+p {
+  font-family: "Product Sans", sans-serif !important;
 }
 
 .page-header {

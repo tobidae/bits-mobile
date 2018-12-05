@@ -5,38 +5,6 @@
 // roboto, and noto sans fonts
 
 $font-path: "../assets/fonts";
-@font-face {
-  font-family: Product_Sans;
-  src: url(../assets/fonts/Product_Sans_Regular.ttf) format("ttf");
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Product_Sans;
-  src: url(../assets/fonts/Product_Sans_Bold.ttf) format("ttf");
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: Product_Sans;
-  src: url(../assets/fonts/Product_Sans_Italic.ttf) format("ttf");
-  font-weight: 200;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: Product_Sans;
-  src: url(../assets/fonts/Product_Sans_Bold_Italic.ttf) format("ttf");
-  font-weight: bold;
-  font-style: italic;
-}
-
-$font-family-base: "Product Sans" sans-serif !default;
-$font-family-ios-base: $font-family-base;
-$font-family-md-base: $font-family-base;
-$font-family-wp-base: $font-family-base;
 
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
