@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { AuthProvider } from "../../providers/auth/auth";
+import { CreateCasePage } from "../create-case/create-case";
 
 @IonicPage()
 @Component({
@@ -37,11 +38,7 @@ export class InventoryPage implements OnInit{
   }
 
   createNewCase() {
-
-  }
-
-  createNewReminder() {
-
+    return this.navCtrl.push(CreateCasePage);
   }
 
   objToArr(obj) {

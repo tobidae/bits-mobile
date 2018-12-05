@@ -78,16 +78,4 @@ export class ScanPage {
     }
     return true;
   }
-
-  checkoutCase() {
-    this.utilProvider.presentToast('Will be able to checkout specific case soon!');
-  }
-
-  returnCase() {
-    this.utilProvider.presentToast('Will be able to scan case to return to location or transport');
-  }
-
-  updateCaseLocation() {
-    this.utilProvider.presentToast('Will be able to update current case location soon');
-  }
 }

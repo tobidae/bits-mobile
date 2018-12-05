@@ -1,6 +1,7 @@
-import { ToastController, LoadingController, Loading } from 'ionic-angular';
+import { ToastController, LoadingController, Loading, Platform } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 @Injectable()
 export class UtilProvider {
@@ -8,7 +9,9 @@ export class UtilProvider {
 
   constructor(
     private toastCtrl: ToastController,
-    private loadingCtrl: LoadingController) { }
+    private loadingCtrl: LoadingController,
+    public _platform: Platform,
+    public _diagnostic: Diagnostic) { }
 
   presentToast(message) {
     return this.toastCtrl.create({
@@ -39,5 +42,77 @@ export class UtilProvider {
       this.loading.dismissAll();
       this.loading = null;
     }
+  }
+
+  isAndroid() {
+    return this._platform.is('android')
+  }
+
+  isiOS() {
+    return this._platform.is('ios');
+  }
+
+  isCordova() {
+    return this._platform.is('cordova');
+  }
+
+  checkExternalStoragePermissions(): Promise<boolean> {
+    return new Promise(resolve => {
+      if (this.isiOS()) {
+        this._diagnostic.getExternalStorageAuthorizationStatus().then(status => {
+          if (status == this._diagnostic.permissionStatus.GRANTED) {
+            resolve(true);
+          } else if (status == this._diagnostic.permissionStatus.DENIED) {
+            resolve(false);
+          } else if (status == this._diagnostic.permissionStatus.NOT_REQUESTED || status.toLowerCase() == 'not_determined') {
+            this._diagnostic.requestExternalStorageAuthorization().then(authorisation => {
+              resolve(authorisation == this._diagnostic.permissionStatus.GRANTED);
+            });
+          }
+        });
+      } else if (this.isAndroid()) {
+        this._diagnostic.isExternalStorageAuthorized().then(authorised => {
+          if (authorised) {
+            resolve(true);
+          } else {
+            this._diagnostic.requestExternalStorageAuthorization().then(authorisation => {
+              resolve(authorisation == this._diagnostic.permissionStatus.GRANTED);
+            });
+          }
+        });
+      } else {
+        resolve(false);
+      }
+    });
+  }
+
+  checkCameraPermissions(): Promise<boolean> {
+    return new Promise(resolve => {
+      if (this.isiOS()) {
+        this._diagnostic.getCameraAuthorizationStatus().then(status => {
+          if (status == this._diagnostic.permissionStatus.GRANTED) {
+            resolve(true);
+          } else if (status == this._diagnostic.permissionStatus.DENIED) {
+            resolve(false);
+          } else if (status == this._diagnostic.permissionStatus.NOT_REQUESTED || status.toLowerCase() == 'not_determined') {
+            this._diagnostic.requestCameraAuthorization().then(authorisation => {
+              resolve(authorisation == this._diagnostic.permissionStatus.GRANTED);
+            });
+          }
+        });
+      } else if (this.isAndroid()) {
+        this._diagnostic.isCameraAuthorized().then(authorised => {
+          if (authorised) {
+            resolve(true);
+          } else {
+            this._diagnostic.requestCameraAuthorization().then(authorisation => {
+              resolve(authorisation == this._diagnostic.permissionStatus.GRANTED);
+            });
+          }
+        });
+      } else {
+        resolve(false);
+      }
+    });
   }
 }

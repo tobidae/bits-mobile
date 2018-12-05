@@ -3,7 +3,7 @@
     <name>BITS</name>
     <description>Boeing Inventory Tracking System - Tracks equipment cases so that workers can make requests for them.</description>
     <author email="contact@tobiak.com" href="http://tobiak.com/">Tobi Akerele</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.86.3:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -95,9 +95,9 @@
     <allow-navigation href="http://192.168.86.3:8100" sessionid="df97e43c" />
     <plugin name="cordova-plugin-file" spec="6.0.1" />
     <plugin name="cordova-plugin-file-transfer" spec="1.7.1" />
-    <engine name="android" spec="7.1.4" />
-    <engine name="ios" spec="4.5.5" />
     <plugin name="phonegap-plugin-barcodescanner" spec="8.0.1">
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
+    <engine name="android" spec="7.1.4" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

@@ -6,7 +6,7 @@
     </ion-col>
     <ion-col no-padding padding-left col-8>
       <h3 class="case-title">{{caseData.name}}</h3>
-      <p><strong>RFID:</strong>&ensp;{{caseData.rfid | shorten:26}}</p>
+      <p><strong>RFID:</strong>&ensp;{{caseData.rfid | shorten:25}}</p>
       <div>
         <ion-badge large item-end color="{{caseData.isAvailable ? 'secondary' : 'warning'}}">{{caseData.isAvailable ?
           'Available' : 'Unavailable/On Hold'}}

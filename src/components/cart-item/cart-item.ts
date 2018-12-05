@@ -9,6 +9,7 @@ import { UtilProvider } from "../../providers/util/util";
 })
 export class CartItemComponent implements OnInit{
   @Input('case') case: Case;
+  @Input('type') cartType: string;
   isAvailableText: string = "Available";
  
   constructor(private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider) {

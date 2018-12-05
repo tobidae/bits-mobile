@@ -5,18 +5,23 @@ import { CustomLoaderComponent } from './custom-loader/custom-loader';
 import { IonicModule } from "ionic-angular";
 import { CartItemComponent } from './cart-item/cart-item';
 import { CaseInfoComponent } from './case-info/case-info';
+import { PipesModule } from "../pipes/pipes.module";
 
 @NgModule({
-	declarations: [LazyImgComponent,
+  declarations: [LazyImgComponent,
     ItemCardComponent,
     CustomLoaderComponent,
     CartItemComponent,
     CaseInfoComponent],
-	imports: [IonicModule],
-	exports: [LazyImgComponent,
+  imports: [
+    IonicModule,
+    PipesModule],
+  exports: [
+    LazyImgComponent,
     ItemCardComponent,
     CustomLoaderComponent,
     CartItemComponent,
     CaseInfoComponent]
 })
-export class ComponentsModule {}
+export class ComponentsModule {
+}

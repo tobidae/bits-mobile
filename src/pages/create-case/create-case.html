@@ -1,0 +1,15 @@
+<ion-content padding>
+  <div class="page-header">
+    <span class="page-title">Add A Case</span>
+  </div>
+
+  <ion-card class="image-holder" text-center (click)="openCameraOptions()">
+    <img *ngIf="!isEdit" src="{{uploadProvider.pathForImage(basicDetailsForm.value.partyImage)}}" style="width: 100%" [hidden]="basicDetailsForm.value.partyImage === null">
+    <img *ngIf="isEdit" src="{{basicDetailsForm.value.partyImage}}" style="width: 100%" [hidden]="basicDetailsForm.value.partyImage === null">
+    <div [hidden]="basicDetailsForm.value.partyImage !== null">
+      <ion-icon name="ios-camera"></ion-icon>
+      <h5 style="color: #9a0000" *ngIf="!basicDetailsForm.controls.partyImage.valid  && (basicDetailsForm.controls.partyImage.dirty || slide1ContinueAttempt)">Required, you can always change this later!</h5>
+      <h5>Tap here to add a 4:3 image from your gallery or use one of our nice stock images!</h5>
+    </div>
+  </ion-card>
+</ion-content>

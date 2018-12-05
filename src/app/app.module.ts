@@ -37,6 +37,10 @@ import { UserDataProvider } from '../providers/user-data/user-data';
 import { CartPage } from "../pages/cart/cart";
 import { CartPageModule } from "../pages/cart/cart.module";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { CreateCasePage } from "../pages/create-case/create-case";
+import { CreateCasePageModule } from "../pages/create-case/create-case.module";
+import { UploadProvider } from '../providers/upload/upload';
+import { Diagnostic } from "@ionic-native/diagnostic";
 
 @NgModule({
   declarations: [
@@ -57,7 +61,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     InventoryPageModule,
     ScanPageModule,
     SettingsPageModule,
-    CartPageModule
+    CartPageModule,
+    CreateCasePageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,7 +74,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     TabsPage,
     AuthLoginPage,
     AuthForgotPage,
-    CartPage
+    CartPage,
+    CreateCasePage
   ],
   providers: [
     StatusBar,
@@ -83,7 +89,9 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
     CacheImageProvider,
     UtilProvider,
     CaseDataProvider,
-    UserDataProvider
+    UserDataProvider,
+    UploadProvider,
+    Diagnostic
   ]
 })
 export class AppModule {
