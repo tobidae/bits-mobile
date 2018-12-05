@@ -1,4 +1,4 @@
-<ion-card class="inventory-item" [class.is-not-available]="!case.isAvailable">
+<div class="inventory-item" [class.is-not-available]="!case.isAvailable">
   <ion-grid>
     <ion-row class="item-row">
       <ion-col col-3 no-padding>
@@ -15,7 +15,7 @@
         <hr class="custom-divide">
         <ion-row float-right>
           <button ion-button small text-capitalize (click)="addCaseToCart()" [disabled]="!case.isAvailable"
-                  *ngIf="!cart.hasOwnProperty(case.$key)">
+                  *ngIf="!cart.hasOwnProperty(case.$key)" color="dark">
             <ion-icon name="cart"></ion-icon>&emsp;Add
           </button>
           <button ion-button small text-capitalize (click)="removeCaseFromCart()" *ngIf="cart.hasOwnProperty(case.$key)"
@@ -34,4 +34,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-card>
+</div>
+<hr class="custom-divide bold">

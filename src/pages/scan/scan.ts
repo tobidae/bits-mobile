@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import { UtilProvider } from "../../providers/util/util";
+import { BarcodeScanner } from "@ionic-native/barcode-scanner";
+import { CaseDataProvider } from "../../providers/case-data/case-data";
+import { Case } from "../../shared/interfaces";
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+class QRScan {
+  app: string;
+  caseId: string;
+}
 
 @IonicPage()
 @Component({
@@ -8,44 +17,24 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
   templateUrl: 'scan.html',
 })
 export class ScanPage {
-  private scanSub: any;
+  private scannedData: QRScan;
+  caseData: Case = {
+    category: "Electronics",
+    color: "gray",
+    datasheetUrl: "https://www.valuetronics.com/pub/media/vti/datasheets/Agilent%208590%20E-Series.pdf",
+    description: "A spectrum analyzer measures the power of spectrums of known and unknown signals. Spectrum analyzers collect information such as the magnitude of an input signal compared to its frequency. As a frequency analyzer spectrum analyzers main use is to document and analyze electrical input signals as well as spectral compositions of other signals.",
+    imageUrl: "https://storage.googleapis.com/case-manager-boeing.appspot.com/inventory-images/spectrum-analyzer.jpg",
+    isAvailable: true,
+    lastLocation: "B3",
+    mass: 14,
+    maxHoldTime: 6,
+    name: "Spectrum Analyzer",
+    rfid: "934e88e1-21b1-4fce-bafc-03b220f9d43f",
+    tags: "Needs Maintenance"
+  };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private qrScanner: QRScanner) {
-  }
-
-  ionViewWillEnter() {
-    this.showCamera();
-    this.initializeCamera().then(status => {
-      console.log(status);
-      if (status) {
-        return this.scanCode();
-      }
-    })
-  }
-
-  ionViewWillLeave() {
-    this.qrScanner.hide().catch(e => console.log('QRScanner hide', e)); // hide camera preview
-    if (this.scanSub) {
-      this.scanSub.unsubscribe(); // stop scanning
-    }
-    this.hideCamera();
-  }
-
-  initializeCamera() {
-    return this.qrScanner.prepare()
-      .then((status: QRScannerStatus) => {
-        if (status.authorized) {
-          // Camera was granted
-          return Promise.resolve(true);
-        } else if (status.denied) {
-          return Promise.reject(status.denied);
-          // Camera permission was permanently denied, can only grant permission in settings.
-        } else {
-          return Promise.reject(false);
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
-        }
-      })
-      .catch((e: any) => console.log('Error is', e));
+  constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner, private iab: InAppBrowser,
+              private utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider) {
   }
 
   /**
@@ -53,25 +42,53 @@ export class ScanPage {
    */
   scanCode() {
     // start scanning
-    return new Promise((resolve, reject) => {
-      this.scanSub = this.qrScanner.scan().subscribe((text: string) => {
-        this.qrScanner.hide().catch(e => reject({error: e, data: text})); // hide camera preview
-        this.scanSub.unsubscribe(); // stop scanning
-        resolve(text);
+    return this.barcodeScanner.scan({formats: 'QR_CODE'})
+      .then(result => {
+        console.log(this.isJsonString(result.text));
+        if (this.isJsonString(result.text)) {
+          this.scannedData = JSON.parse(result.text);
+          console.log(this.scannedData);
+          this.getCaseData();
+        }
+      })
+      .catch(error => {
+        this.utilProvider.presentToast(error);
       });
-    })
 
   }
 
-  guideToGrantPermission() {
-    this.qrScanner.openSettings();
+  getCaseData() {
+    // Check if the app the QR came from is
+    if (this.scannedData.app == 'BITS') {
+      this.caseDataProvider.getCaseById(this.scannedData.caseId)
+        .subscribe((caseData: Case) => {
+          console.log(caseData);
+          this.caseData = caseData;
+        })
+    }
   }
 
-  showCamera() {
-    (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
+  isJsonString(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 
-  hideCamera() {
-    (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
+  checkoutCase() {
+  }
+
+  returnCase() {
+    this.utilProvider.presentToast('Will update case location in future');
+  }
+
+  openDatasheet() {
+    this.iab.create(this.caseData.datasheetUrl);
+  }
+
+  updateCaseLocation() {
+    this.utilProvider.presentToast('Will update case location in future');
   }
 }

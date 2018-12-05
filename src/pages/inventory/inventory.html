@@ -1,11 +1,13 @@
 <ion-content padding>
-  <h2 class="page-title">Inventory</h2>
+  <div class="page-header">
+    <span class="page-title">Inventory</span>
+  </div>
 
   <custom-loader *ngIf="!casesData"></custom-loader>
   <ion-list *ngIf="casesData">
     <item-card *ngFor="let case of casesData | isAvailable:true" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
   </ion-list>
-  <h3 *ngIf="casesData" bold>Unavailable</h3>
+  <h3 *ngIf="casesData">Unavailable</h3>
   <ion-list *ngIf="casesData">
     <item-card *ngFor="let case of casesData | isAvailable:false" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
   </ion-list>

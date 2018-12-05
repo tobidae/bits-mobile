@@ -1,4 +1,4 @@
-<ion-card class="cart-item">
+<div class="cart-item" [class.is-not-available]="!case.isAvailable">
   <ion-grid>
     <ion-row>
       <ion-col col-3 no-padding>
@@ -6,20 +6,20 @@
       </ion-col>
       <ion-col col-9>
         <h5 class="item-title">{{case.name}}</h5>
-        <p class="small item-desc"><strong>
-          <ion-icon name="md-locate"></ion-icon>
-          {{case.lastLocation}}</strong>
-          <ion-icon name="md-timer"></ion-icon>
-          {{case.maxHoldTime}} hrs
-        </p>
+        <p class="small item-desc"><strong>{{isAvailableText}}</strong></p>
         <hr class="custom-divide">
         <ion-row float-right>
-          <button ion-button small text-capitalize (click)="removeCaseFromCart()" *ngIf="cart.hasOwnProperty(case.$key)"
+          <button ion-button small text-capitalize (click)="removeCaseFromCart()"
                   color="danger">
             <ion-icon name="remove-circle"></ion-icon>&emsp;Remove
+          </button>
+          <button ion-button small text-capitalize (click)="addToFav()"
+                  color="light">
+            <ion-icon name="star-half"></ion-icon>&emsp;Save for later
           </button>
         </ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-card>
+</div>
+<hr class="custom-divide bold">

@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthProvider } from "../providers/auth/auth";
 import { AuthLoginPage } from "../pages/auth-login/auth-login";
-import { CodePush } from '@ionic-native/code-push';
+import { CodePush, SyncStatus } from '@ionic-native/code-push';
 import { UtilProvider } from "../providers/util/util";
 
 @Component({
@@ -20,13 +20,14 @@ export class MyApp {
     platform.ready()
       .then(() => {
         if (platform.is('cordova')) {
-          this.utilProvider.presentToast('Checking for updates...');
           const downloadProgress = (progress) => {
             console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
           };
-          this.codePush.sync({}, downloadProgress).subscribe((syncStatus) => {
+          this.codePush.sync({}, downloadProgress).subscribe((syncStatus: SyncStatus) => {
             if (syncStatus == 2) {
               this.utilProvider.presentToast('Update downloaded, please restart app');
+            } else if (syncStatus == 7) {
+              this.utilProvider.presentToast('Update found, installing');
             }
           });
         }

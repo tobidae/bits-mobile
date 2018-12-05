@@ -13,8 +13,7 @@ export class ItemCardComponent {
   @Input('favCart') favCart: any = {};
   @Input('userId') userId: string;
 
-  constructor(
-    public utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider) {
+  constructor(public utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider) {
 
   }
 

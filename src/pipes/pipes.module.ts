@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { IsAvailablePipe } from './is-available/is-available';
+import { ShortenPipe } from './shorten/shorten';
 @NgModule({
-	declarations: [IsAvailablePipe],
+	declarations: [IsAvailablePipe,
+    ShortenPipe],
 	imports: [],
-	exports: [IsAvailablePipe]
+	exports: [IsAvailablePipe,
+    ShortenPipe]
 })
 export class PipesModule {}

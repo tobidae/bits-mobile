@@ -34,6 +34,10 @@ export class CaseDataProvider {
     return this.db.database.ref(`/userFavCarts/${userId}/${caseId}`).remove();
   }
 
+  getCaseById(caseId: string) {
+    return this.db.object(`/cases/${caseId}`).valueChanges();
+  }
+
   isCaseInCart(caseId) {
     const userId = this.authProvider.userID();
     this.db.database.ref(`/userCarts/${userId}/${caseId}`)

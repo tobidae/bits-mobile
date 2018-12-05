@@ -1,5 +1,5 @@
 export class Case {
-  $key: string;
+  $key?: string;
   name: string;
   description: string;
   imageUrl: string;
@@ -8,8 +8,8 @@ export class Case {
   datasheetUrl: string;
   color: string;
   category: string;
-  isAvailable: string;
-  mass: string;
-
-
+  isAvailable: boolean | string;
+  mass: number | string;
+  rfid: string;
+  tags: string;
 }
