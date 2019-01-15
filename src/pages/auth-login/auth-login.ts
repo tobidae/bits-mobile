@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController } from 'ionic-angular';
+import { IonicPage, NavController, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../providers/auth/auth";
 import { TabsPage } from "../tabs/tabs";
@@ -15,9 +15,14 @@ export class AuthLoginPage {
   loginForm: FormGroup;
   loginError: string;
 
-  constructor(private navCtrl: NavController, private authProvider: AuthProvider,
-    fb: FormBuilder
+  constructor(private navCtrl: NavController, private authProvider: AuthProvider, platform: Platform,
+              fb: FormBuilder
   ) {
+
+    platform.ready().then((readySource) => {
+      console.log('Width: ' + platform.width());
+      console.log('Height: ' + platform.height());
+    });
     this.loginForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
@@ -46,7 +51,7 @@ export class AuthLoginPage {
       );
   }
 
-  register(){
+  register() {
     let data = this.loginForm.value;
 
     if (!data.email) return;

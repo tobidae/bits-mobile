@@ -12,9 +12,10 @@ import { CreateCasePage } from "../create-case/create-case";
 })
 export class InventoryPage implements OnInit{
   casesData: any;
-  userCart: any = {};
-  favCart: any = {};
+  userCart: any;
+  favCart: any;
   userId: string;
+  inventoryCategory: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private caseDataProvider: CaseDataProvider,
               private userDataProvider: UserDataProvider, private authProvider: AuthProvider,
@@ -23,6 +24,10 @@ export class InventoryPage implements OnInit{
   }
 
   ngOnInit() {
+    this.getAppData();
+  }
+
+  getAppData() {
     this.caseDataProvider.getCases().subscribe(itemData => {
       this.casesData = this.objToArr(itemData);
     });
@@ -36,6 +41,13 @@ export class InventoryPage implements OnInit{
         this.favCart = userFav;
       }
     });
+  }
+
+  onTabSelect(ev: any) {
+    if (!this.userCart || !this.favCart || !this.casesData) {
+      // this.getAppData();
+    }
+    console.log('Tab selected', 'Index: ' + ev.index, 'Unique ID: ' + ev.id);
   }
 
   createNewCase() {
