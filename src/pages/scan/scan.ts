@@ -44,14 +44,16 @@ export class ScanPage {
     // start scanning
     return this.barcodeScanner.scan({formats: 'QR_CODE'})
       .then(result => {
-        console.log(this.isJsonString(result.text));
         if (this.isJsonString(result.text)) {
           this.scannedData = JSON.parse(result.text);
-          console.log(this.scannedData);
           this.getCaseData();
+        } else {
+          this.caseData = null;
+          this.utilProvider.presentToast('Unrecognized QR code format');
         }
       })
       .catch(error => {
+        this.caseData = null;
         this.utilProvider.presentToast(error);
       });
 
@@ -59,7 +61,7 @@ export class ScanPage {
 
   getCaseData() {
     // Check if the app the QR came from is
-    if (this.scannedData.app == 'BITS') {
+    if (this.scannedData.app && this.scannedData.app == 'BITS') {
       this.caseDataProvider.getCaseById(this.scannedData.caseId)
         .subscribe((caseData: Case) => {
           if (caseData.tags) {
@@ -67,6 +69,9 @@ export class ScanPage {
           }
           this.caseData = caseData;
         })
+    } else {
+      this.caseData = null;
+      this.utilProvider.presentToast('Unrecognized QR code format');
     }
   }
 

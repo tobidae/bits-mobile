@@ -36,7 +36,13 @@ export class AuthLoginPage {
     this.authProvider.signInWithEmail(credentials)
       .then(
         () => this.navCtrl.setRoot(TabsPage),
-        error => this.loginError = error.message
+        error => {
+          if (this.isJSON(error.message)) {
+            return this.loginError = error['error'].message
+          } else {
+            this.loginError = error.message;
+          }
+        }
       );
   }
 
@@ -57,6 +63,15 @@ export class AuthLoginPage {
 
   forgotPassword() {
     this.navCtrl.push(AuthForgotPage);
+  }
+
+  isJSON(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 
 }

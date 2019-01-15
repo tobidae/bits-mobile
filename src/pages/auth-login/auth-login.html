@@ -1,13 +1,17 @@
 <ion-content>
-  <div padding-top>
-    <img src="./../../assets/imgs/auth-logo.png" width="100%">
+  <div class="top">
+    <div padding-top class="top">
+      <img src="assets/imgs/auth-logo.png" width="100%">
+    </div>
+    <h3 padding class="header" text-center>Let's get started</h3>
+    <p>SIGN IN TO B.I.T.S</p>
   </div>
-  <h1 padding class="header">Authenticate your BITS account</h1>
+
   <form (ngSubmit)="login()" [formGroup]="loginForm">
     <ion-list inset>
 
       <ion-item [ngClass]="{ invalid: loginForm.controls['email'].errors && loginForm.controls['email'].dirty }" margin-bottom>
-        <ion-input type="text" placeholder="Email" formControlName="email"></ion-input>
+        <ion-input type="text" placeholder="Email address" formControlName="email"></ion-input>
       </ion-item>
 
       <p class="auth-error" *ngIf="loginForm.controls['email'].errors && loginForm.controls['email'].dirty">Email is not valid.</p>
@@ -34,7 +38,7 @@
         </ion-col>
       </ion-row>
       <div class="login-footer" text-center>
-        <h5><a href="#" (click)="forgotPassword()">Forgot password?</a></h5>
+        <h6><a href="#" (click)="forgotPassword()">Forgot password?</a></h6>
       </div>
     </div>
   </form>

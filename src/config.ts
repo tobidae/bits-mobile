@@ -1,6 +1,5 @@
-
 export const firebaseConfig = {
-  apiKey: "AIzaSyB4WiGfSm15s1eg6W1_wlwF6fh8hvKcOdY",
+  apiKey: "AIzaSyD9vrUyCuC4T_uCcEWowOSnnxAUzRfMfPg",
   authDomain: "case-manager-boeing.firebaseapp.com",
   databaseURL: "https://case-manager-boeing.firebaseio.com",
   projectId: "case-manager-boeing",

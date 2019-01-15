@@ -14,6 +14,10 @@ export class CaseDataProvider {
     return this.db.object('/cases').valueChanges();
   }
 
+  addCaseToDb(caseData) {
+    return this.db.database.ref('/cases').push(caseData);
+  }
+
   addCaseToCart(caseId) {
     const userId = this.authProvider.userID();
     return this.db.database.ref(`/userCarts/${userId}/${caseId}`).set(true);

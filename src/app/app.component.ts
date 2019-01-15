@@ -19,23 +19,24 @@ export class MyApp {
               private authService: AuthProvider, private codePush: CodePush, private utilProvider: UtilProvider) {
     platform.ready()
       .then(() => {
+        statusBar.styleDefault();
+        splashScreen.hide();
         if (platform.is('cordova')) {
           const downloadProgress = (progress) => {
             console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
           };
-          // this.codePush.sync({}, downloadProgress).subscribe((syncStatus: SyncStatus) => {
-          //   if (syncStatus == 2) {
-          //     this.utilProvider.presentToast('Update downloaded, please restart app');
-          //   } else if (syncStatus == 7) {
-          //     this.utilProvider.presentToast('Update found, installing...');
-          //   }
-          // });
+          this.codePush.sync({}, downloadProgress).subscribe((syncStatus: SyncStatus) => {
+            if (syncStatus == 7) {
+              this.utilProvider.presentToast('Downloading update package...');
+            } else if (syncStatus == 8) {
+              this.utilProvider.presentToast('Update installing...');
+            } else if (syncStatus == 5) {
+              this.utilProvider.presentToast('Checking for update...');
+            }
+          });
         }
 
         this.authService.isAuthenticated().subscribe(user => {
-          statusBar.styleDefault();
-          splashScreen.hide();
-
           if (user) {
             this.zone.run(() => {
               this.rootPage = TabsPage;

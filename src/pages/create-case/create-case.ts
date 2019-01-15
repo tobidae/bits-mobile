@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UtilProvider } from "../../providers/util/util";
 import { UploadProvider } from "../../providers/upload/upload";
 import { DomSanitizer } from "@angular/platform-browser";
+import { CaseDataProvider } from "../../providers/case-data/case-data";
 
 declare var cordova: any;
 declare var window: any;
@@ -23,7 +24,7 @@ export class CreateCasePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,
               private file: File, private filePath: FilePath, private fb: FormBuilder,
               private actionSheetCtrl: ActionSheetController, private utilProvider: UtilProvider,
-              public uploadProvider: UploadProvider, private sanitizer: DomSanitizer) {
+              public uploadProvider: UploadProvider, private caseDataProvider: CaseDataProvider) {
     this.caseForm = this.fb.group({
       caseImage: [null, Validators.required],
       name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
@@ -38,6 +39,16 @@ export class CreateCasePage {
       rfid: ['', Validators.compose([Validators.required])],
       tags: ['', Validators.compose([Validators.required])],
     });
+  }
+
+  addCase() {
+    if (!this.caseForm.valid) return;
+
+    let caseImage = this.caseForm.value.caseImage;
+
+    let imagePath = this.uploadProvider.pathForImage(caseImage);
+    this.caseDataProvider.addCaseToDb(this.caseForm.value);
+    this.utilProvider.presentToast('Will add cases from here in the future');
   }
 
   openCameraOptions() {

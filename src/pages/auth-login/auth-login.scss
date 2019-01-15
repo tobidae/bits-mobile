@@ -1,15 +1,19 @@
 page-auth-login {
+
   .auth-error {
     color: #dc3545;
     padding-left: 3px;
     font-weight: normal;
   }
   .header {
-    font-size: 2.7rem;
+    font-size: 2.2rem;
     padding-top: 60px;
   }
   .form-error {
     font-weight: bold;
     padding: 10px 0;
+  }
+  .top {
+    background-color: #99badd;
   }
 }
