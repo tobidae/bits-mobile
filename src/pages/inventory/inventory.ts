@@ -12,8 +12,8 @@ import { CreateCasePage } from "../create-case/create-case";
 })
 export class InventoryPage implements OnInit{
   casesData: any;
-  userCart: any;
-  favCart: any;
+  userCart: any = {};
+  favCart: any = {};
   userId: string;
   inventoryCategory: string;
 
@@ -24,6 +24,7 @@ export class InventoryPage implements OnInit{
   }
 
   ngOnInit() {
+    this.inventoryCategory = 'available';
     this.getAppData();
   }
 
@@ -45,7 +46,7 @@ export class InventoryPage implements OnInit{
 
   onTabSelect(ev: any) {
     if (!this.userCart || !this.favCart || !this.casesData) {
-      // this.getAppData();
+      this.getAppData();
     }
     console.log('Tab selected', 'Index: ' + ev.index, 'Unique ID: ' + ev.id);
   }

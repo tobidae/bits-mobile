@@ -15,20 +15,16 @@
         <hr class="custom-divide">
         <ion-row float-right>
           <button ion-button small text-capitalize (click)="addCaseToCart()" [disabled]="!case.isAvailable"
-                  *ngIf="!cart.hasOwnProperty(case.$key)" color="dark">
-            <ion-icon name="cart"></ion-icon>&emsp;Add
+                  *ngIf="!cart.hasOwnProperty(case.$key)" color="dark">Add
           </button>
           <button ion-button small text-capitalize (click)="removeCaseFromCart()" *ngIf="cart.hasOwnProperty(case.$key)"
-                  color="danger">
-            <ion-icon name="remove-circle"></ion-icon>&emsp;Remove
+                  color="danger">Remove
           </button>
-          <button ion-button color="danger" small clear text-capitalize (click)="addToFav()"
-                  *ngIf="!favCart.hasOwnProperty(case.$key)">
-            <ion-icon name="star-outline"></ion-icon>&emsp;Watch
+          <button ion-button color="danger" small outline text-capitalize (click)="addToFav()"
+                  *ngIf="!favCart.hasOwnProperty(case.$key)">Watch
           </button>
           <button ion-button color="danger" small outline text-capitalize (click)="removeCaseFromFav()"
-                  *ngIf="favCart.hasOwnProperty(case.$key)">
-            <ion-icon name="star"></ion-icon>&emsp;Ignore
+                  *ngIf="favCart.hasOwnProperty(case.$key)">Ignore
           </button>
         </ion-row>
       </ion-col>

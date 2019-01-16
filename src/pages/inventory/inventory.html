@@ -1,9 +1,6 @@
 <ion-content padding>
   <div class="page-header">
     <span class="page-title">Inventory</span>
-  </div>
-
-  <div padding>
     <ion-segment [(ngModel)]="inventoryCategory">
       <ion-segment-button value="available">
         Available
@@ -16,13 +13,15 @@
 
   <custom-loader *ngIf="!casesData"></custom-loader>
 
-  <div [ngSwitch]="inventoryCategory" (ionChange)="onTabSelect($event)">
-    <ion-list *ngSwitchCase="'available'">
-      <item-card *ngFor="let case of casesData | isAvailable:true" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
-    </ion-list>
-    <ion-list *ngSwitchCase="'unavailable'">
-      <item-card *ngFor="let case of casesData | isAvailable:false" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
-    </ion-list>
+  <div *ngIf="casesData">
+    <div [ngSwitch]="inventoryCategory" (ionChange)="onTabSelect($event)">
+      <ion-list *ngSwitchCase="'available'">
+        <item-card *ngFor="let case of casesData | isAvailable:true" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
+      </ion-list>
+      <ion-list *ngSwitchCase="'unavailable'">
+        <item-card *ngFor="let case of casesData | isAvailable:false" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
+      </ion-list>
+    </div>
   </div>
 
   <ion-fab bottom right class="create-case-fab" #fab>
