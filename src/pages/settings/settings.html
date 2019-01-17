@@ -7,9 +7,13 @@
 
 <ion-content padding>
   <ion-card class="logout">
+    <button ion-button outline block (click)="checkForUpdate()" *ngIf="platform.is('cordova')">
+      Check for update
+    </button>
     <button ion-item icon-left (click)="logout()">
       <ion-icon name="md-exit"></ion-icon>
       Log out
     </button>
   </ion-card>
+  <p ion-text text-center color="secondary" *ngIf="platform.is('cordova')">Version: {{versionNumber}}</p>
 </ion-content>

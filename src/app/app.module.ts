@@ -45,6 +45,7 @@ import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { Camera } from "@ionic-native/camera";
 import { SuperTabsModule } from "ionic2-super-tabs";
+import { AppVersion } from "@ionic-native/app-version";
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { SuperTabsModule } from "ionic2-super-tabs";
     Diagnostic,
     File,
     FilePath,
-    Camera
+    Camera,
+    AppVersion
   ]
 })
 export class AppModule {

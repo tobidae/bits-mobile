@@ -45,9 +45,6 @@ export class InventoryPage implements OnInit{
   }
 
   onTabSelect(ev: any) {
-    if (!this.userCart || !this.favCart || !this.casesData) {
-      this.getAppData();
-    }
     console.log('Tab selected', 'Index: ' + ev.index, 'Unique ID: ' + ev.id);
   }
 
