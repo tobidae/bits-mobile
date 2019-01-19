@@ -10,6 +10,9 @@
     <button ion-button outline block (click)="checkForUpdate()" *ngIf="platform.is('cordova')">
       Check for update
     </button>
+    <button ion-button outline block (click)="downloadUpdate()" *ngIf="platform.is('cordova') && hasUpdate">
+      Download Updated
+    </button>
     <button ion-item icon-left (click)="logout()">
       <ion-icon name="md-exit"></ion-icon>
       Log out

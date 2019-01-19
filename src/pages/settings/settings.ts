@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AuthLoginPage } from "../auth-login/auth-login";
 import { AuthProvider } from "../../providers/auth/auth";
 import { AppVersion } from "@ionic-native/app-version";
-import { CodePush, IRemotePackage } from "@ionic-native/code-push";
+import { CodePush, IRemotePackage, SyncStatus } from "@ionic-native/code-push";
 import { UtilProvider } from "../../providers/util/util";
 
 @IonicPage()
@@ -34,8 +34,24 @@ export class SettingsPage {
 
   checkForUpdate() {
     this.codePush.checkForUpdate().then((remotePackage: IRemotePackage) => {
-      if (remotePackage.appVersion !== this.versionNumber) {
+      if (remotePackage && remotePackage.appVersion !== this.versionNumber) {
         this.utilProvider.presentToast('A new version of the app is available');
+        this.hasUpdate = true;
+      }
+    });
+  }
+
+  downloadUpdate() {
+    const downloadProgress = (progress) => {
+      console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
+    };
+    this.codePush.sync({}, downloadProgress).subscribe((syncStatus: SyncStatus) => {
+      if (syncStatus == 7) {
+        this.utilProvider.presentToast('Downloading update package...');
+      } else if (syncStatus == 8) {
+        this.utilProvider.presentToast('Update installing...');
+      } else if (syncStatus == 5) {
+        this.utilProvider.presentToast('Checking for update...');
       }
     });
   }
