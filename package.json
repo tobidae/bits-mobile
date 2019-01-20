@@ -22,7 +22,6 @@
     "@angular/http": "5.2.11",
     "@angular/platform-browser": "5.2.11",
     "@angular/platform-browser-dynamic": "5.2.11",
-    "@ionic-native/app-version": "^4.19.0",
     "@ionic-native/barcode-scanner": "^4.18.0",
     "@ionic-native/camera": "^4.18.0",
     "@ionic-native/code-push": "^4.18.0",
@@ -38,7 +37,6 @@
     "cordova-android": "7.1.4",
     "cordova-ios": "4.5.5",
     "cordova-plugin-add-swift-support": "^1.7.2",
-    "cordova-plugin-app-version": "0.1.9",
     "cordova-plugin-appcenter-analytics": "0.2.1",
     "cordova-plugin-appcenter-shared": "0.2.1",
     "cordova-plugin-camera": "^4.0.3",
@@ -87,8 +85,7 @@
       },
       "cordova-plugin-filepath": {},
       "cordova.plugins.diagnostic": {},
-      "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-app-version": {}
+      "cordova-plugin-ionic-webview": {}
     },
     "platforms": [
       "android",

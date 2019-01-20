@@ -22,7 +22,9 @@ export class TabsPage {
   constructor(private userDataProvider: UserDataProvider) {
     setTimeout(() => {
       this.userDataProvider.getUserCart().subscribe(userCart => {
-        this.cartCount = Object.keys(userCart).length;
+        if (userCart) {
+          this.cartCount = Object.keys(userCart).length;
+        }
       });
     }, 500);
   }

@@ -1,10 +1,10 @@
 <div class="inventory-item" [class.is-not-available]="!case.isAvailable">
-  <ion-grid>
+  <ion-grid no-padding>
     <ion-row class="item-row">
       <ion-col col-3 no-padding>
         <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
       </ion-col>
-      <ion-col col-9>
+      <ion-col col-9 class="data-col">
         <h5 class="item-title">{{case.name}}</h5>
         <p class="small item-desc"><strong>
           <ion-icon name="md-locate"></ion-icon>

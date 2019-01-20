@@ -1,16 +1,19 @@
 cart-item {
   .cart-item {
-    padding: 10px 5px 10px 0;
+    padding: 4px 5px 4px 0;
     width: calc(100% - 4px);
 
     ion-label {
       margin-top: 0;
       margin-bottom: 5px;
     }
+    ion-grid {
+      padding: 0;
+    }
   }
   .item-image {
     img {
-      height: 65px !important;
+      height: 50px !important;
       width: auto;
       display: inline;
     }
@@ -39,9 +42,9 @@ cart-item {
       padding-right: 6px;
     }
   }
-  .item-action-button {
-    .button-inner {
-      height: 2.8rem;
+  .cart-button-container {
+    button {
+      float: right;
     }
   }
   .is-not-available {

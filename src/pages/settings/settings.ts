@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AuthLoginPage } from "../auth-login/auth-login";
 import { AuthProvider } from "../../providers/auth/auth";
-import { AppVersion } from "@ionic-native/app-version";
 import { CodePush, IRemotePackage, SyncStatus } from "@ionic-native/code-push";
 import { UtilProvider } from "../../providers/util/util";
 
@@ -16,7 +15,7 @@ export class SettingsPage {
   hasUpdate: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authProvider: AuthProvider,
-              private appVersion: AppVersion, private platform: Platform, private codePush: CodePush,
+              private platform: Platform, private codePush: CodePush,
               private utilProvider: UtilProvider) {
     if (platform.is('cordova')) {
       // Get the current app package which has the version

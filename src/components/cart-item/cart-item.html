@@ -4,20 +4,18 @@
       <ion-col col-3 no-padding>
         <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
       </ion-col>
-      <ion-col col-9>
+      <ion-col col-9 no-padding="">
         <h5 class="item-title">{{case.name}}</h5>
         <p class="small item-desc"><strong>{{isAvailableText}}</strong></p>
         <hr class="custom-divide">
-        <ion-row float-right>
-          <button ion-button small text-capitalize (click)="removeCaseFromCart()"
-                  color="danger">
-            <ion-icon name="remove-circle"></ion-icon>&emsp;Remove
-          </button>
-          <button ion-button small text-capitalize (click)="addToFav()"
-                  color="light">
-            <ion-icon name="star-half"></ion-icon>&emsp;Save for later
-          </button>
-        </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 no-padding class="cart-button-container">
+        <button ion-button small text-capitalize (click)="addToUserDB()" color="light">
+          {{addToDBText}}
+        </button>
+        <button ion-button small text-capitalize (click)="removeCaseFromUserDB()" color="danger">Delete</button>
       </ion-col>
     </ion-row>
   </ion-grid>
