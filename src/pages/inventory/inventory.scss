@@ -2,15 +2,26 @@ page-inventory {
   font-family: "Product_Sans", sans-serif !important;
   font-weight: 400 !important;
 
+  .custom-toolbar {
+    padding-bottom: 0px !important;
+    .toolbar-background {
+      background-color: white !important;
+    }
+  }
+
   .content-ios {
     .scroll-content {
-      padding-top: 30px !important;
+      padding-top: 100px !important;
     }
   }
   .content-md {
     .scroll-content {
-      padding-top: 20px !important;
+      padding-top: 100px !important;
     }
+  }
+
+  .toolbar-content-ios {
+    margin-top: 16px;
   }
 
   .page-title {
@@ -19,6 +30,14 @@ page-inventory {
 
   .page-header {
     margin-bottom: 6px;
+
+    .segment-ios {
+      left: unset;
+      right: unset;
+      top: unset;
+      bottom: unset;
+      position: unset;
+    }
   }
 
   .swipe-area {

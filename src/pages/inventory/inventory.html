@@ -1,5 +1,5 @@
 
-<ion-toolbar padding>
+<ion-toolbar padding class="custom-toolbar">
   <div class="page-header">
     <span class="page-title">Inventory</span>
     <ion-segment [(ngModel)]="inventoryCategory" (ionChange)="onSegmentChanged($event)">
@@ -12,7 +12,7 @@
     </ion-segment>
   </div>
 </ion-toolbar>
-<ion-content padding>
+<ion-content padding class="custom-content">
 
   <custom-loader *ngIf="!casesData"></custom-loader>
 
@@ -25,17 +25,6 @@
         </ion-list>
       </ion-slide>
     </ion-slides>
-    <!--<div [ngSwitch]="inventoryCategory" swipeSegment [tabsList]="categories" [(currentTab)]="inventoryCategory"-->
-         <!--(tabChanged)="onTabChanged($event)" class="swipe-area">-->
-      <!--<ion-list *ngSwitchCase="'available'">-->
-        <!--<item-card *ngFor="let case of casesData | isAvailable:true" [case]="case" [cart]="userCart" [userId]="userId"-->
-                   <!--[favCart]="favCart"></item-card>-->
-      <!--</ion-list>-->
-      <!--<ion-list *ngSwitchCase="'unavailable'">-->
-        <!--<item-card *ngFor="let case of casesData | isAvailable:false" [case]="case" [cart]="userCart" [userId]="userId"-->
-                   <!--[favCart]="favCart"></item-card>-->
-      <!--</ion-list>-->
-    <!--</div>-->
   </div>
 
   <ion-fab bottom right class="create-case-fab" #fab>
@@ -51,9 +40,3 @@
   </ion-fab>
 </ion-content>
 
-<style>
-  ion-scroll {
-    width: 100%;
-    height: 100%;
-  }
-</style>
