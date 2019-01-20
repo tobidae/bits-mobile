@@ -47,6 +47,9 @@ cart-item {
       float: right;
     }
   }
+  .data-col {
+    padding: 4px 0 0 8px !important;
+  }
   .is-not-available {
     //background-color: rgba(0, 0, 0, 0.15);
     .item-title, .item-desc {

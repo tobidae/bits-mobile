@@ -4,7 +4,7 @@
       <ion-col col-3 no-padding>
         <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
       </ion-col>
-      <ion-col col-9 no-padding="">
+      <ion-col col-9 no-padding class="data-col">
         <h5 class="item-title">{{case.name}}</h5>
         <p class="small item-desc"><strong>{{isAvailableText}}</strong></p>
         <hr class="custom-divide">
@@ -12,7 +12,8 @@
     </ion-row>
     <ion-row>
       <ion-col col-12 no-padding class="cart-button-container">
-        <button ion-button small text-capitalize (click)="addToUserDB()" color="light">
+        <button ion-button small text-capitalize (click)="addToUserDB()" color="light"
+                *ngIf="case.isAvailable || (!case.isAvailable && cartType == 'cart')">
           {{addToDBText}}
         </button>
         <button ion-button small text-capitalize (click)="removeCaseFromUserDB()" color="danger">Delete</button>

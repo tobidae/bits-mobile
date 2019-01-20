@@ -17,6 +17,8 @@ export class InventoryPage implements OnInit{
   userId: string;
   inventoryCategory: string;
 
+  public categories: Array<string> = ['available', 'unavailable'];
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private caseDataProvider: CaseDataProvider,
               private userDataProvider: UserDataProvider, private authProvider: AuthProvider,
               private modalCtrl: ModalController) {
@@ -26,6 +28,10 @@ export class InventoryPage implements OnInit{
   ngOnInit() {
     this.inventoryCategory = 'available';
     this.getAppData();
+  }
+
+  onTabChanged(tabName) {
+    this.inventoryCategory = tabName;
   }
 
   getAppData() {
@@ -42,10 +48,6 @@ export class InventoryPage implements OnInit{
         this.favCart = userFav;
       }
     });
-  }
-
-  onTabSelect(ev: any) {
-    console.log('Tab selected', 'Index: ' + ev.index, 'Unique ID: ' + ev.id);
   }
 
   createNewCase() {

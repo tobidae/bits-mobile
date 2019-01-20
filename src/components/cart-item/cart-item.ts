@@ -18,13 +18,22 @@ export class CartItemComponent implements OnInit{
   }
 
   ngOnInit() {
-    if (!this.case.isAvailable) this.isAvailableText = 'Not Available';
-    else this.isAvailableText = 'Available';
+    if (!this.case.isAvailable) {
+      this.isAvailableText = 'Not Available';
+      if (this.cartType == 'cart') {
+        this.caseDataProvider.removeCaseFromCart(this.case.$key)
+          .then(() => this.utilProvider.presentToast(`Removed ${this.case.name} from cart because it is no longer available`),
+            () => this.utilProvider.presentToast(`Error removing ${this.case.name} from cart`));
+        this.caseDataProvider.addCaseToFav(this.case.$key)
+      }
+    } else {
+      this.isAvailableText = 'Available';
+    }
 
     if (this.cartType == 'cart') {
       this.addToDBText = 'Watch';
     } else if (this.cartType == 'watch') {
-      this.addToDBText = 'Add to Cart'
+      this.addToDBText = 'Add to Cart';
     }
   }
 

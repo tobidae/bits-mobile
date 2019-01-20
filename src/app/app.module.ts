@@ -44,7 +44,6 @@ import { Diagnostic } from "@ionic-native/diagnostic";
 import { File } from "@ionic-native/file";
 import { FilePath } from "@ionic-native/file-path";
 import { Camera } from "@ionic-native/camera";
-import { SuperTabsModule } from "ionic2-super-tabs";
 
 @NgModule({
   declarations: [
@@ -54,7 +53,6 @@ import { SuperTabsModule } from "ionic2-super-tabs";
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    SuperTabsModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig),
     ComponentsModule,
     CommonModule,

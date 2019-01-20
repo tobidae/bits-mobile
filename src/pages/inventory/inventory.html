@@ -14,7 +14,7 @@
   <custom-loader *ngIf="!casesData"></custom-loader>
 
   <div *ngIf="casesData">
-    <div [ngSwitch]="inventoryCategory" (ionChange)="onTabSelect($event)">
+    <div [ngSwitch]="inventoryCategory" swipeSegment [tabsList]="categories" [(currentTab)]="inventoryCategory" (tabChanged)="onTabChanged($event)" class="swipe-area">
       <ion-list *ngSwitchCase="'available'">
         <item-card *ngFor="let case of casesData | isAvailable:true" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
       </ion-list>
