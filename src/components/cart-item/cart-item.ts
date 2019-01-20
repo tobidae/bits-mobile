@@ -53,13 +53,13 @@ export class CartItemComponent implements OnInit{
     if (this.cartType == 'cart') {
       this.caseDataProvider.addCaseToFav(this.case.$key)
         .then(() => this.utilProvider.presentToast(`Successfully added  ${this.case.name} to cart`),
-          () => this.utilProvider.presentToast(`Error adding ${this.case.name} to cart`))
-        .then(() => this.caseDataProvider.removeCaseFromCart(this.case.$key));
+          () => this.utilProvider.presentToast(`Error adding ${this.case.name} to cart`));
+      this.caseDataProvider.removeCaseFromCart(this.case.$key);
     } else if (this.cartType == 'watch') {
       this.caseDataProvider.addCaseToCart(this.case.$key)
         .then(() => this.utilProvider.presentToast(`Successfully added ${this.case.name} to cart`),
-          () => this.utilProvider.presentToast(`Error adding ${this.case.name} to cart`))
-        .then(() => this.caseDataProvider.removeCaseFromFav(this.case.$key));
+          () => this.utilProvider.presentToast(`Error adding ${this.case.name} to cart`));
+      this.caseDataProvider.removeCaseFromFav(this.case.$key);
     }
   }
 

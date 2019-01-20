@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IonicPage, ModalController, NavController, NavParams, Slides } from 'ionic-angular';
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { AuthProvider } from "../../providers/auth/auth";
@@ -17,12 +17,24 @@ export class InventoryPage implements OnInit{
   userId: string;
   inventoryCategory: string;
 
+  @ViewChild('inventorySlider') slider: Slides;
+  slides: any;
+
   public categories: Array<string> = ['available', 'unavailable'];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private caseDataProvider: CaseDataProvider,
               private userDataProvider: UserDataProvider, private authProvider: AuthProvider,
               private modalCtrl: ModalController) {
     this.userId = this.authProvider.userID();
+    this.slides = [
+      {
+        id: "available",
+        value: true
+      },{
+        id: "unavailable",
+        value: false
+      }
+    ];
   }
 
   ngOnInit() {
@@ -30,8 +42,17 @@ export class InventoryPage implements OnInit{
     this.getAppData();
   }
 
-  onTabChanged(tabName) {
-    this.inventoryCategory = tabName;
+  onSegmentChanged(segmentButton) {
+    const selectedIndex = this.slides.findIndex((slide) => {
+      return slide.id === segmentButton.value;
+    });
+    this.slider.slideTo(selectedIndex);
+  }
+
+  onSlideChanged() {
+    let currentIndex = this.slider.getActiveIndex();
+    const currentSlide = this.slides[currentIndex];
+    this.inventoryCategory = currentSlide.id;
   }
 
   getAppData() {

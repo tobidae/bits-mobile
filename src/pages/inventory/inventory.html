@@ -1,7 +1,8 @@
-<ion-content padding>
+
+<ion-toolbar padding>
   <div class="page-header">
     <span class="page-title">Inventory</span>
-    <ion-segment [(ngModel)]="inventoryCategory">
+    <ion-segment [(ngModel)]="inventoryCategory" (ionChange)="onSegmentChanged($event)">
       <ion-segment-button value="available">
         Available
       </ion-segment-button>
@@ -10,26 +11,49 @@
       </ion-segment-button>
     </ion-segment>
   </div>
+</ion-toolbar>
+<ion-content padding>
 
   <custom-loader *ngIf="!casesData"></custom-loader>
 
   <div *ngIf="casesData">
-    <div [ngSwitch]="inventoryCategory" swipeSegment [tabsList]="categories" [(currentTab)]="inventoryCategory" (tabChanged)="onTabChanged($event)" class="swipe-area">
-      <ion-list *ngSwitchCase="'available'">
-        <item-card *ngFor="let case of casesData | isAvailable:true" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
-      </ion-list>
-      <ion-list *ngSwitchCase="'unavailable'">
-        <item-card *ngFor="let case of casesData | isAvailable:false" [case]="case" [cart]="userCart" [userId]="userId" [favCart]="favCart"></item-card>
-      </ion-list>
-    </div>
+    <ion-slides #inventorySlider (ionSlideDidChange)="onSlideChanged($event)">
+      <ion-slide *ngFor="let slide of slides">
+        <ion-list>
+          <item-card *ngFor="let case of casesData | isAvailable:slide.value" [case]="case" [cart]="userCart" [userId]="userId"
+                     [favCart]="favCart"></item-card>
+        </ion-list>
+      </ion-slide>
+    </ion-slides>
+    <!--<div [ngSwitch]="inventoryCategory" swipeSegment [tabsList]="categories" [(currentTab)]="inventoryCategory"-->
+         <!--(tabChanged)="onTabChanged($event)" class="swipe-area">-->
+      <!--<ion-list *ngSwitchCase="'available'">-->
+        <!--<item-card *ngFor="let case of casesData | isAvailable:true" [case]="case" [cart]="userCart" [userId]="userId"-->
+                   <!--[favCart]="favCart"></item-card>-->
+      <!--</ion-list>-->
+      <!--<ion-list *ngSwitchCase="'unavailable'">-->
+        <!--<item-card *ngFor="let case of casesData | isAvailable:false" [case]="case" [cart]="userCart" [userId]="userId"-->
+                   <!--[favCart]="favCart"></item-card>-->
+      <!--</ion-list>-->
+    <!--</div>-->
   </div>
 
   <ion-fab bottom right class="create-case-fab" #fab>
-    <button ion-fab><ion-icon name="add" color="dark"></ion-icon></button>
+    <button ion-fab>
+      <ion-icon name="add" color="dark"></ion-icon>
+    </button>
     <ion-fab-list side="top">
       <button ion-fab (click)="createNewCase()" class="create-sub-fab" color="dark">
-        <ion-icon name="briefcase"></ion-icon><ion-label>New Case</ion-label>
+        <ion-icon name="briefcase"></ion-icon>
+        <ion-label>New Case</ion-label>
       </button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>
+
+<style>
+  ion-scroll {
+    width: 100%;
+    height: 100%;
+  }
+</style>
