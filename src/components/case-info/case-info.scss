@@ -9,6 +9,13 @@ case-info {
       font-weight: bold;
     }
   }
+  .case-image {
+    img {
+      height: 120px !important;
+      width: auto;
+      display: inline;
+    }
+  }
   .case-container {
     margin-bottom: 80px;
   }

@@ -4,6 +4,8 @@ import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { AuthProvider } from "../../providers/auth/auth";
 import { CreateCasePage } from "../create-case/create-case";
+import { ViewCasePage } from "../view-case/view-case";
+import { Case } from "../../shared/interfaces";
 
 @IonicPage()
 @Component({
@@ -69,6 +71,12 @@ export class InventoryPage implements OnInit{
         this.favCart = userFav;
       }
     });
+  }
+
+  viewCaseInfo(caseData: Case) {
+    this.navCtrl.push(ViewCasePage, {
+      data: caseData
+    })
   }
 
   createNewCase() {

@@ -2,7 +2,7 @@
   <div class="page-header" *ngIf="caseData">
     <span class="page-title">Scanned Case</span>
   </div>
-  <case-info [case]="caseData"></case-info>
+  <case-info [case]="caseData" *ngIf="caseData"></case-info>
   <div class="no-data-text" *ngIf="!caseData">
     <ion-icon name="md-sad" text-center></ion-icon>
     <h3>No QR Code was scanned yet.</h3>

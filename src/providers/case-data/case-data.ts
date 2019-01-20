@@ -33,6 +33,10 @@ export class CaseDataProvider {
     return this.db.database.ref(`/userFavCarts/${userId}/${caseId}`).set(true);
   }
 
+  updateCaseLocation(caseId, caseLocation) {
+    return this.db.database.ref(`/cases/${caseId}/lastLocation`).set(caseLocation);
+  }
+
   removeCaseFromFav(caseId) {
     const userId = this.authProvider.userID();
     return this.db.database.ref(`/userFavCarts/${userId}/${caseId}`).remove();
