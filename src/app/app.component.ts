@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { App, Platform, ViewController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -8,6 +8,7 @@ import { AuthProvider } from "../providers/auth/auth";
 import { AuthLoginPage } from "../pages/auth-login/auth-login";
 import { CodePush, SyncStatus } from '@ionic-native/code-push';
 import { UtilProvider } from "../providers/util/util";
+import { CacheImageProvider } from "../providers/cache-image/cache-image";
 
 @Component({
   templateUrl: 'app.html'
@@ -16,7 +17,8 @@ export class MyApp {
   rootPage: any;
 
   constructor(platform: Platform, statusBar: StatusBar, public zone: NgZone, splashScreen: SplashScreen,
-              private authService: AuthProvider, private codePush: CodePush, private utilProvider: UtilProvider) {
+              private authService: AuthProvider, private codePush: CodePush, private utilProvider: UtilProvider,
+              private imgcacheService: CacheImageProvider, app: App) {
     platform.ready()
       .then(() => {
         statusBar.styleDefault();
@@ -38,6 +40,7 @@ export class MyApp {
 
         this.authService.isAuthenticated().subscribe(user => {
           if (user) {
+            imgcacheService.initImgCache();
             this.zone.run(() => {
               this.rootPage = TabsPage;
             });
@@ -48,5 +51,20 @@ export class MyApp {
           this.rootPage = AuthLoginPage;
         });
       });
+
+    platform.registerBackButtonAction(() => {
+      let nav = app.getActiveNav();
+      let activeView: ViewController = nav.getActive();
+
+      if (activeView != null) {
+        if (nav.canGoBack()) {
+          nav.pop();
+        } else if (typeof activeView.instance.backButtonAction === 'function') {
+          activeView.instance.backButtonAction();
+        } else {
+          nav.parent.select(0);
+        }
+      }
+    });
   }
 }

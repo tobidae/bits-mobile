@@ -21,7 +21,7 @@
       <ion-slide *ngFor="let slide of slides">
         <ion-list>
           <item-card *ngFor="let case of casesData | isAvailable:slide.value" [case]="case" [cart]="userCart" [userId]="userId"
-                     [favCart]="favCart" (click)="viewCaseInfo(case)"></item-card>
+                     [favCart]="favCart"></item-card>
         </ion-list>
       </ion-slide>
     </ion-slides>

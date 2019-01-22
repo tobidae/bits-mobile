@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { UtilProvider } from "../../providers/util/util";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { Case } from "../../shared/interfaces";
+import { ViewCasePage } from "../../pages/view-case/view-case";
+import { NavController } from "ionic-angular";
 
 @Component({
   selector: 'item-card',
@@ -13,8 +15,14 @@ export class ItemCardComponent {
   @Input('favCart') favCart: any = {};
   @Input('userId') userId: string;
 
-  constructor(public utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider) {
+  constructor(public utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider, private navCtrl: NavController) {
 
+  }
+
+  viewCaseInfo(caseData: Case) {
+    this.navCtrl.push(ViewCasePage, {
+      data: caseData
+    })
   }
 
   addCaseToCart() {

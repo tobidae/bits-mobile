@@ -16,8 +16,4 @@ export class ViewCasePage {
     this.caseKey = this.caseData.$key;
   }
 
-  ionViewDidLoad() {
-
-  }
-
 }

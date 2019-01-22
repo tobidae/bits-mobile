@@ -12,7 +12,7 @@
   <div class="watch-container" margin-top *ngIf="userFav">
     <cart-item *ngFor="let case of userFav" [case]="case" [type]="'watch'"></cart-item>
   </div>
-  <ion-fab bottom right class="checkout-fab" #fab>
+  <ion-fab bottom right class="checkout-fab" #fab *ngIf="userCart && userCart.length > 0">
     <button ion-button round color="dark" large (click)="checkoutCart()">Checkout</button>
   </ion-fab>
 </ion-content>

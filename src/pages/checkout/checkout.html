@@ -1,18 +1,41 @@
-<!--
-  Generated template for the CheckoutPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>checkout</ion-title>
+    <ion-title>Checkout</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content padding>
+  <ion-card class="checkout-card">
+    <ion-card-header>
+      {{caseData.length}} {{caseData.length > 1 ? 'items' : 'item'}} to pickup
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item *ngFor="let case of caseData" class="checkout-item">
+        <div item-start>
+          <lazy-img class="case-image" inputSrc="{{case.imageUrl}}"></lazy-img>
+        </div>
+        <h2 class="case-title">{{case.name}}</h2>
 
+        <p *ngIf="case.maxHoldTime">Max checkout time: <strong>{{case.maxHoldTime}} hrs!</strong></p>
+        <p>{{case.category}}</p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="pickup-card">
+    <ion-card-header>
+      PICKUP DETAILS
+      <button float-right ion-button color="secondary" small> Refresh</button>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item class="pickup-item">
+        <div item-start>
+          <ion-icon name="pin"></ion-icon>
+        </div>
+        <p>Your approximate location: <strong>Sector B3</strong></p>
+        <p>Closest pickup station: <strong>Sector B1</strong></p>
+        <p>ETA: <strong>10 mins</strong></p>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  <button ion-button block color="primary" (click)="placeOrder()">Place your order</button>
 </ion-content>

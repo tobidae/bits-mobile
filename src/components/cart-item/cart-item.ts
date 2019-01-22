@@ -44,7 +44,7 @@ export class CartItemComponent implements OnInit{
           () => this.utilProvider.presentToast(`Error removing ${this.case.name} from cart`));
     } else if (this.cartType == 'watch') {
       this.caseDataProvider.removeCaseFromFav(this.case.$key)
-        .then(() => this.utilProvider.presentToast(`Removed ${this.case.name} from watch later`),
+        .then(() => this.utilProvider.presentToast(`Removed ${this.case.name} from watch section`),
           () => this.utilProvider.presentToast(`Error removing ${this.case.name} from watch later`));
     }
   }
@@ -52,12 +52,12 @@ export class CartItemComponent implements OnInit{
   addToUserDB() {
     if (this.cartType == 'cart') {
       this.caseDataProvider.addCaseToFav(this.case.$key)
-        .then(() => this.utilProvider.presentToast(`Successfully added  ${this.case.name} to cart`),
+        .then(() => this.utilProvider.presentToast(`You are now watching ${this.case.name}`),
           () => this.utilProvider.presentToast(`Error adding ${this.case.name} to cart`));
       this.caseDataProvider.removeCaseFromCart(this.case.$key);
     } else if (this.cartType == 'watch') {
       this.caseDataProvider.addCaseToCart(this.case.$key)
-        .then(() => this.utilProvider.presentToast(`Successfully added ${this.case.name} to cart`),
+        .then(() => this.utilProvider.presentToast(`${this.case.name} is now in your cart.`),
           () => this.utilProvider.presentToast(`Error adding ${this.case.name} to cart`));
       this.caseDataProvider.removeCaseFromFav(this.case.$key);
     }

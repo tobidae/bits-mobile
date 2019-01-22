@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UtilProvider } from "../../providers/util/util";
+import { CheckoutPage } from "../checkout/checkout";
 
 @IonicPage()
 @Component({
@@ -18,12 +19,11 @@ export class CartPage {
     this.userDataProvider.getUserCart()
       .subscribe(userCart => {
         this.userCart = this.objToArr(userCart);
-      })
+      });
     this.userDataProvider.getUserFav()
       .subscribe(userFav => {
         this.userFav = this.objToArr(userFav);
-      })
-
+      });
   }
 
   objToArr(obj) {
@@ -38,7 +38,7 @@ export class CartPage {
   }
 
   checkoutCart() {
-    this.utilProvider.presentToast('Will be able to Checkout Cart in the future!');
+    this.navCtrl.push(CheckoutPage);
   }
 
 }

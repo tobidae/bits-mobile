@@ -12,7 +12,7 @@ import { Case } from "../../shared/interfaces";
   selector: 'page-inventory',
   templateUrl: 'inventory.html',
 })
-export class InventoryPage implements OnInit{
+export class InventoryPage implements OnInit {
   casesData: any;
   userCart: any = {};
   favCart: any = {};
@@ -22,21 +22,17 @@ export class InventoryPage implements OnInit{
   @ViewChild('inventorySlider') slider: Slides;
   slides: any;
 
-  public categories: Array<string> = ['available', 'unavailable'];
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private caseDataProvider: CaseDataProvider,
               private userDataProvider: UserDataProvider, private authProvider: AuthProvider,
               private modalCtrl: ModalController) {
     this.userId = this.authProvider.userID();
-    this.slides = [
-      {
-        id: "available",
-        value: true
-      },{
-        id: "unavailable",
-        value: false
-      }
-    ];
+    this.slides = [{
+      id: "available",
+      value: true
+    }, {
+      id: "unavailable",
+      value: false
+    }];
   }
 
   ngOnInit() {
@@ -71,12 +67,6 @@ export class InventoryPage implements OnInit{
         this.favCart = userFav;
       }
     });
-  }
-
-  viewCaseInfo(caseData: Case) {
-    this.navCtrl.push(ViewCasePage, {
-      data: caseData
-    })
   }
 
   createNewCase() {

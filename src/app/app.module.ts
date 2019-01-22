@@ -46,6 +46,8 @@ import { FilePath } from "@ionic-native/file-path";
 import { Camera } from "@ionic-native/camera";
 import { ViewCasePage } from "../pages/view-case/view-case";
 import { ViewCasePageModule } from "../pages/view-case/view-case.module";
+import { CheckoutPage } from "../pages/checkout/checkout";
+import { CheckoutPageModule } from "../pages/checkout/checkout.module";
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { ViewCasePageModule } from "../pages/view-case/view-case.module";
     SettingsPageModule,
     CartPageModule,
     CreateCasePageModule,
-    ViewCasePageModule
+    ViewCasePageModule,
+    CheckoutPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -82,7 +85,8 @@ import { ViewCasePageModule } from "../pages/view-case/view-case.module";
     AuthForgotPage,
     CartPage,
     CreateCasePage,
-    ViewCasePage
+    ViewCasePage,
+    CheckoutPage
   ],
   providers: [
     StatusBar,
