@@ -50,6 +50,16 @@ export class UserDataProvider {
     })
   }
 
+  getUserInfo() {
+    const userId = this.authProvider.userID();
+    return this.db.object(`/userInfo/${userId}`).valueChanges();
+  }
 
-
+  setUserInfo(data: any, path?: any) {
+    const userId = this.authProvider.userID();
+    if (path) {
+      return this.db.database.ref(`/userInfo/${userId}/${path}`).update(data);
+    }
+    return this.db.database.ref(`/userInfo/${userId}`).update(data);
+  }
 }

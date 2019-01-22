@@ -28,12 +28,10 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item class="pickup-item">
-        <div item-start>
-          <ion-icon name="pin"></ion-icon>
-        </div>
-        <p>Your approximate location: <strong>Sector B3</strong></p>
-        <p>Closest pickup station: <strong>Sector B1</strong></p>
-        <p>ETA: <strong>10 mins</strong></p>
+        <p *ngIf="userInfo && userInfo.displayName">Checkout by <strong float-right>{{userInfo.displayName}}</strong></p>
+        <p>Your approximate location: <strong float-right>Sector B5</strong></p>
+        <p>Closest pickup station: <strong float-right>Sector B1</strong></p>
+        <p>ETA: <strong float-right>10 mins</strong></p>
       </ion-item>
     </ion-card-content>
   </ion-card>

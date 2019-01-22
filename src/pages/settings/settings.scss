@@ -1,3 +1,28 @@
 page-settings {
-
+  .profile-card {
+    ion-card-header {
+      font-weight: bold;
+      padding-bottom: 4px;
+    }
+  }
+  .profile-info {
+    position: absolute;
+    top: -100px;
+    width: 100%;
+    z-index: 2;
+    text-align: center;
+  }
+  .profile-name {
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+  .edit-user-button {
+    font-size: 2rem;
+  }
+  .edit-user-button.icon-ios {
+    top: 30px;
+  }
 }

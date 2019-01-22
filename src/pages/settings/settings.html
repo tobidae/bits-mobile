@@ -6,6 +6,22 @@
 
 
 <ion-content padding>
+  <ion-card class="profile-card">
+    <ion-card-header>
+      USER DETAILS
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card-title *ngIf="userData && userData.displayName">
+        {{userData.displayName}}
+        <ion-icon name="ios-create-outline" color="dark" class="edit-user-button"
+                  (click)="editUserProfile()" float-end></ion-icon>
+      </ion-card-title>
+      <button ion-button color="dark" small (click)="editDisplayName()" float-right
+              *ngIf="!userData || (userData && !userData.displayName)">Add name
+      </button>
+      <p ion-text class="dark">Your name identifies you for pickup and returns.</p>
+    </ion-card-content>
+  </ion-card>
   <ion-card class="logout">
     <button ion-button outline block (click)="checkForUpdate()" *ngIf="platform.is('cordova')">
       Check for update

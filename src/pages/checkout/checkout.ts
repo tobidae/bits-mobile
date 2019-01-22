@@ -11,6 +11,7 @@ import { Case } from "../../shared/interfaces";
 })
 export class CheckoutPage {
   caseData: Case[] = [];
+  userInfo: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider,
               private caseDataProvider: CaseDataProvider) {
@@ -25,7 +26,10 @@ export class CheckoutPage {
             this.caseData.push(caseData);
           });
         }
-      })
+      });
+    this.userDataProvider.getUserInfo().take(1).subscribe(userInfo => {
+      this.userInfo = userInfo;
+    })
   }
 
   placeOrder() {

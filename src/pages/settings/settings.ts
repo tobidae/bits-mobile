@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
+import { ActionSheetController, AlertController, IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import { AuthLoginPage } from "../auth-login/auth-login";
 import { AuthProvider } from "../../providers/auth/auth";
 import { CodePush, IRemotePackage, SyncStatus } from "@ionic-native/code-push";
 import { UtilProvider } from "../../providers/util/util";
+import { UserDataProvider } from "../../providers/user-data/user-data";
 
 @IonicPage()
 @Component({
@@ -14,9 +15,12 @@ export class SettingsPage {
   versionNumber: string;
   hasUpdate: boolean = false;
 
+  userData: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private authProvider: AuthProvider,
-              private platform: Platform, private codePush: CodePush,
-              private utilProvider: UtilProvider) {
+              private platform: Platform, private codePush: CodePush, private actionSheetCtrl: ActionSheetController,
+              private utilProvider: UtilProvider, private alertCtrl: AlertController,
+              private userDataProvider: UserDataProvider) {
     if (platform.is('cordova')) {
       // Get the current app package which has the version
       this.codePush.getCurrentPackage().then(pack => {
@@ -29,6 +33,9 @@ export class SettingsPage {
     } else {
       this.versionNumber = '1.0.0';
     }
+    this.userDataProvider.getUserInfo().subscribe(data => {
+      this.userData = data;
+    })
   }
 
   checkForUpdate() {
@@ -38,6 +45,52 @@ export class SettingsPage {
         this.hasUpdate = true;
       }
     });
+  }
+
+  editUserProfile() {
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Edit Account Info',
+      buttons: [{
+        text: 'Change Display Name',
+        icon: 'md-contact',
+        handler: () => {
+          this.editDisplayName();
+        }
+      }]
+    });
+    actionSheet.present();
+  }
+
+  editDisplayName() {
+    let prompt = this.alertCtrl.create({
+      title: "Enter name",
+      inputs: [{
+        name: 'displayName',
+        placeholder: 'Your Name'
+      }],
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel'
+      }, {
+        text: 'Change',
+        handler: data => {
+          let displayName: string = data.displayName;
+          if (displayName && displayName.length > 0) {
+            this.userDataProvider.setUserInfo({
+              displayName: displayName,
+            }).then((res) => {
+              this.utilProvider.presentToast("Successfully changed your name!");
+            }, err => {
+              console.log(err);
+              this.utilProvider.presentToast("There was a problem trying to change your name!");
+            })
+          } else {
+            this.utilProvider.presentToast("Something's wrong with the name!");
+          }
+        }
+      }]
+    });
+    prompt.present();
   }
 
   downloadUpdate() {
