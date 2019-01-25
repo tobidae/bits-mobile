@@ -2,7 +2,9 @@ page-checkout {
   .case-image {
     img {
       height: auto !important;
-      width: 60px;
+      max-height: 60px !important;
+      width: auto;
+      max-width: 60px;
       display: inline;
     }
   }
@@ -23,6 +25,9 @@ page-checkout {
   .checkout-card {
     .checkout-item {
       padding-left: 0px;
+    }
+    .img-container {
+      width: 60px;
     }
   }
   .pickup-card {

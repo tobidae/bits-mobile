@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UtilProvider } from "../../providers/util/util";
@@ -15,7 +15,7 @@ export class CartPage {
   userFav: any = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider,
-              private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider) {
+              private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider, private modalCtrl: ModalController) {
     this.userDataProvider.getUserCart()
       .subscribe(userCart => {
         this.userCart = this.objToArr(userCart);
@@ -38,7 +38,13 @@ export class CartPage {
   }
 
   checkoutCart() {
-    this.navCtrl.push(CheckoutPage);
+    const modal = this.modalCtrl.create(CheckoutPage);
+
+    // TODO: Handle when the checkout page has been dismissed
+    modal.onDidDismiss(data => {
+      this.utilProvider.presentToast('Your order has been processed');
+    });
+    modal.present();
   }
 
 }

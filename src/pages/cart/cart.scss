@@ -1,4 +1,15 @@
 page-cart {
+
+  .content-ios {
+    .scroll-content {
+      padding-top: 25px !important;
+    }
+  }
+
+  .toolbar-content-ios {
+    margin-top: 16px;
+  }
+
   .checkout-fab {
     button {
       height: 2.4em !important;

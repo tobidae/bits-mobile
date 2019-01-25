@@ -10,8 +10,8 @@ export class UserDataProvider {
 
   constructor(public http: HttpClient, private db: AngularFireDatabase, private authProvider: AuthProvider) {
     this.headers = new HttpHeaders();
-    this.headers.append('Content-Type', 'application/json');
-    this.headers.append('Access-Control-Allow-Origin', '*');
+    this.headers = this.headers.append('Content-Type', 'application/json');
+    this.headers = this.headers.append('Access-Control-Allow-Origin', '*');
   }
 
   getUserCart() {
@@ -30,7 +30,7 @@ export class UserDataProvider {
       this.authProvider.userToken()
         .then(token => {
           if (token) {
-            this.headers.set('Authorization', `Bearer ${token}`);
+            this.headers = this.headers.append('Authorization', `Bearer ${token}`);
 
             let projectId = firebaseConfig.projectId;
 
@@ -39,7 +39,11 @@ export class UserDataProvider {
                 userId: userId
               }), { headers: this.headers })
               .subscribe(data => {
-                resolve(data);
+                if (data['type'] == 'success') {
+                  resolve(data);
+                } else {
+                  reject(data);
+                }
               });
           }
         })

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { Case } from "../../shared/interfaces";
+import { TabsPage } from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -14,7 +15,7 @@ export class CheckoutPage {
   userInfo: any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider,
-              private caseDataProvider: CaseDataProvider) {
+              private caseDataProvider: CaseDataProvider, private viewCtrl: ViewController) {
     // TODO Use beacon or BLE device to get approximate location of user
   }
 
@@ -33,10 +34,20 @@ export class CheckoutPage {
   }
 
   placeOrder() {
-    this.userDataProvider.placeOrder().then(data => {
-      console.log(data);
-    });
+    this.userDataProvider.placeOrder()
+      // .then(data => this.navCtrl.popAll())
+      .then(() => {
+        return this.viewCtrl.dismiss();
+      })
+      .catch(error => {
+        console.log(error);
+        return this.viewCtrl.dismiss();
+      });
 
+  }
+
+  backButtonAction() {
+    return this.viewCtrl.dismiss();
   }
 
 }

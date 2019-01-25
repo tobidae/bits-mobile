@@ -11,7 +11,7 @@
     </ion-card-header>
     <ion-card-content>
       <ion-item *ngFor="let case of caseData" class="checkout-item">
-        <div item-start>
+        <div item-start class="img-container">
           <lazy-img class="case-image" inputSrc="{{case.imageUrl}}"></lazy-img>
         </div>
         <h2 class="case-title">{{case.name}}</h2>
