@@ -1,19 +1,39 @@
-<ion-content padding>
+
+<ion-toolbar padding class="custom-toolbar">
   <div class="page-header">
     <span class="page-title">History</span>
+    <ion-segment [(ngModel)]="historyCategory" (ionChange)="onSegmentChanged($event)">
+      <ion-segment-button value="global">
+        Global
+      </ion-segment-button>
+      <ion-segment-button value="me">
+        Me
+      </ion-segment-button>
+    </ion-segment>
   </div>
-  <ion-card *ngFor="let history of histories" class="history-card">
-    <ion-row>
-      <ion-col col-3 text-center class="history-date" no-padding>
-        <h3>{{history.month}}</h3>
-        <p>{{history.day}}</p>
-      </ion-col>
-      <ion-col col-9 class="history-info" no-padding>
-        <h3>{{history.info}}</h3>
-        <hr class="custom-divide">
-        <p>Checked out from <strong>{{history.location}}</strong></p>
-        <small *ngIf="history.timeLeft"><strong>{{history.timeLeft}}</strong> left till return!</small>
-      </ion-col>
-    </ion-row>
-  </ion-card>
+</ion-toolbar>
+<ion-content padding class="custom-content">
+
+  <div *ngIf="histories">
+    <ion-slides #historySlider (ionSlideDidChange)="onSlideChanged($event)">
+      <ion-slide *ngFor="let slide of slides">
+        <ion-list>
+          <ion-card *ngFor="let history of histories" class="history-card">
+            <ion-row>
+              <ion-col col-3 text-center class="history-date" no-padding>
+                <h3>{{history.timestamp | momentUnix: 'MMM'}}</h3>
+                <p>{{history.timestamp | momentUnix: 'DD'}}</p>
+              </ion-col>
+              <ion-col col-9 class="history-info" no-padding>
+                <h3>{{history.info}}</h3>
+                <hr class="custom-divide">
+                <p>Checked out from <strong>Sector A2</strong></p>
+                <small *ngIf="history.timeLeft"><strong>{{history.timeLeft}}</strong> left till return!</small>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-list>
+      </ion-slide>
+    </ion-slides>
+  </div>
 </ion-content>

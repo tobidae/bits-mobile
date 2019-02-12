@@ -13,19 +13,24 @@
           {{case.maxHoldTime}} hrs
         </p>
         <hr class="custom-divide">
-        <ion-row float-right>
-          <button ion-button small text-capitalize (click)="addCaseToCart()" [disabled]="!case.isAvailable"
-                  *ngIf="!cart.hasOwnProperty(case.$key)" color="dark">Add
-          </button>
-          <button ion-button small text-capitalize (click)="removeCaseFromCart()" *ngIf="cart.hasOwnProperty(case.$key)"
-                  color="danger">Remove
-          </button>
-          <button ion-button color="danger" small outline text-capitalize (click)="addToFav()"
-                  *ngIf="!favCart.hasOwnProperty(case.$key)">Watch
-          </button>
-          <button ion-button color="danger" small outline text-capitalize (click)="removeCaseFromFav()"
-                  *ngIf="favCart.hasOwnProperty(case.$key)">Ignore
-          </button>
+        <ion-row>
+          <ion-col (click)="viewCaseInfo(case)">
+            <!--Because adding the click handler to root will cause button clicks below to act on 2 events-->
+          </ion-col>
+          <ion-col col-auto float-right>
+            <button ion-button small text-capitalize (click)="addCaseToCart()" [disabled]="!case.isAvailable"
+                    *ngIf="!cart.hasOwnProperty(case.$key)" color="dark">Add
+            </button>
+            <button ion-button small text-capitalize (click)="removeCaseFromCart()" *ngIf="cart.hasOwnProperty(case.$key)"
+                    color="danger">Remove
+            </button>
+            <button ion-button color="danger" small outline text-capitalize (click)="addToFav()"
+                    *ngIf="!favCart.hasOwnProperty(case.$key)">Watch
+            </button>
+            <button ion-button color="danger" small outline text-capitalize (click)="removeCaseFromFav()"
+                    *ngIf="favCart.hasOwnProperty(case.$key)">Ignore
+            </button>
+          </ion-col>
         </ion-row>
       </ion-col>
     </ion-row>

@@ -1,6 +1,6 @@
 <div class="cart-item" [class.is-not-available]="!case.isAvailable">
   <ion-grid>
-    <ion-row>
+    <ion-row (click)="viewCaseInfo()">
       <ion-col col-3 no-padding>
         <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
       </ion-col>

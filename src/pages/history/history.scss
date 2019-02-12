@@ -1,8 +1,20 @@
 page-history {
 
+  .custom-toolbar {
+    padding-bottom: 0px !important;
+    .toolbar-background {
+      background-color: white !important;
+    }
+  }
+
   .content-ios {
     .scroll-content {
-      padding-top: 25px !important;
+      padding-top: 100px !important;
+    }
+  }
+  .content-md {
+    .scroll-content {
+      padding-top: 100px !important;
     }
   }
 

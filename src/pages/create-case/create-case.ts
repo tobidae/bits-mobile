@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActionSheetController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ActionSheetController, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { FilePath } from '@ionic-native/file-path';
 import { Camera } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
@@ -24,7 +24,8 @@ export class CreateCasePage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private camera: Camera,
               private file: File, private filePath: FilePath, private fb: FormBuilder,
               private actionSheetCtrl: ActionSheetController, private utilProvider: UtilProvider,
-              public uploadProvider: UploadProvider, private caseDataProvider: CaseDataProvider) {
+              public uploadProvider: UploadProvider, private caseDataProvider: CaseDataProvider,
+              private viewCtrl: ViewController) {
     this.caseForm = this.fb.group({
       caseImage: [null, Validators.required],
       name: ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(60)])],
@@ -128,6 +129,10 @@ export class CreateCasePage {
         console.log(error);
         this.utilProvider.presentToast('Error while storing file.');
       });
+  }
+
+  backButtonAction() {
+    return this.viewCtrl.dismiss();
   }
 
 }

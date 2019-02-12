@@ -48,6 +48,7 @@ import { ViewCasePage } from "../pages/view-case/view-case";
 import { ViewCasePageModule } from "../pages/view-case/view-case.module";
 import { CheckoutPage } from "../pages/checkout/checkout";
 import { CheckoutPageModule } from "../pages/checkout/checkout.module";
+import { HistoryProvider } from '../providers/history/history';
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { CheckoutPageModule } from "../pages/checkout/checkout.module";
     Diagnostic,
     File,
     FilePath,
-    Camera
+    Camera,
+    HistoryProvider
   ]
 })
 export class AppModule {

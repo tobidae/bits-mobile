@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams, Slides } from 'ionic-angular';
+import { Events, IonicPage, ModalController, NavController, NavParams, Slides } from 'ionic-angular';
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { AuthProvider } from "../../providers/auth/auth";
@@ -24,7 +24,7 @@ export class InventoryPage implements OnInit {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private caseDataProvider: CaseDataProvider,
               private userDataProvider: UserDataProvider, private authProvider: AuthProvider,
-              private modalCtrl: ModalController) {
+              private modalCtrl: ModalController, private events: Events) {
     this.userId = this.authProvider.userID();
     this.slides = [{
       id: "available",
@@ -57,15 +57,15 @@ export class InventoryPage implements OnInit {
     this.caseDataProvider.getCases().subscribe(itemData => {
       this.casesData = this.objToArr(itemData);
     });
-    this.userDataProvider.getUserCart().subscribe(userCart => {
-      if (userCart) {
-        this.userCart = userCart;
-      }
+    // this.userDataProvider.getUserCart().subscribe(userCart => {
+    //   this.userCart = userCart ? userCart : {};
+    // });
+
+    this.events.subscribe('data:userCart', (cart) => {
+      this.userCart = cart ? cart : {};
     });
     this.userDataProvider.getUserFav().subscribe(userFav => {
-      if (userFav) {
-        this.favCart = userFav;
-      }
+      this.favCart = userFav ? userFav : {};
     });
   }
 
@@ -78,7 +78,7 @@ export class InventoryPage implements OnInit {
   objToArr(obj) {
     let arr = [];
     for (let key in obj) {
-      let element = obj[key]
+      let element = obj[key];
       element.$key = key;
       arr.push(element);
     }

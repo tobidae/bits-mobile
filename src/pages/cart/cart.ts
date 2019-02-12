@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
+import { Component, OnInit } from '@angular/core';
+import { Events, IonicPage, ModalController, NavController, NavParams } from 'ionic-angular';
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UtilProvider } from "../../providers/util/util";
@@ -10,12 +10,13 @@ import { CheckoutPage } from "../checkout/checkout";
   selector: 'page-cart',
   templateUrl: 'cart.html',
 })
-export class CartPage {
+export class CartPage implements OnInit{
   userCart: any = null;
   userFav: any = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider,
-              private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider, private modalCtrl: ModalController) {
+              private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider, private modalCtrl: ModalController,
+              private events: Events) {
     this.userDataProvider.getUserCart()
       .subscribe(userCart => {
         this.userCart = this.objToArr(userCart);
@@ -24,6 +25,13 @@ export class CartPage {
       .subscribe(userFav => {
         this.userFav = this.objToArr(userFav);
       });
+  }
+
+  ngOnInit() {
+    // Subscribe to the user cart event at the tabs class
+    // this.events.subscribe('data:userCart', (cart) => {
+    //   this.userCart = this.objToArr(cart);
+    // });
   }
 
   objToArr(obj) {

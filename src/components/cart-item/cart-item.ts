@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Case } from "../../shared/interfaces";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UtilProvider } from "../../providers/util/util";
+import { ViewCasePage } from "../../pages/view-case/view-case";
+import { NavController } from "ionic-angular";
 
 @Component({
   selector: 'cart-item',
@@ -13,8 +15,14 @@ export class CartItemComponent implements OnInit{
   isAvailableText: string = "Available";
   addToDBText: string;
  
-  constructor(private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider) {
+  constructor(private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider, private navCtrl: NavController) {
 
+  }
+
+  viewCaseInfo() {
+    this.navCtrl.push(ViewCasePage, {
+      data: this.case
+    })
   }
 
   ngOnInit() {

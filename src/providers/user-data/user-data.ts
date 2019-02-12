@@ -25,8 +25,10 @@ export class UserDataProvider {
   }
 
   placeOrder() {
+    // Get the user ID from the auth provider
     const userId = this.authProvider.userID();
     return new Promise((resolve, reject) => {
+      // Get the user's token and send it to the server as an Auth header
       this.authProvider.userToken()
         .then(token => {
           if (token) {
@@ -34,11 +36,15 @@ export class UserDataProvider {
 
             let projectId = firebaseConfig.projectId;
 
+            // Build the url where the cloud server function is located
+            // Pass in the userID and the headers with authorization
             this.http.post('https://us-central1-' + projectId + '.cloudfunctions.net/placeCaseOrder',
               JSON.stringify({
                 userId: userId
               }), { headers: this.headers })
               .subscribe(data => {
+                // After the function has been executed, a response is sent back
+                // if the type of data is success, resolve else reject with error handling
                 if (data['type'] == 'success') {
                   resolve(data);
                 } else {

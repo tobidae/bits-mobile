@@ -5,6 +5,7 @@ import {SettingsPage} from "../settings/settings";
 import {HistoryPage} from "../history/history";
 import { CartPage } from "../cart/cart";
 import { UserDataProvider } from "../../providers/user-data/user-data";
+import { Events } from 'ionic-angular';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -19,12 +20,11 @@ export class TabsPage {
 
   cartCount: number;
 
-  constructor(private userDataProvider: UserDataProvider) {
+  constructor(private userDataProvider: UserDataProvider, private events: Events) {
     setTimeout(() => {
       this.userDataProvider.getUserCart().subscribe(userCart => {
-        if (userCart) {
-          this.cartCount = Object.keys(userCart).length;
-        }
+        this.events.publish('data:userCart', userCart);
+        this.cartCount = userCart ? Object.keys(userCart).length : null;
       });
     }, 500);
   }

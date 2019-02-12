@@ -18,6 +18,12 @@
         ".read": "$user_id === auth.uid"
       }
     },
+    "userHistory": {
+      "$user_id": {
+        ".write": "$user_id === auth.uid",
+        ".read": "$user_id === auth.uid"
+      }
+    },
     "cases": {
       ".read": "auth != null",
       ".write": "auth != null"

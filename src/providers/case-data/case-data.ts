@@ -46,6 +46,10 @@ export class CaseDataProvider {
     return this.db.object(`/cases/${caseId}`).valueChanges();
   }
 
+  getQueueByCase(caseId: string) {
+    return this.db.object(`/caseQueues/${caseId}/queueCount`).valueChanges();
+  }
+
   isCaseInCart(caseId) {
     const userId = this.authProvider.userID();
     this.db.database.ref(`/userCarts/${userId}/${caseId}`)

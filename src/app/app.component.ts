@@ -27,7 +27,9 @@ export class MyApp {
           const downloadProgress = (progress) => {
             console.log(`Downloaded ${progress.receivedBytes} of ${progress.totalBytes}`);
           };
+          // Call code push service. Check if there is an update, install if any
           this.codePush.sync({}, downloadProgress).subscribe((syncStatus: SyncStatus) => {
+            // Print logs based on the status of Code Push
             if (syncStatus == 7) {
               this.utilProvider.presentToast('Downloading update package...');
             } else if (syncStatus == 8) {
@@ -38,16 +40,22 @@ export class MyApp {
           });
         }
 
+        // Check if the user is authenticated by looking at the user state
+        // The user is subscribed to to ensure that any subsequent changes to the user is handled appropriately.
         this.authService.isAuthenticated().subscribe(user => {
           if (user) {
+            // Enable the caching service if user is authenticated
             imgcacheService.initImgCache();
             this.zone.run(() => {
+              // Set root page to tabs
               this.rootPage = TabsPage;
             });
           } else {
+            // User not authenticated, redirect to login
             this.rootPage = AuthLoginPage;
           }
         }, () => {
+          // There was an error, default to login page
           this.rootPage = AuthLoginPage;
         });
       });
