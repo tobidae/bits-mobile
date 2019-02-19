@@ -100,4 +100,6 @@
     </plugin>
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="4.5.5" />
+    <plugin name="cordova-plugin-fcm-with-dependecy-updated" spec="2.4.0" />
+    <plugin name="com.unarin.cordova.beacon" spec="~3.7.0" />
 </widget>

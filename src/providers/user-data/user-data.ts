@@ -10,8 +10,9 @@ export class UserDataProvider {
 
   constructor(public http: HttpClient, private db: AngularFireDatabase, private authProvider: AuthProvider) {
     this.headers = new HttpHeaders();
-    this.headers = this.headers.append('Content-Type', 'application/json');
-    this.headers = this.headers.append('Access-Control-Allow-Origin', '*');
+    this.headers = this.headers.set('Content-Type', 'application/json');
+    this.headers = this.headers.set('Access-Control-Allow-Origin', '*');
+    this.headers = this.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
   }
 
   getUserCart() {
@@ -32,7 +33,7 @@ export class UserDataProvider {
       this.authProvider.userToken()
         .then(token => {
           if (token) {
-            this.headers = this.headers.append('Authorization', `Bearer ${token}`);
+            this.headers = this.headers.set('Authorization', `Bearer ${token}`);
 
             let projectId = firebaseConfig.projectId;
 
@@ -58,6 +59,11 @@ export class UserDataProvider {
           reject("You are unauthorized");
         });
     })
+  }
+
+  storeUserToken(userToken) {
+    const userId = this.authProvider.userID();
+    return this.db.database.ref(`notificationTokens/${userId}`).set(userToken);
   }
 
   getUserInfo() {

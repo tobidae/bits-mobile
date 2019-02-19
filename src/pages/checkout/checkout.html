@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content padding>
+  <custom-loader *ngIf="isLoading" class="overlay"></custom-loader>
   <ion-card class="checkout-card">
     <ion-card-header>
       {{caseData.length}} {{caseData.length > 1 ? 'items' : 'item'}} to pickup

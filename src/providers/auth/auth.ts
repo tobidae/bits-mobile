@@ -74,7 +74,7 @@ export class AuthProvider {
   }
 
   userToken() {
-    return this.afAuth.auth.currentUser.getIdToken(true)
+    return this.afAuth.auth.currentUser.getIdToken()
       .then(token => {
         return token;
       }, err => {

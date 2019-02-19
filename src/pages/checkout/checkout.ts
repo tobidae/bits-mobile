@@ -13,6 +13,7 @@ import { TabsPage } from "../tabs/tabs";
 export class CheckoutPage {
   caseData: Case[] = [];
   userInfo: any;
+  isLoading: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider,
               private caseDataProvider: CaseDataProvider, private viewCtrl: ViewController) {
@@ -22,6 +23,7 @@ export class CheckoutPage {
   ionViewDidLoad() {
     this.userDataProvider.getUserCart()
       .subscribe((cartData: {})=> {
+        this.isLoading = false;
         for (const id in cartData) {
           this.caseDataProvider.getCaseById(id).take(1).subscribe((caseData: Case) => {
             this.caseData.push(caseData);
@@ -29,14 +31,17 @@ export class CheckoutPage {
         }
       });
     this.userDataProvider.getUserInfo().take(1).subscribe(userInfo => {
+      this.isLoading = false;
       this.userInfo = userInfo;
     })
   }
 
   placeOrder() {
+    this.isLoading = true;
     this.userDataProvider.placeOrder()
       // .then(data => this.navCtrl.popAll())
       .then(() => {
+        this.isLoading = false;
         return this.viewCtrl.dismiss();
       })
       .catch(error => {

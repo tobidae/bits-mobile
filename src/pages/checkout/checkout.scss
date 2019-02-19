@@ -35,4 +35,14 @@ page-checkout {
       padding-left: 0px;
     }
   }
+  .overlay {
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: #353535;
+    opacity:0.8;
+    z-index:1001;
+  }
 }

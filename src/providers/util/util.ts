@@ -13,10 +13,10 @@ export class UtilProvider {
     public _platform: Platform,
     public _diagnostic: Diagnostic) { }
 
-  presentToast(message) {
+  presentToast(message, duration=1500) {
     return this.toastCtrl.create({
       message: message,
-      duration: 3000,
+      duration: duration,
       showCloseButton: true,
       dismissOnPageChange: true,
     }).present();

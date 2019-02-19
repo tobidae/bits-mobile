@@ -29,10 +29,12 @@ export class CartItemComponent implements OnInit{
     if (!this.case.isAvailable) {
       this.isAvailableText = 'Not Available';
       if (this.cartType == 'cart') {
-        this.caseDataProvider.removeCaseFromCart(this.case.$key)
-          .then(() => this.utilProvider.presentToast(`Removed ${this.case.name} from cart because it is no longer available`),
-            () => this.utilProvider.presentToast(`Error removing ${this.case.name} from cart`));
-        this.caseDataProvider.addCaseToFav(this.case.$key)
+        // If the case is no longer available and it is in the cart, remove it. Since there is now a queue, this logic
+        // is no longer required.
+        // this.caseDataProvider.removeCaseFromCart(this.case.$key)
+        //   .then(() => this.utilProvider.presentToast(`Removed ${this.case.name} from cart because it is no longer available`),
+        //     () => this.utilProvider.presentToast(`Error removing ${this.case.name} from cart`));
+        // this.caseDataProvider.addCaseToFav(this.case.$key);
       }
     } else {
       this.isAvailableText = 'Available';

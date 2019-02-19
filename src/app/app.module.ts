@@ -49,6 +49,7 @@ import { ViewCasePageModule } from "../pages/view-case/view-case.module";
 import { CheckoutPage } from "../pages/checkout/checkout";
 import { CheckoutPageModule } from "../pages/checkout/checkout.module";
 import { HistoryProvider } from '../providers/history/history';
+import { FCM } from "@ionic-native/fcm/ngx";
 
 @NgModule({
   declarations: [
@@ -107,7 +108,8 @@ import { HistoryProvider } from '../providers/history/history';
     File,
     FilePath,
     Camera,
-    HistoryProvider
+    HistoryProvider,
+    FCM
   ]
 })
 export class AppModule {
