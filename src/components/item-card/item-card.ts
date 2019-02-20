@@ -15,7 +15,9 @@ export class ItemCardComponent {
   @Input('favCart') favCart: any = {};
   @Input('userId') userId: string;
 
-  constructor(public utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider, private navCtrl: NavController) {
+  constructor(public utilProvider: UtilProvider,
+              private caseDataProvider: CaseDataProvider,
+              private navCtrl: NavController) {
 
   }
 

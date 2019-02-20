@@ -19,13 +19,16 @@
           </ion-col>
           <ion-col col-auto float-right>
             <button ion-button small text-capitalize (click)="addCaseToCart()"
-                    *ngIf="!cart.hasOwnProperty(case.$key)" color="dark">Add
+                    *ngIf="!cart.hasOwnProperty(case.$key)" color="dark">
+              Add
             </button>
-            <button ion-button small text-capitalize (click)="removeCaseFromCart()" *ngIf="cart.hasOwnProperty(case.$key)"
-                    color="danger">Remove
+            <button ion-button small text-capitalize (click)="removeCaseFromCart()"
+                    *ngIf="cart.hasOwnProperty(case.$key)" color="danger">
+              Remove
             </button>
-            <button ion-button color="danger" small outline text-capitalize (click)="addToFav()"
-                    *ngIf="!favCart.hasOwnProperty(case.$key)">Watch
+            <button ion-button color="danger" small outline text-capitalize
+                    (click)="addToFav()" *ngIf="!favCart.hasOwnProperty(case.$key)">
+              Watch
             </button>
             <button ion-button color="danger" small text-capitalize (click)="removeCaseFromFav()"
                     *ngIf="favCart.hasOwnProperty(case.$key)">Ignore

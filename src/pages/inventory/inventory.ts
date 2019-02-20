@@ -6,6 +6,7 @@ import { AuthProvider } from "../../providers/auth/auth";
 import { CreateCasePage } from "../create-case/create-case";
 import { ViewCasePage } from "../view-case/view-case";
 import { Case } from "../../shared/interfaces";
+import { objToArr } from "../../shared/helpers";
 
 @IonicPage()
 @Component({
@@ -55,7 +56,7 @@ export class InventoryPage implements OnInit {
 
   getAppData() {
     this.caseDataProvider.getCases().subscribe(itemData => {
-      this.casesData = this.objToArr(itemData);
+      this.casesData = objToArr(itemData);
     });
     // this.userDataProvider.getUserCart().subscribe(userCart => {
     //   this.userCart = userCart ? userCart : {};
@@ -73,16 +74,6 @@ export class InventoryPage implements OnInit {
     // return this.navCtrl.push(CreateCasePage);
     const modal = this.modalCtrl.create(CreateCasePage);
     return modal.present();
-  }
-
-  objToArr(obj) {
-    let arr = [];
-    for (let key in obj) {
-      let element = obj[key];
-      element.$key = key;
-      arr.push(element);
-    }
-    return arr;
   }
 
 }

@@ -5,6 +5,7 @@ import { AuthProvider } from "../../providers/auth/auth";
 import { CodePush, IRemotePackage, SyncStatus } from "@ionic-native/code-push";
 import { UtilProvider } from "../../providers/util/util";
 import { UserDataProvider } from "../../providers/user-data/user-data";
+import { factorySectors } from "../../shared/helpers";
 
 @IonicPage()
 @Component({
@@ -56,6 +57,12 @@ export class SettingsPage {
         handler: () => {
           this.editDisplayName();
         }
+      },{
+        text: 'Change Pickup Location',
+        icon: 'md-pin',
+        handler: () => {
+          this.editPickupLocation();
+        }
       }]
     });
     actionSheet.present();
@@ -90,6 +97,43 @@ export class SettingsPage {
         }
       }]
     });
+    prompt.present();
+  }
+
+  editPickupLocation() {
+    let prompt = this.alertCtrl.create({
+      title: "Select location",
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel'
+      }, {
+        text: 'Change',
+        handler: data => {
+          let sector: string = data;
+          if (sector) {
+            this.userDataProvider.setUserInfo({
+              pickupLocation: sector,
+            }).then((res) => {
+              this.utilProvider.presentToast("Successfully changed your pickup location!");
+            }, err => {
+              console.log(err);
+              this.utilProvider.presentToast("There was a problem trying to change your location!");
+            })
+          } else {
+            this.utilProvider.presentToast("Something's wrong with the sector id!");
+          }
+        }
+      }]
+    });
+    for (let i = 0; i < factorySectors.length; i++) {
+      const sector = factorySectors[i].sectorId;
+      prompt.addInput({
+        type: 'radio',
+        label: `Sector ${sector}`,
+        value: sector,
+        checked: this.userData && this.userData.pickupLocation == sector
+      })
+    }
     prompt.present();
   }
 

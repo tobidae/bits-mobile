@@ -49,7 +49,8 @@ import { ViewCasePageModule } from "../pages/view-case/view-case.module";
 import { CheckoutPage } from "../pages/checkout/checkout";
 import { CheckoutPageModule } from "../pages/checkout/checkout.module";
 import { HistoryProvider } from '../providers/history/history';
-import { FCM } from "@ionic-native/fcm/ngx";
+import { Firebase } from "@ionic-native/firebase/ngx";
+import { FcmProvider } from '../providers/fcm/fcm';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { FCM } from "@ionic-native/fcm/ngx";
   providers: [
     StatusBar,
     SplashScreen,
+    Firebase,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     AuthProvider,
     AuthGuardProvider,
@@ -109,7 +111,8 @@ import { FCM } from "@ionic-native/fcm/ngx";
     FilePath,
     Camera,
     HistoryProvider,
-    FCM
+    FcmProvider
+
   ]
 })
 export class AppModule {

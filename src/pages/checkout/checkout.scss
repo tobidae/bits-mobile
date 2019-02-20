@@ -31,8 +31,22 @@ page-checkout {
     }
   }
   .pickup-card {
-    .pickup-item {
+    .pickup-item,
+    .pickup-location-item {
       padding-left: 0px;
+    }
+    .pickup-location-item {
+      ion-label {
+        margin-right: 0;
+        font-size: 1.4rem;
+        color: #8e9093;
+      }
+      ion-select {
+        padding-left: 0;
+        font-size: 1.4rem;
+        color: #8e9093;
+        font-weight: bold;
+      }
     }
   }
   .overlay {

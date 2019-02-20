@@ -15,11 +15,13 @@ export class UserDataProvider {
     this.headers = this.headers.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT');
   }
 
+  // Get the user's cart and subscribe to any changes made
   getUserCart() {
     const userId = this.authProvider.userID();
     return this.db.object(`/userCarts/${userId}`).valueChanges();
   }
 
+  // Get the user's watch list of cases and subscribe to any changes
   getUserFav() {
     const userId = this.authProvider.userID();
     return this.db.object(`/userFavCarts/${userId}`).valueChanges();
@@ -39,7 +41,7 @@ export class UserDataProvider {
 
             // Build the url where the cloud server function is located
             // Pass in the userID and the headers with authorization
-            this.http.post('https://us-central1-' + projectId + '.cloudfunctions.net/placeCaseOrder',
+            this.http.post(`https://us-central1-${projectId}.cloudfunctions.net/placeCaseOrder`,
               JSON.stringify({
                 userId: userId
               }), { headers: this.headers })
@@ -61,16 +63,13 @@ export class UserDataProvider {
     })
   }
 
-  storeUserToken(userToken) {
-    const userId = this.authProvider.userID();
-    return this.db.database.ref(`notificationTokens/${userId}`).set(userToken);
-  }
-
+  // Get the info of the user on the db like name, location, e.t.c
   getUserInfo() {
     const userId = this.authProvider.userID();
     return this.db.object(`/userInfo/${userId}`).valueChanges();
   }
 
+  // Set the data of the user as they change it
   setUserInfo(data: any, path?: any) {
     const userId = this.authProvider.userID();
     if (path) {

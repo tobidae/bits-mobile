@@ -25,14 +25,17 @@
   <ion-card class="pickup-card">
     <ion-card-header>
       PICKUP DETAILS
-      <button float-right ion-button color="secondary" small> Refresh</button>
     </ion-card-header>
     <ion-card-content>
       <ion-item class="pickup-item">
         <p *ngIf="userInfo && userInfo.displayName">Checkout by <strong float-right>{{userInfo.displayName}}</strong></p>
-        <p>Your approximate location: <strong float-right>Sector B5</strong></p>
-        <p>Closest pickup station: <strong float-right>Sector B1</strong></p>
         <p>ETA: <strong float-right>10 mins</strong></p>
+      </ion-item>
+      <ion-item class="pickup-location-item">
+        <ion-label small>Location</ion-label>
+        <ion-select placeholder="Select A Sector" [(ngModel)]="pickupLocation" (ionChange)="changeLocation($event)">
+          <ion-option *ngFor="let sector of factorySectors" [value]="sector.sectorId">Sector {{sector.sectorId}}</ion-option>
+        </ion-select>
       </ion-item>
     </ion-card-content>
   </ion-card>

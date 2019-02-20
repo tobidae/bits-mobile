@@ -4,6 +4,8 @@ import { UserDataProvider } from "../../providers/user-data/user-data";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { Case } from "../../shared/interfaces";
 import { TabsPage } from "../tabs/tabs";
+import { factorySectors } from "../../shared/helpers";
+import { UtilProvider } from "../../providers/util/util";
 
 @IonicPage()
 @Component({
@@ -13,11 +15,13 @@ import { TabsPage } from "../tabs/tabs";
 export class CheckoutPage {
   caseData: Case[] = [];
   userInfo: any;
+  pickupLocation: string;
   isLoading: boolean = true;
+  factorySectors: any[] = factorySectors;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider,
-              private caseDataProvider: CaseDataProvider, private viewCtrl: ViewController) {
-    // TODO Use beacon or BLE device to get approximate location of user
+              private caseDataProvider: CaseDataProvider, private viewCtrl: ViewController,
+              private utilProvider: UtilProvider) {
   }
 
   ionViewDidLoad() {
@@ -30,25 +34,36 @@ export class CheckoutPage {
           });
         }
       });
-    this.userDataProvider.getUserInfo().take(1).subscribe(userInfo => {
+    this.userDataProvider.getUserInfo().subscribe(userInfo => {
       this.isLoading = false;
       this.userInfo = userInfo;
+      this.pickupLocation = userInfo['pickupLocation'];
     })
   }
 
   placeOrder() {
-    this.isLoading = true;
-    this.userDataProvider.placeOrder()
+    if (this.pickupLocation) {
+      this.isLoading = true;
+      this.userDataProvider.placeOrder()
       // .then(data => this.navCtrl.popAll())
-      .then(() => {
-        this.isLoading = false;
-        return this.viewCtrl.dismiss();
-      })
-      .catch(error => {
-        console.log(error);
-        return this.viewCtrl.dismiss();
-      });
+        .then(() => {
+          this.isLoading = false;
+          return this.viewCtrl.dismiss();
+        })
+        .catch(error => {
+          console.log(error);
+          return this.viewCtrl.dismiss();
+        });
 
+    } else {
+      this.utilProvider.presentToast('Please select a pickup location', 2500);
+    }
+  }
+
+  changeLocation(e) {
+    this.userDataProvider.setUserInfo({
+      pickupLocation: this.pickupLocation
+    });
   }
 
   backButtonAction() {

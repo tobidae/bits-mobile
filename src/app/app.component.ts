@@ -1,8 +1,7 @@
-import { Component, NgZone, isDevMode } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { App, Platform, ViewController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { FCM } from '@ionic-native/fcm/ngx';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthProvider } from "../providers/auth/auth";
@@ -11,6 +10,7 @@ import { CodePush, SyncStatus } from '@ionic-native/code-push';
 import { UtilProvider } from "../providers/util/util";
 import { CacheImageProvider } from "../providers/cache-image/cache-image";
 import { UserDataProvider } from "../providers/user-data/user-data";
+import { FcmProvider } from "../providers/fcm/fcm";
 
 @Component({
   templateUrl: 'app.html'
@@ -20,7 +20,7 @@ export class MyApp {
 
   constructor(private platform: Platform, statusBar: StatusBar, private zone: NgZone, splashScreen: SplashScreen,
               private authService: AuthProvider, private codePush: CodePush, private utilProvider: UtilProvider,
-              private imgcacheService: CacheImageProvider, private app: App, private fcm: FCM,
+              private imgcacheService: CacheImageProvider, private app: App, private fcmProvider: FcmProvider,
               private userDataProvider: UserDataProvider) {
     // Wait for the app to load fully
     platform.ready()
@@ -59,19 +59,9 @@ export class MyApp {
   }
 
   notificationSetup() {
-    // Subscribe to all the topics on Firebase
-    this.fcm.subscribeToTopic('all');
     // Get the user's current messaging token
-    this.fcm.getToken().then(token => {
-      return this.userDataProvider.storeUserToken(token);
-    });
-    // Subscribe to changes on the token and store the token in database
-    this.fcm.onTokenRefresh().subscribe(token => {
-      return this.userDataProvider.storeUserToken(token);
-    });
-
-    // When a notification is received, handle it appropriately
-    this.fcm.onNotification().subscribe(
+    this.fcmProvider.getToken();
+    this.fcmProvider.onNotifications().subscribe(
       (msg) => {
         if (this.platform.is('ios')) {
           this.utilProvider.presentToast(msg.aps.alert, 3000);

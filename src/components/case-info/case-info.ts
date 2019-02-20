@@ -3,6 +3,7 @@ import { Case } from "../../shared/interfaces";
 import { UtilProvider } from "../../providers/util/util";
 import { AlertController } from "ionic-angular";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
+import { factorySectors } from "../../shared/helpers";
 
 @Component({
   selector: 'case-info',
@@ -24,12 +25,10 @@ export class CaseInfoComponent {
   }
 
   updateCaseLocation() {
-    const sectorCol = ['A', 'B', 'C', 'D', 'E'];
     let inputs = [];
-    // TODO: Store the proper sections from the factory floor
     for (let i = 1; i < 6; i++) {
-      sectorCol.every(value => {
-        const sector = value + i;
+      factorySectors.every(value => {
+        const sector = value.sectorId;
         inputs.push({
           type: 'radio',
           label: sector,
