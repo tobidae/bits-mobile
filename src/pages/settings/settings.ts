@@ -6,6 +6,7 @@ import { CodePush, IRemotePackage, SyncStatus } from "@ionic-native/code-push";
 import { UtilProvider } from "../../providers/util/util";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { factorySectors } from "../../shared/helpers";
+import { FcmProvider } from "../../providers/fcm/fcm";
 
 @IonicPage()
 @Component({
@@ -21,7 +22,7 @@ export class SettingsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private authProvider: AuthProvider,
               private platform: Platform, private codePush: CodePush, private actionSheetCtrl: ActionSheetController,
               private utilProvider: UtilProvider, private alertCtrl: AlertController,
-              private userDataProvider: UserDataProvider) {
+              private userDataProvider: UserDataProvider, private fcmProvider: FcmProvider) {
     if (platform.is('cordova')) {
       // Get the current app package which has the version
       this.codePush.getCurrentPackage().then(pack => {
@@ -156,6 +157,7 @@ export class SettingsPage {
     this.authProvider.signOut()
       .then(res => {
         this.navCtrl.setRoot(AuthLoginPage);
+        return this.fcmProvider.unregister();
       })
   }
 }

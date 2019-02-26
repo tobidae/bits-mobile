@@ -68,6 +68,7 @@ export class MyApp {
         } else {
           this.utilProvider.presentToast(msg.body, 3000);
         }
+        this.fcmProvider.clearAppBadge();
       });
   }
 

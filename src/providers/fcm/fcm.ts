@@ -30,10 +30,23 @@ export class FcmProvider {
   // WIth the token, the server can send alerts to the user based on events created
   storeUserToken(userToken) {
     const userId = this.authProvider.userID();
-    return this.db.database.ref(`notificationTokens/${userId}`).set(userToken);
+    return this.db.database.ref(`userInfo/${userId}/notificationToken`).set(userToken);
   }
 
   onNotifications() {
     return this.firebase.onNotificationOpen();
+  }
+
+  async setAppBadge() {
+    let badgeNum = await this.firebase.getBadgeNumber();
+    return this.firebase.setBadgeNumber(badgeNum+1);
+  }
+
+  clearAppBadge() {
+    return this.firebase.setBadgeNumber(0);
+  }
+
+  unregister() {
+    return this.firebase.unregister();
   }
 }
