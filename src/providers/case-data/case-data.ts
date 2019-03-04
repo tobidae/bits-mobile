@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from "@angular/fire/database";
 import { AuthProvider } from "../auth/auth";
+import { Observable } from "rxjs";
+import { Case } from "../../shared/interfaces";
 
 @Injectable()
 export class CaseDataProvider {
@@ -42,7 +44,7 @@ export class CaseDataProvider {
     return this.db.database.ref(`/userFavCarts/${userId}/${caseId}`).remove();
   }
 
-  getCaseById(caseId: string) {
+  getCaseById(caseId: string): Observable<Case | {}> {
     return this.db.object(`/cases/${caseId}`).valueChanges();
   }
 

@@ -9,23 +9,24 @@ page-history {
 
   .content-ios {
     .scroll-content {
-      padding-top: 100px !important;
+      padding-top: 60px !important;
     }
   }
   .content-md {
     .scroll-content {
-      padding-top: 100px !important;
+      padding-top: 60px !important;
     }
   }
 
-  .toolbar-content-ios {
-    margin-top: 16px;
+  .toolbar-content-ios,
+  .toolbar-content-md {
+    margin-top: 18px;
   }
 
   .history-card {
     padding: 8px 0;
     ion-row {
-      padding: 8px 0;
+      padding: 8px 6px;
     }
   }
   .history-date {
@@ -34,10 +35,24 @@ page-history {
       font-weight: bold;
     }
     p {
-      font-size: 1.7rem;
+      font-size: 1.9rem;
+      font-weight: bold;
     }
   }
   .history-info {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      padding-bottom: 4px;
+      color: #666;
+    }
+    h4 {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    p {
+      font-size: 1.2rem;
+    }
 
   }
 }

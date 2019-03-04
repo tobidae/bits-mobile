@@ -1,7 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HistoryProvider } from "../../providers/history/history";
 import { objToArr } from "../../shared/helpers";
+import { CaseDataProvider } from "../../providers/case-data/case-data";
+import { Case } from "../../shared/interfaces";
+import { Stack } from "../../shared/helpers";
 
 @IonicPage()
 @Component({
@@ -9,44 +12,41 @@ import { objToArr } from "../../shared/helpers";
   templateUrl: 'history.html',
 })
 export class HistoryPage {
-  @ViewChild('historySlider') slider: Slides;
-  slides: any;
   histories: {};
-  // histories: any[] = [{
-  //   month: 'Dec',
-  //   day: '4',
-  //   info: 'Adam Jennerjahn checkout out a multimeter',
-  //   timeLeft: '2 hrs',
-  //   location: 'A3'
-  // }];
-  historyCategory: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public historyProvider: HistoryProvider) {
-    this.slides = [{
-      id: "global",
-      value: true
-    }, {
-      id: "me",
-      value: false
-    }];
-    this.historyCategory = 'me';
+  constructor(private navCtrl: NavController, private navParams: NavParams, private historyProvider: HistoryProvider,
+              private caseProvider: CaseDataProvider) {
     this.historyProvider.getUserHistory().subscribe(userHistory => {
-      this.histories = objToArr(userHistory);
+      this.histories = this.addCaseInfoToHistory(objToArr(userHistory));
     })
-
   }
 
-  onSegmentChanged(segmentButton) {
-    const selectedIndex = this.slides.findIndex((slide) => {
-      return slide.id === segmentButton.value;
+  addCaseInfoToHistory(histories: any[]) {
+    const newArray = new Stack();
+
+    histories.forEach(async histoire => {
+      const caseId = histoire['caseId'];
+      const caseInfo = (await this.caseProvider.getCaseById(caseId).take(1).toPromise());
+      const caseName = caseInfo['name'];
+
+      let body = null;
+
+      switch (histoire['type']) {
+        case 'order-processed':
+          body = `The order for a ${caseName} was created.`;
+          break;
+        case 'in-queue':
+          const caseHoldTime = Number.parseInt(caseInfo['maxHoldTime']);
+          const totalWaitTime = caseHoldTime * histoire['queueCount'];
+          body = `Current wait time is approximately ${totalWaitTime} hours!`;
+          break;
+      }
+      histoire['body'] = body;
+      histoire['caseName'] = caseName;
+      newArray.push(histoire);
     });
-    this.slider.slideTo(selectedIndex);
-  }
-
-  onSlideChanged() {
-    let currentIndex = this.slider.getActiveIndex();
-    const currentSlide = this.slides[currentIndex];
-    this.historyCategory = currentSlide.id;
+    console.log(newArray.all());
+    return newArray.all();
   }
 
 }

@@ -1,39 +1,27 @@
-
 <ion-toolbar padding class="custom-toolbar">
   <div class="page-header">
     <span class="page-title">History</span>
-    <ion-segment [(ngModel)]="historyCategory" (ionChange)="onSegmentChanged($event)">
-      <ion-segment-button value="global">
-        Global
-      </ion-segment-button>
-      <ion-segment-button value="me">
-        Me
-      </ion-segment-button>
-    </ion-segment>
   </div>
 </ion-toolbar>
 <ion-content padding class="custom-content">
 
   <div *ngIf="histories">
-    <ion-slides #historySlider (ionSlideDidChange)="onSlideChanged($event)">
-      <ion-slide *ngFor="let slide of slides">
-        <ion-list>
-          <ion-card *ngFor="let history of histories" class="history-card">
-            <ion-row>
-              <ion-col col-3 text-center class="history-date" no-padding>
-                <h3>{{history.timestamp | momentUnix: 'MMM'}}</h3>
-                <p>{{history.timestamp | momentUnix: 'DD'}}</p>
-              </ion-col>
-              <ion-col col-9 class="history-info" no-padding>
-                <h3>{{history.info}}</h3>
-                <hr class="custom-divide">
-                <p>Checked out from <strong>Sector A2</strong></p>
-                <small *ngIf="history.timeLeft"><strong>{{history.timeLeft}}</strong> left till return!</small>
-              </ion-col>
-            </ion-row>
-          </ion-card>
-        </ion-list>
-      </ion-slide>
-    </ion-slides>
+    <ion-list>
+      <ion-card *ngFor="let history of histories" class="history-card">
+        <ion-row>
+          <ion-col col-3 text-center class="history-date" no-padding>
+            <h3>{{history.timestamp | momentUnix: 'MMM'}}</h3>
+            <p>{{history.timestamp | momentUnix: 'DD'}}</p>
+            <label>{{history.timestamp | momentUnix: 'LT'}}</label>
+          </ion-col>
+          <ion-col col-9 class="history-info" no-padding>
+            <h2>{{history.caseName}}</h2>
+            <h4>{{history.info}}</h4>
+            <hr class="custom-divide" *ngIf="history.body">
+            <p *ngIf="history.body">{{history.body}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </ion-list>
   </div>
 </ion-content>

@@ -31,7 +31,7 @@ export class MyApp {
         splashScreen.hide();
 
         if (platform.is('cordova')) {
-          this.syncApp();
+          // this.syncApp();
           this.notificationSetup();
         }
       });
@@ -60,7 +60,11 @@ export class MyApp {
 
   notificationSetup() {
     // Get the user's current messaging token
-    this.fcmProvider.getToken();
+    try {
+      this.fcmProvider.getToken();
+    } catch (error) {
+      console.error("FCM Error", error);
+    }
     this.fcmProvider.onNotifications().subscribe(
       (msg) => {
         if (this.platform.is('ios')) {
