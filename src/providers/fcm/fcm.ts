@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firebase } from '@ionic-native/firebase/ngx';
+import { Firebase } from '@ionic-native/firebase';
 import { Platform } from 'ionic-angular';
 import { AngularFireDatabase } from "@angular/fire/database";
 import { AuthProvider } from "../auth/auth";
@@ -8,8 +8,7 @@ import { AuthProvider } from "../auth/auth";
 export class FcmProvider {
 
   constructor(private firebase: Firebase, private authProvider: AuthProvider,
-              private db: AngularFireDatabase,
-              private platform: Platform) {}
+              private db: AngularFireDatabase, private platform: Platform) {}
 
   async getToken() {
     let token;

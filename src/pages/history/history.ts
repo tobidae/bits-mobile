@@ -3,8 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HistoryProvider } from "../../providers/history/history";
 import { objToArr } from "../../shared/helpers";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
-import { Case } from "../../shared/interfaces";
-import { Stack } from "../../shared/helpers";
 
 @IonicPage()
 @Component({
@@ -22,11 +20,15 @@ export class HistoryPage {
   }
 
   addCaseInfoToHistory(histories: any[]) {
-    const newArray = new Stack();
+    let newArray = [];
 
     histories.forEach(async histoire => {
       const caseId = histoire['caseId'];
       const caseInfo = (await this.caseProvider.getCaseById(caseId).take(1).toPromise());
+      if (!caseInfo) {
+        newArray.unshift(histoire);
+        return;
+      }
       const caseName = caseInfo['name'];
 
       let body = null;
@@ -43,10 +45,8 @@ export class HistoryPage {
       }
       histoire['body'] = body;
       histoire['caseName'] = caseName;
-      newArray.push(histoire);
+      newArray.unshift(histoire);
     });
-    console.log(newArray.all());
-    return newArray.all();
+    return newArray;
   }
-
 }

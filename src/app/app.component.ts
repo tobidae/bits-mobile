@@ -11,6 +11,7 @@ import { UtilProvider } from "../providers/util/util";
 import { CacheImageProvider } from "../providers/cache-image/cache-image";
 import { UserDataProvider } from "../providers/user-data/user-data";
 import { FcmProvider } from "../providers/fcm/fcm";
+import { tap } from "rxjs/operators";
 
 @Component({
   templateUrl: 'app.html'
@@ -26,14 +27,14 @@ export class MyApp {
     platform.ready()
       .then(() => {
         this.authSetup();
-
-        statusBar.styleDefault();
-        splashScreen.hide();
-
         if (platform.is('cordova')) {
           // this.syncApp();
           this.notificationSetup();
         }
+
+        statusBar.styleDefault();
+        splashScreen.hide();
+
       });
 
     this.registerBackButton();
@@ -62,18 +63,20 @@ export class MyApp {
     // Get the user's current messaging token
     try {
       this.fcmProvider.getToken();
+      this.fcmProvider.onNotifications().pipe(
+        tap(msg => {
+          console.log('Notification MSG', msg);
+          if (this.platform.is('ios')) {
+            this.utilProvider.presentToast(msg.aps.alert, 3000);
+          } else {
+            this.utilProvider.presentToast(msg.body, 3000);
+          }
+          this.fcmProvider.clearAppBadge();
+        }))
+        .subscribe();
     } catch (error) {
-      console.error("FCM Error", error);
+      console.error("FCM Error:", error);
     }
-    this.fcmProvider.onNotifications().subscribe(
-      (msg) => {
-        if (this.platform.is('ios')) {
-          this.utilProvider.presentToast(msg.aps.alert, 3000);
-        } else {
-          this.utilProvider.presentToast(msg.body, 3000);
-        }
-        this.fcmProvider.clearAppBadge();
-      });
   }
 
   registerBackButton() {
@@ -87,7 +90,7 @@ export class MyApp {
         } else if (typeof activeView.instance.backButtonAction === 'function') {
           activeView.instance.backButtonAction();
         } else {
-          nav.parent.select(0);
+          this.platform.exitApp();
         }
       }
     });

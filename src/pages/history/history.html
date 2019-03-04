@@ -7,7 +7,7 @@
 
   <div *ngIf="histories">
     <ion-list>
-      <ion-card *ngFor="let history of histories" class="history-card">
+      <ion-card *ngFor="let history of histories | reverse" class="history-card">
         <ion-row>
           <ion-col col-3 text-center class="history-date" no-padding>
             <h3>{{history.timestamp | momentUnix: 'MMM'}}</h3>

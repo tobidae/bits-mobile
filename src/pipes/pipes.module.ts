@@ -5,6 +5,8 @@ import { MomentPipe } from "./moment/moment";
 import { UnixPipe } from "./moment/unix";
 import { CustomCalendarPipe } from "./moment/custom-calendar";
 import { FromNowPipe } from "./moment/from-now";
+import { SortPipe } from './sort/sort';
+import { ReversePipe } from './reverse/reverse';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { FromNowPipe } from "./moment/from-now";
     MomentPipe,
     UnixPipe,
     CustomCalendarPipe,
-    FromNowPipe
+    FromNowPipe,
+    SortPipe,
+    ReversePipe
   ],
   imports: [],
   exports: [
@@ -22,7 +26,9 @@ import { FromNowPipe } from "./moment/from-now";
     MomentPipe,
     UnixPipe,
     CustomCalendarPipe,
-    FromNowPipe
+    FromNowPipe,
+    SortPipe,
+    ReversePipe
   ]
 })
 export class PipesModule {
