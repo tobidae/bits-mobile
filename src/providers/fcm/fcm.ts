@@ -28,8 +28,9 @@ export class FcmProvider {
   // Store the user's notification token in the database
   // WIth the token, the server can send alerts to the user based on events created
   storeUserToken(userToken) {
-    const userId = this.authProvider.userID();
-    return this.db.database.ref(`userInfo/${userId}/notificationToken`).set(userToken);
+    this.authProvider.userSub.subscribe(userInfo => {
+      if (userInfo) this.db.database.ref(`userInfo/${userInfo.uid}/notificationToken`).set(userToken)
+    });
   }
 
   onNotifications() {

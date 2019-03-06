@@ -4,8 +4,6 @@ import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { AuthProvider } from "../../providers/auth/auth";
 import { CreateCasePage } from "../create-case/create-case";
-import { ViewCasePage } from "../view-case/view-case";
-import { Case } from "../../shared/interfaces";
 import { objToArr } from "../../shared/helpers";
 
 @IonicPage()
@@ -51,7 +49,7 @@ export class InventoryPage implements OnInit {
   onSlideChanged() {
     let currentIndex = this.slider.getActiveIndex();
     const currentSlide = this.slides[currentIndex];
-    this.inventoryCategory = currentSlide.id;
+    if (currentSlide) this.inventoryCategory = currentSlide.id;
   }
 
   getAppData() {

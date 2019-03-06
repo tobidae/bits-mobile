@@ -17,8 +17,7 @@ export class UtilProvider {
     return this.toastCtrl.create({
       message: message,
       duration: duration,
-      showCloseButton: true,
-      dismissOnPageChange: true,
+      showCloseButton: true
     }).present();
   }
 

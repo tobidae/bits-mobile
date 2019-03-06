@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IonicModule, IonicPageModule } from 'ionic-angular';
+import { IonicModule } from 'ionic-angular';
 import { HistoryPage } from './history';
 import { PipesModule } from "../../pipes/pipes.module";
 

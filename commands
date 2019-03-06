@@ -7,3 +7,8 @@ pod setup
 
 appcenter codepush release-cordova -a otakerele/Case-Manager -d Production -m
 appcenter codepush release-cordova -a otakerele/Case-Manager-iOS -d Production -m
+
+{
+"app":"BITS",
+"caseId":"-LSnF4AfeTG6cqfv2_sq"
+}

@@ -85,4 +85,8 @@ export class AuthProvider {
   userID() {
     return this.afAuth.auth.currentUser.uid || null;
   }
+
+  get userSub() {
+    return this.user;
+  }
 }

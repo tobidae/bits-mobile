@@ -26,7 +26,7 @@ export class CheckoutPage {
 
   ionViewDidLoad() {
     this.userDataProvider.getUserCart()
-      .subscribe((cartData: {})=> {
+      .subscribe((cartData: {}) => {
         this.isLoading = false;
         for (const id in cartData) {
           this.caseDataProvider.getCaseById(id).take(1).subscribe((caseData: Case) => {
@@ -48,11 +48,11 @@ export class CheckoutPage {
       // .then(data => this.navCtrl.popAll())
         .then(() => {
           this.isLoading = false;
-          return this.viewCtrl.dismiss();
+          return this.viewCtrl.dismiss({ordered: true});
         })
         .catch(error => {
           console.log(error);
-          return this.viewCtrl.dismiss();
+          return this.viewCtrl.dismiss({ordered: false});
         });
 
     } else {

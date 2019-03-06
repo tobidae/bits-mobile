@@ -15,8 +15,8 @@ export class CartPage implements OnInit{
   userFav: any = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider,
-              private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider, private modalCtrl: ModalController,
-              private events: Events) {
+              private caseDataProvider: CaseDataProvider, private utilProvider: UtilProvider,
+              private modalCtrl: ModalController, private events: Events) {
     this.userDataProvider.getUserCart()
       .subscribe(userCart => {
         this.userCart = this.objToArr(userCart);
@@ -48,9 +48,9 @@ export class CartPage implements OnInit{
   checkoutCart() {
     const modal = this.modalCtrl.create(CheckoutPage);
 
-    // TODO: Handle when the checkout page has been dismissed
     modal.onDidDismiss(data => {
-      this.utilProvider.presentToast('Your order has been processed');
+      if (data.ordered) this.utilProvider.presentToast('Your order has been processed');
+      else this.utilProvider.presentToast('Your order was not be completed');
     });
     modal.present();
   }
