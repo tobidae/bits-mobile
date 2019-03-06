@@ -1,0 +1,9 @@
+<ion-content padding>
+  <div class="page-header">
+    <span class="page-title">My Past Orders</span>
+  </div>
+  <div margin-top *ngIf="userPastOrders">
+    <past-order-item *ngFor="let info of userPastOrders" [info]="info"></past-order-item>
+  </div>
+</ion-content>
+

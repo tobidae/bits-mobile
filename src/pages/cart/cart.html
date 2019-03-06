@@ -1,7 +1,7 @@
 <ion-content padding>
   <div class="page-header">
     <span class="page-title">My Cart</span>
-    <button ion-button float-right color="dark">Past Orders</button>
+    <button ion-button float-right color="dark" (click)="pastOrders()">Past Orders</button>
   </div>
   <div margin-top *ngIf="userCart">
     <cart-item *ngFor="let case of userCart" [case]="case" [type]="'cart'"></cart-item>

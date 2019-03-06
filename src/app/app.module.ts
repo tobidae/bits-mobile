@@ -51,6 +51,7 @@ import { CheckoutPageModule } from "../pages/checkout/checkout.module";
 import { HistoryProvider } from '../providers/history/history';
 import { Firebase } from "@ionic-native/firebase";
 import { FcmProvider } from '../providers/fcm/fcm';
+import { PastOrdersPage } from "../pages/past-orders/past-orders";
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { FcmProvider } from '../providers/fcm/fcm';
     CartPage,
     CreateCasePage,
     ViewCasePage,
-    CheckoutPage
+    CheckoutPage,
+    PastOrdersPage
   ],
   providers: [
     StatusBar,

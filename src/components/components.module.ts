@@ -6,13 +6,15 @@ import { IonicModule } from "ionic-angular";
 import { CartItemComponent } from './cart-item/cart-item';
 import { CaseInfoComponent } from './case-info/case-info';
 import { PipesModule } from "../pipes/pipes.module";
+import { PastOrderItemComponent } from './past-order-item/past-order-item';
 
 @NgModule({
   declarations: [LazyImgComponent,
     ItemCardComponent,
     CustomLoaderComponent,
     CartItemComponent,
-    CaseInfoComponent],
+    CaseInfoComponent,
+    PastOrderItemComponent],
   imports: [
     IonicModule,
     PipesModule],
@@ -21,7 +23,8 @@ import { PipesModule } from "../pipes/pipes.module";
     ItemCardComponent,
     CustomLoaderComponent,
     CartItemComponent,
-    CaseInfoComponent]
+    CaseInfoComponent,
+    PastOrderItemComponent]
 })
 export class ComponentsModule {
 }

@@ -1,0 +1,21 @@
+<div class="order-item">
+  <ion-grid>
+    <ion-row (click)="viewCaseInfo()">
+      <ion-col col-3 no-padding>
+        <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
+      </ion-col>
+      <ion-col col-9 no-padding class="data-col">
+        <h5 class="item-title">{{case.name}}</h5>
+        <hr class="custom-divide">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12 no-padding class="order-info-container">
+        <p><strong>Processed By Kart:</strong> True</p>
+        <p><strong>Delivered:</strong> True</p>
+        <p><strong>Picked Up:</strong> False</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+<hr class="custom-divide bold">

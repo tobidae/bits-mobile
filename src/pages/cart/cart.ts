@@ -4,6 +4,7 @@ import { UserDataProvider } from "../../providers/user-data/user-data";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { UtilProvider } from "../../providers/util/util";
 import { CheckoutPage } from "../checkout/checkout";
+import { PastOrdersPage } from "../past-orders/past-orders";
 
 @IonicPage()
 @Component({
@@ -43,6 +44,10 @@ export class CartPage implements OnInit{
       })
     }
     return newArr;
+  }
+
+  pastOrders() {
+    return this.navCtrl.push(PastOrdersPage);
   }
 
   checkoutCart() {

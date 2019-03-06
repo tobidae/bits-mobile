@@ -27,6 +27,12 @@ export class UserDataProvider {
     return this.db.object(`/userFavCarts/${userId}`).valueChanges();
   }
 
+  // Get the user's cart and subscribe to any changes made
+  getUserPastOrders() {
+    const userId = this.authProvider.userID();
+    return this.db.object(`/userPastOrders/${userId}`).valueChanges();
+  }
+
   placeOrder() {
     // Get the user ID from the auth provider
     const userId = this.authProvider.userID();

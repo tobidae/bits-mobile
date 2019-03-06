@@ -1,0 +1,53 @@
+past-order-item {
+  .order-item {
+    padding: 4px 5px 4px 0;
+    width: calc(100% - 4px);
+
+    ion-label {
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
+    ion-grid {
+      padding: 0;
+    }
+  }
+  .item-image {
+    img {
+      height: 50px !important;
+      width: auto;
+      display: inline;
+    }
+  }
+  .item-image:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transition: all .3s linear;
+  }
+  .item-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2px;
+  }
+  .item-desc {
+    margin: 0;
+    ion-icon {
+      padding-right: 4px;
+    }
+    strong {
+      padding-right: 6px;
+    }
+  }
+  .order-info-container {
+    button {
+      float: right;
+    }
+  }
+  .data-col {
+    padding: 4px 0 0 8px !important;
+  }
+}
