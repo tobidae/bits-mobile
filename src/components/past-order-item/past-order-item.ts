@@ -10,26 +10,29 @@ import { CaseDataProvider } from "../../providers/case-data/case-data";
 })
 export class PastOrderItemComponent {
 
-  @Input('info') orderInfo: any;
+  @Input('pastOrder') pastOrder: any;
   case: Case;
-  caseId: string;
 
   constructor(private navCtrl: NavController, private caseDataProvider: CaseDataProvider) {
-    this.caseId = this.orderInfo.caseId;
+    setTimeout(() => {
+      if (this.pastOrder.caseId)
+        this.caseDataProvider.getCaseById(this.pastOrder.caseId).subscribe((caseData: Case) => {
+          caseData['caseId'] = this.pastOrder.caseId;
+          if (caseData.tags) {
+            caseData.tagsArr = caseData.tags.split(',');
+          }
+          this.case = caseData;
+        });
+    }, 100);
+  }
 
-    if (this.caseId)
-      this.caseDataProvider.getCaseById(this.orderInfo.caseId).subscribe((caseData: Case) => {
-        caseData['caseId'] = this.caseId;
-        if (caseData.tags) {
-          caseData.tagsArr = caseData.tags.split(',');
-        }
-        this.case = caseData;
-      });
+  ionViewDidLoad(){
   }
 
   viewCaseInfo() {
     this.navCtrl.push(ViewCasePage, {
-      data: this.case
+      data: this.case,
+      pastOrder: this.pastOrder
     })
   }
 }

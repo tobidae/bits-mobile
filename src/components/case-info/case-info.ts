@@ -16,12 +16,10 @@ export class CaseInfoComponent {
               private caseDataProvider: CaseDataProvider) {
   }
 
-  checkoutCase() {
-    this.utilProvider.presentToast('Will be able to checkout specific case soon!');
-  }
-
-  returnCase() {
-    this.utilProvider.presentToast('Will be able to scan case to return to location or transport');
+  toggleAvailability() {
+    const toggleAvailable = !this.caseData['isAvailable'];
+    this.caseData['isAvailable'] = toggleAvailable;
+    return this.caseDataProvider.updateCaseAvailability(this.caseData.$key, toggleAvailable);
   }
 
   updateCaseLocation() {

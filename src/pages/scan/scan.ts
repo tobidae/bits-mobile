@@ -71,8 +71,8 @@ export class ScanPage {
         const modal = this.modalCtrl.create(CheckoutPage);
 
         modal.onDidDismiss(data => {
-          if (data.ordered) this.utilProvider.presentToast('Your order has been processed');
-          else this.utilProvider.presentToast('Your order was not be completed');
+          if (data && data.ordered) this.utilProvider.presentToast('Your order has been processed');
+          else this.utilProvider.presentToast('Your order was not completed');
         });
         modal.present();
       });

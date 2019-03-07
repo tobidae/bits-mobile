@@ -10,15 +10,22 @@ import { UserDataProvider } from "../../providers/user-data/user-data";
   templateUrl: 'past-orders.html',
 })
 export class PastOrdersPage {
-  userPastOrders;
+  userPastOrders: any[] = null;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private userDataProvider: UserDataProvider) {
-    this.userDataProvider.getUserPastOrders()
-      .subscribe(pastOrders => {
-        this.userPastOrders = objToArr(pastOrders);
-      });
   }
 
   ionViewDidLoad() {
+    let arr = [];
+    this.userDataProvider.getUserPastOrders()
+      .subscribe(pastOrders => {
+        const orderArr = objToArr(pastOrders);
+
+        orderArr.forEach(order => {
+          arr.unshift(order);
+        });
+        this.userPastOrders = arr;
+      });
 
   }
 

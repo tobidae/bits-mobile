@@ -6,4 +6,8 @@
 
 <ion-content padding class="custom-content">
   <case-info [case]="caseData" *ngIf="caseData" margin-top></case-info>
+
+  <ion-fab bottom right class="scan-fab" *ngIf="caseData">
+    <button ion-button round color="dark" large (click)="checkoutCase()">Checkout</button>
+  </ion-fab>
 </ion-content>

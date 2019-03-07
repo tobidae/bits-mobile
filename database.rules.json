@@ -24,6 +24,12 @@
         ".read": "$user_id === auth.uid"
       }
     },
+    "userPastOrders": {
+      "$user_id": {
+        ".write": "$user_id === auth.uid",
+        ".read": "$user_id === auth.uid"
+      }
+    },
     "cases": {
       ".read": "auth != null",
       ".write": "auth != null"
@@ -31,6 +37,11 @@
     "caseQueues": {
       ".read": false,
       ".write": false
+    },
+    "kartInfo": {
+      ".indexOn": "currentLocation",
+      ".read": true,
+      ".write": true
     },
     ".read": false,
     ".write": false

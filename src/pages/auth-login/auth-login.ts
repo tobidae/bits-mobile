@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthProvider } from "../../providers/auth/auth";
 import { TabsPage } from "../tabs/tabs";
 import { AuthForgotPage } from "../auth-forgot/auth-forgot";
+import { UtilProvider } from "../../providers/util/util";
 
 @IonicPage()
 @Component({
@@ -16,13 +17,8 @@ export class AuthLoginPage {
   loginError: string;
 
   constructor(private navCtrl: NavController, private authProvider: AuthProvider, platform: Platform,
-              fb: FormBuilder
+              fb: FormBuilder, private utilProvider: UtilProvider
   ) {
-
-    platform.ready().then((readySource) => {
-      console.log('Width: ' + platform.width());
-      console.log('Height: ' + platform.height());
-    });
     this.loginForm = fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6)])]
@@ -39,8 +35,7 @@ export class AuthLoginPage {
       password: data.password
     };
     this.authProvider.signInWithEmail(credentials)
-      .then(
-        () => this.navCtrl.setRoot(TabsPage),
+      .then(() => this.navCtrl.setRoot(TabsPage),
         error => {
           if (this.isJSON(error.message)) {
             return this.loginError = error['error'].message
@@ -63,11 +58,14 @@ export class AuthLoginPage {
     this.authProvider.registerWithEmail(credentials).then(
       () => this.navCtrl.setRoot(TabsPage),
       error => this.loginError = error.message
-    );
+    ).then(() => {
+      return this.utilProvider.presentToast('Add your name in settings for a more personalized experience',
+        4000);
+    });
   }
 
   forgotPassword() {
-    this.navCtrl.push(AuthForgotPage);
+    return this.navCtrl.push(AuthForgotPage);
   }
 
   isJSON(str) {

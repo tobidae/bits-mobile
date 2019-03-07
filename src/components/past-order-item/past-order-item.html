@@ -1,21 +1,45 @@
-<div class="order-item">
-  <ion-grid>
-    <ion-row (click)="viewCaseInfo()">
+<ion-card class="order-item">
+  <ion-grid padding (click)="viewCaseInfo()">
+    <ion-row *ngIf="case">
       <ion-col col-3 no-padding>
         <lazy-img class="item-image" inputSrc="{{case.imageUrl}}"></lazy-img>
       </ion-col>
       <ion-col col-9 no-padding class="data-col">
         <h5 class="item-title">{{case.name}}</h5>
+        <p class="item-time">Order fulfilled <strong>{{pastOrder['fulfillTimestamp'] | fromNow}}</strong></p>
+        <p class="item-time">Case found <strong>{{pastOrder['foundCaseTimestamp'] | fromNow}}</strong></p>
         <hr class="custom-divide">
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="pastOrder" padding-top>
       <ion-col col-12 no-padding class="order-info-container">
-        <p><strong>Processed By Kart:</strong> True</p>
-        <p><strong>Delivered:</strong> True</p>
-        <p><strong>Picked Up:</strong> False</p>
+        <ion-row no-padding>
+          <ion-col no-padding col-6>
+            <strong>1. Order Fulfilled:</strong>
+            <ion-badge [color]="pastOrder['orderFulfilled'] ? 'primary':'danger'">{{pastOrder['orderFulfilled'] ? 'Yes' : 'No'}}</ion-badge>
+          </ion-col>
+          <ion-col no-padding col-6>
+            <strong class="second">4. Delivered:</strong>
+            <ion-badge [color]="pastOrder['completedByKart'] ? 'primary':'danger'" color="primary">{{pastOrder['completedByKart'] ? 'Yes' : 'No'}}</ion-badge>
+          </ion-col>
+        </ion-row>
+        <ion-row no-padding>
+          <ion-col no-padding col-6>
+            <strong>2. Kart Processed:</strong>
+            <ion-badge [color]="pastOrder['kartReceivedOrder'] ? 'primary':'danger'" color="primary">{{pastOrder['kartReceivedOrder'] ? 'Yes' : 'No'}}</ion-badge>
+          </ion-col>
+          <ion-col no-padding>
+            <strong class="second">5. User pickup:</strong>
+            <ion-badge [color]="pastOrder['scannedByUser'] ? 'primary':'danger'" color="primary">{{pastOrder['scannedByUser'] ? 'Yes' : 'No'}}</ion-badge>
+          </ion-col>
+        </ion-row>
+        <ion-row no-padding>
+          <ion-col no-padding col-6>
+            <strong>3. On its way:</strong>
+            <ion-badge [color]="pastOrder['isTransporting'] ? 'primary':'danger'" color="primary">{{pastOrder['isTransporting'] ? 'Yes' : 'No'}}</ion-badge>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
   </ion-grid>
-</div>
-<hr class="custom-divide bold">
+</ion-card>

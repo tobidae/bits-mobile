@@ -13,4 +13,9 @@ export class Case {
   rfid: string;
   tags: string;
   tagsArr?: string[];
+  dimensions: {
+    depth: string,
+    width: string,
+    length: string
+  };
 }

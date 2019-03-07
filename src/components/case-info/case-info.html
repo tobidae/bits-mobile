@@ -21,6 +21,14 @@
     </ion-col>
   </ion-row>
   <hr class="custom-divide">
+
+  <ion-row no-padding *ngIf="caseData.datasheetUrl">
+    <ion-col no-padding col-12 padding-top>
+      <h3><strong>DEBUG ONLY!!!</strong></h3>
+      <button ion-button color="dark" (click)="toggleAvailability()" float-right>Toggle Availability</button>
+    </ion-col>
+  </ion-row>
+  <hr class="custom-divide">
   <ion-row no-padding>
     <ion-col no-padding col-12>
       <p class="case-location" *ngIf="caseData.lastLocation">
@@ -58,6 +66,22 @@
     <ion-col no-padding col-4>
       <h4>Color</h4>
       <h5>{{caseData.color}}</h5>
+    </ion-col>
+  </ion-row>
+  <hr class="custom-divide" margin-top>
+  <h3 padding-bottom>Dimensions</h3>
+  <ion-row no-padding text-center class="metadata-container">
+    <ion-col no-padding col-4>
+      <h4>Length</h4>
+      <h5>{{caseData.dimensions.length}} in</h5>
+    </ion-col>
+    <ion-col no-padding col-4>
+      <h4>Width</h4>
+      <h5>{{caseData.dimensions.width}} in</h5>
+    </ion-col>
+    <ion-col no-padding col-4>
+      <h4>Depth</h4>
+      <h5>{{caseData.dimensions.depth}} in</h5>
     </ion-col>
   </ion-row>
   <hr class="custom-divide">

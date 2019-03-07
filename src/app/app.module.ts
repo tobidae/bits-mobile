@@ -52,6 +52,7 @@ import { HistoryProvider } from '../providers/history/history';
 import { Firebase } from "@ionic-native/firebase";
 import { FcmProvider } from '../providers/fcm/fcm';
 import { PastOrdersPage } from "../pages/past-orders/past-orders";
+import { PastOrdersPageModule } from "../pages/past-orders/past-orders.module";
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { PastOrdersPage } from "../pages/past-orders/past-orders";
     CartPageModule,
     CreateCasePageModule,
     ViewCasePageModule,
-    CheckoutPageModule
+    CheckoutPageModule,
+    PastOrdersPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

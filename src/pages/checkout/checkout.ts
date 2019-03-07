@@ -45,7 +45,6 @@ export class CheckoutPage {
     if (this.pickupLocation) {
       this.isLoading = true;
       this.userDataProvider.placeOrder()
-      // .then(data => this.navCtrl.popAll())
         .then(() => {
           this.isLoading = false;
           return this.viewCtrl.dismiss({ordered: true});

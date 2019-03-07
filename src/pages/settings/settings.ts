@@ -25,16 +25,16 @@ export class SettingsPage {
               private userDataProvider: UserDataProvider, private fcmProvider: FcmProvider) {
     if (platform.is('cordova')) {
       // Get the current app package which has the version
-      this.codePush.getCurrentPackage().then(pack => {
-        this.versionNumber = pack.appVersion;
-      });
+      // this.codePush.getCurrentPackage().then(pack => {
+      //   this.versionNumber = pack.appVersion;
+      // });
       // this.appVersion.getVersionNumber()
       //   .then(version => {
       //     this.versionNumber = version;
       //   });
     } else {
-      this.versionNumber = '1.0.0';
     }
+    this.versionNumber = '1.0.0';
     this.userDataProvider.getUserInfo().subscribe(data => {
       this.userData = data;
     })
