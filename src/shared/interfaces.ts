@@ -1,5 +1,6 @@
 export class Case {
   $key?: string;
+  caseId?: string;
   name: string;
   description: string;
   imageUrl: string;

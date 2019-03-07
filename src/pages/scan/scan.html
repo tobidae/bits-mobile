@@ -13,6 +13,9 @@
       <ion-icon name="md-camera"></ion-icon>
     </button>
   </ion-fab>
+  <ion-fab bottom left class="scan-fab" *ngIf="caseData">
+    <button ion-button round color="secondary" large (click)="pickupCase()">Pickup</button>
+  </ion-fab>
   <ion-fab bottom right class="scan-fab" *ngIf="caseData">
     <button ion-button round color="dark" large (click)="checkoutCase()">Checkout</button>
   </ion-fab>

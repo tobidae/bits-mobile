@@ -1,4 +1,4 @@
-export function objToArr(obj) {
+export function objToArr(obj): any[] {
   let arr = [];
   for (let key in obj) {
     let element = obj[key];

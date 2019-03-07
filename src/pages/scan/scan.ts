@@ -5,6 +5,8 @@ import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
 import { Case } from "../../shared/interfaces";
 import { CheckoutPage } from "../checkout/checkout";
+import { UserDataProvider } from "../../providers/user-data/user-data";
+import { objToArr } from "../../shared/helpers";
 
 class QRScan {
   app: string;
@@ -21,7 +23,8 @@ export class ScanPage {
   caseData: Case;
 
   constructor(public navCtrl: NavController, private barcodeScanner: BarcodeScanner, private modalCtrl: ModalController,
-              private utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider) {
+              private utilProvider: UtilProvider, private caseDataProvider: CaseDataProvider,
+              private userDataProvider: UserDataProvider) {
   }
 
   /**
@@ -77,6 +80,37 @@ export class ScanPage {
         modal.present();
       });
 
+  }
+
+  async pickupCase() {
+    let pastOrders: any = await this.userDataProvider.getUserPastOrders().take(1).toPromise();
+    pastOrders = objToArr(pastOrders);
+    let caseKey = this.caseData.caseId;
+    let pickedUpPastOrder = false;
+
+    // Start from reverse because most recent order is there
+    for (let i = pastOrders.length-1; i >= 0; i--) {
+      const pastOrder = pastOrders[i];
+
+      // If the order case id matches the scanned case key, the order has been completed by kart
+      // And the order has not yet been scanned by the user, this is the order to complete
+      if (pastOrder.caseId == caseKey && pastOrder.completedByKart && !pastOrder.scannedByUser) {
+        this.userDataProvider.updateUserPastOrder(pastOrder.$key, {
+          scannedByUser: true
+        });
+        pickedUpPastOrder = true;
+        break;
+      }
+    }
+    if (!pickedUpPastOrder) {
+      this.utilProvider.presentToast('It looks like you did not checkout this item.' +
+        ' Check it out and try again!', 4000);
+    } else {
+      this.utilProvider.presentToast('You picked up your order, thanks for using BITS')
+        .then(() => {
+          this.caseData = null;
+        });
+    }
   }
 
   isJsonString(str) {

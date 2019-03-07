@@ -33,6 +33,11 @@ export class UserDataProvider {
     return this.db.object(`/userPastOrders/${userId}`).valueChanges();
   }
 
+  updateUserPastOrder(orderId, data) {
+    const userId = this.authProvider.userID();
+    return this.db.database.ref(`/userPastOrders/${userId}/${orderId}`).update(data);
+  }
+
   placeOrder() {
     // Get the user ID from the auth provider
     const userId = this.authProvider.userID();
