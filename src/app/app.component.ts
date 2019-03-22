@@ -65,11 +65,14 @@ export class MyApp {
       this.fcmProvider.getToken();
       this.fcmProvider.onNotifications().pipe(
         tap(msg => {
-          console.log('Notification MSG', msg.body);
           if (this.platform.is('ios')) {
             this.utilProvider.presentToast(msg.aps.alert, 3500);
           } else {
-            this.utilProvider.presentToast(msg.body, 3500);
+            if (msg.body) {
+              this.utilProvider.presentToast(msg.body, 4500);
+            } else if (msg.title) {
+              this.utilProvider.presentToast(msg.title, 4500);
+            }
           }
         }))
         .subscribe();

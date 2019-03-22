@@ -3,7 +3,7 @@
     <name>BITS</name>
     <description>Boeing Inventory Tracking System - Tracks equipment cases so that workers can make requests for them.</description>
     <author email="contact@tobiak.com" href="http://tobiak.com/">Tobi Akerele</author>
-    <content original-src="index.html" src="http://192.168.86.3:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

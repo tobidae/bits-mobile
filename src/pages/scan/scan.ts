@@ -3,7 +3,7 @@ import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { UtilProvider } from "../../providers/util/util";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 import { CaseDataProvider } from "../../providers/case-data/case-data";
-import { Case } from "../../shared/interfaces";
+import { Case, PastOrder } from "../../shared/interfaces";
 import { CheckoutPage } from "../checkout/checkout";
 import { UserDataProvider } from "../../providers/user-data/user-data";
 import { objToArr } from "../../shared/helpers";
@@ -87,29 +87,42 @@ export class ScanPage {
     pastOrders = objToArr(pastOrders);
     let caseKey = this.caseData.caseId;
     let pickedUpPastOrder = false;
+    let isStillTransporting = false;
+    let isCompletedByKart = false;
 
     // Start from reverse because most recent order is there
     for (let i = pastOrders.length-1; i >= 0; i--) {
-      const pastOrder = pastOrders[i];
+      const pastOrder: PastOrder = pastOrders[i];
+      console.log(pastOrder);
 
       // If the order case id matches the scanned case key, the order has been completed by kart
       // And the order has not yet been scanned by the user, this is the order to complete
-      if (pastOrder.caseId == caseKey && pastOrder.completedByKart && !pastOrder.scannedByUser) {
-        this.userDataProvider.updateUserPastOrder(pastOrder.$key, {
-          scannedByUser: true
-        });
-        pickedUpPastOrder = true;
+      if (pastOrder.caseId == caseKey) {
+        if (pastOrder.completedByKart && !pastOrder.scannedByUser) {
+          this.userDataProvider.updateUserPastOrder(pastOrder.$key, {
+            scannedByUser: true
+          });
+          pickedUpPastOrder = true;
+        }
+        if (pastOrder.isTransporting) {
+          isStillTransporting = true;
+        }
+        if (pastOrder.isTransporting && pastOrder.completedByKart) {
+          isCompletedByKart = true;
+        }
         break;
       }
     }
-    if (!pickedUpPastOrder) {
-      this.utilProvider.presentToast('It looks like you did not checkout this item.' +
-        ' Check it out and try again!', 4000);
-    } else {
-      this.utilProvider.presentToast('You picked up your order, thanks for using BITS')
+    if (pickedUpPastOrder) {
+      this.utilProvider.presentToast('Your order has been picked up, thanks for using BITS', 5000)
         .then(() => {
           this.caseData = null;
         });
+    } else if (isStillTransporting && !isCompletedByKart) {
+      this.utilProvider.presentToast('Impossible! Your order is still on the way, hang tight', 4000);
+    } else {
+      this.utilProvider.presentToast('It looks like you did not checkout this item.' +
+        ' Check it out and try again!', 4000);
     }
   }
 

@@ -20,3 +20,16 @@ export class Case {
     length: string
   };
 }
+
+
+export class PastOrder {
+  $key?: string;
+  caseId: string;
+  fulfillTimestamp: string;
+  foundCaseTimestamp: string;
+  orderFulfilled: string;
+  kartReceivedOrder: string;
+  completedByKart: string;
+  isTransporting: string;
+  scannedByUser: string;
+}
