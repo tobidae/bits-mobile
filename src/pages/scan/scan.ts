@@ -82,6 +82,10 @@ export class ScanPage {
 
   }
 
+  returnCase() {
+
+  }
+
   async pickupCase() {
     let pastOrders: any = await this.userDataProvider.getUserPastOrders().take(1).toPromise();
     pastOrders = objToArr(pastOrders);
