@@ -11,28 +11,30 @@ page-inventory {
 
   .content-ios {
     .scroll-content {
-      padding-top: 100px !important;
+      padding-top: 135px !important;
     }
   }
   .content-md {
     .scroll-content {
-      padding-top: 100px !important;
+      padding-top: 110px !important;
+    }
+    .page-title {
+      margin-bottom: 6px;
     }
   }
 
-  .toolbar-content-ios,
+  .toolbar-content-ios {
+    margin-top: 8px;
+  }
   .toolbar-content-md {
-    margin-top: 18px;
+    margin-top: 8px;
   }
 
   .inventory-slide {
-    //text-align: start;
-    //min-height: 400px;
+    text-align: start;
+    min-height: 400px;
   }
 
-  .page-title {
-    margin-bottom: 6px;
-  }
 
   .page-header {
     margin-bottom: 6px;

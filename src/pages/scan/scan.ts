@@ -100,6 +100,7 @@ export class ScanPage {
       if (pastOrder.caseId == caseKey) {
         if (pastOrder.completedByKart && !pastOrder.scannedByUser) {
           this.userDataProvider.updateUserPastOrder(pastOrder.$key, {
+            isTransporting: false,
             scannedByUser: true
           });
           pickedUpPastOrder = true;
