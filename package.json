@@ -1,8 +1,8 @@
 {
   "name": "bits-mobile",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Tobi Akerele",
+  "homepage": "http://bits-purdue.firebaseapp.com/",
   "private": true,
   "scripts": {
     "start": "ionic-app-scripts serve --lab78",

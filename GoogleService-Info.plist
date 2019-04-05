@@ -2,39 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
-	<string>ca-app-pub-3940256099942544/2934735716</string>
-	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
-	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>907896396272-l0hcesj9ta8r26m6k5d76p4gu1gj63b1.apps.googleusercontent.com</string>
+	<string>547464829631-qa13mvpr6ugdqp9s95dlfo5cu1iisut7.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.907896396272-l0hcesj9ta8r26m6k5d76p4gu1gj63b1</string>
+	<string>com.googleusercontent.apps.547464829631-qa13mvpr6ugdqp9s95dlfo5cu1iisut7</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCxzEq_qqdQ9aVB50DW7fJuv5tfQLGxQsM</string>
+	<string>AIzaSyANze8s8Xn6rlzmQZ53yVYmjLD_UiS_i3I</string>
 	<key>GCM_SENDER_ID</key>
-	<string>907896396272</string>
+	<string>547464829631</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.tobiak.bits</string>
 	<key>PROJECT_ID</key>
-	<string>boeing-bits</string>
+	<string>bits-purdue</string>
 	<key>STORAGE_BUCKET</key>
-	<string>boeing-bits.appspot.com</string>
+	<string>bits-purdue.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:907896396272:ios:b364a77a30c53198</string>
+	<string>1:547464829631:ios:b364a77a30c53198</string>
 	<key>DATABASE_URL</key>
-	<string>https://boeing-bits.firebaseio.com</string>
+	<string>https://bits-purdue.firebaseio.com</string>
 </dict>
 </plist>
