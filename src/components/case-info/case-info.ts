@@ -24,18 +24,16 @@ export class CaseInfoComponent {
 
   updateCaseLocation() {
     let inputs = [];
-    for (let i = 1; i < 6; i++) {
-      factorySectors.every(value => {
-        const sector = value.sectorId;
-        inputs.push({
-          type: 'radio',
-          label: sector,
-          value: sector,
-          checked: this.caseData.lastLocation == sector
-        });
-        return true;
+    factorySectors.every(value => {
+      const sector = value.sectorId;
+      inputs.push({
+        type: 'radio',
+        label: sector,
+        value: sector,
+        checked: this.caseData.lastLocation == sector
       });
-    }
+      return true;
+    });
     inputs = inputs.sort((a, b) => {
       if (a.label > b.label) {
         return 1;
